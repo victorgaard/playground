@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-color);
+}
+
+.subcontainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.button {
+  background-color: var(--accent-color);
+  color: var(--button-text-color);
+  padding: 1rem;
+}
+
+.title {
+  font-size: var(--title);
+}

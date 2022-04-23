@@ -1,0 +1,39 @@
+.container {
+  --background-color: #ffffff;
+  --menu-background-color: #fafbff;
+  --menuItem-background-color: #e5f1ff;
+  --accent-color: #0177fd;
+  --text-color: #131635;
+  --text-color-hover: var(--accent-color);
+  --button-text-color: #ffffff;
+  --icon-color: #a4b4cb;
+  --icon-color-active: var(--accent-color);
+  --divider-color: #e8ecf5;
+  --transition: 0.5s;
+  --transition-short: 0.2s;
+  --title: 1.5rem;
+  --sub-title: 1.25rem;
+  --text: 1rem;
+
+  display: flex;
+  background-color: var(--background-color);
+  transition: var(--transition);
+}
+.container.dark {
+  --background-color: #131635;
+  --menu-background-color: #1b2052;
+  --menuItem-background-color: #23296d;
+  --accent-color: #0177fd;
+  --text-color: #ffffff;
+  --icon-color: #a4b4cb;
+  --icon-color-active: var(--accent-color);
+  --divider-color: var(--menu-background-color);
+}
+
+.subcontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem 6rem;
+  width: 100%;
+}

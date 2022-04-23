@@ -1,0 +1,16 @@
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+
+export default function MyWallets() {
+  return (
+    <div>
+      <Head>
+        <title>My wallets</title>
+      </Head>
+
+      <main className={styles.container}>
+        <h1>Welcome to my wallets</h1>
+      </main>
+    </div>
+  );
+}
