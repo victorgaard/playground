@@ -1,0 +1,43 @@
+.card {
+  background: url("/bg.svg");
+  background-size: cover;
+  background-color: var(--accent-color);
+  color: var(--button-text-color);
+  padding: 1.5rem 2rem;
+  width: 350px;
+  height: 200px;
+  display: flex;
+  gap: 2rem;
+  border-radius: 4px;
+  justify-content: space-between;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardInfoInner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.card h1 {
+  font-size: var(--title);
+}
+
+.card h3 {
+  font-size: var(--subtitle);
+  margin-bottom: 0.35rem;
+}
+
+.card p {
+  font-size: var(--text);
+  opacity: 0.85;
+}
+
+.cardBrand {
+  align-self: flex-end;
+}

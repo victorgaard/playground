@@ -9,7 +9,7 @@
   --icon-color: #a4b4cb;
   --icon-color-active: var(--accent-color);
   --divider-color: #e8ecf5;
-  --transition: 0.5s;
+  --transition: 0.25s;
   --transition-short: 0.2s;
   --title: 1.5rem;
   --sub-title: 1.25rem;
@@ -20,9 +20,9 @@
   transition: var(--transition);
 }
 .container.dark {
-  --background-color: #131635;
-  --menu-background-color: #1b2052;
-  --menuItem-background-color: #23296d;
+  --background-color: #1a1a1a;
+  --menu-background-color: #212121;
+  --menuItem-background-color: var(--background-color);
   --accent-color: #0177fd;
   --text-color: #ffffff;
   --icon-color: #a4b4cb;
