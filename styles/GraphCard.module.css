@@ -1,0 +1,71 @@
+.graphCard {
+  background-color: var(--card-background-color);
+  border-radius: 0.5rem;
+  display: flex;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  height: 140px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.graphInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.graphInfo h1,
+.graphInfo h2,
+.graphInfo h3,
+.graphInfo p {
+  z-index: 1;
+}
+
+.graphInfo h2 {
+  font-size: var(--text);
+}
+
+.graphInfo h1 {
+  font-size: var(--title);
+  font-weight: 700;
+}
+
+.graphInfo h3 {
+  font-size: var(--subtitle);
+}
+
+.positive {
+  color: var(--success);
+}
+
+.negative {
+  color: var(--error);
+}
+
+.graphInfo p {
+  font-size: var(--text);
+  opacity: 0.6;
+  font-weight: 500;
+}
+
+.graphMetrics {
+  margin-top: 0.5rem;
+  display: flex;
+}
+
+.graphMetrics {
+  margin-top: 0.5rem;
+  display: flex;
+}
+
+.graph {
+  border: none;
+  padding: 0;
+  margin: 0;
+  z-index: 0;
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  opacity: 0.75;
+}

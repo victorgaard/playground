@@ -14,9 +14,11 @@ function Layout({ children }) {
       }
     >
       <Menu setPage={setPage} />
-      <div className={styles.subcontainer}>
-        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} page={page} />
-        {children}
+      <div className={styles.wrapper}>
+        <div className={styles.subcontainer}>
+          <Navbar darkMode={darkMode} setDarkMode={setDarkMode} page={page} />
+          {children}
+        </div>
       </div>
     </div>
   );

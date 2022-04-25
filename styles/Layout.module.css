@@ -1,7 +1,8 @@
 .container {
-  --background-color: #ffffff;
+  --background-color: #fafbff;
   --menu-background-color: #fafbff;
   --menuItem-background-color: #e5f1ff;
+  --card-background-color: #ffffff;
   --accent-color: #0177fd;
   --text-color: #131635;
   --text-color-hover: var(--accent-color);
@@ -9,6 +10,8 @@
   --icon-color: #a4b4cb;
   --icon-color-active: var(--accent-color);
   --divider-color: #e8ecf5;
+  --success: #1aa72d;
+  --error: #d00101;
   --transition: 0.25s;
   --transition-short: 0.2s;
   --title: 1.5rem;
@@ -23,6 +26,7 @@
   --background-color: #1a1a1a;
   --menu-background-color: #212121;
   --menuItem-background-color: var(--background-color);
+  --card-background-color: #0d0d0d;
   --accent-color: #0177fd;
   --text-color: #ffffff;
   --icon-color: #a4b4cb;
@@ -30,10 +34,17 @@
   --divider-color: var(--menu-background-color);
 }
 
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .subcontainer {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 1rem 6rem;
+  padding: 1rem 4rem;
   width: 100%;
+  max-width: 1100px;
 }

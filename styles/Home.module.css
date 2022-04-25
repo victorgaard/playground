@@ -1,54 +1,12 @@
-.container {
-  color: var(--text-color);
+.wrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 2rem;
 }
 
-.graphCard {
-  border-radius: 4px;
-  width: 300px;
-  height: 140px;
-  display: flex;
-  padding: 1.5rem;
-  box-shadow: 0 0 50px rgba(0,0,0,.1);
-  position: relative;
-  overflow: hidden;
-}
-
-.graphInfo {
-  display: flex;
-  flex-direction: column;
-  gap: .25rem;
-}
-
-.graphInfo h2 {
-  font-size: var(--text);
-}
-
-.graphInfo h1 {
-  font-size: var(--title);
-  font-weight: 700;
-}
-
-.graphInfo h3 {
-  font-size: var(--subtitle);
-}
-
-.graphInfo p {
-  font-size: var(--text);
-  opacity: 0.75;
-  font-weight: 500;
-}
-
-.graphMetrics {
-  margin-top: .5rem;
-  display: flex;
-}
-
-.graph {
-  position: absolute;
-  width: 50%;
-  bottom: 0;
-  right: 0;
+.container {
+  color: var(--text-color);
+  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
