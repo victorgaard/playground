@@ -20,9 +20,9 @@ const menuOptions = {
     },
     {
       id: 4,
-      title: "My wallets",
-      link: "/my-wallets",
-      icon: "/wallets.svg"
+      title: "My cards",
+      link: "/my-cards",
+      icon: "/card.svg"
     },
     {
       id: 5,

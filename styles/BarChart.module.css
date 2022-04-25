@@ -1,0 +1,10 @@
+.barChart {
+  background-color: var(--card-background-color);
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
+}

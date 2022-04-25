@@ -10,3 +10,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+
+.containerAlt {
+  color: var(--text-color);
+  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

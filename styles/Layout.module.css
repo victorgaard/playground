@@ -33,11 +33,11 @@
   --icon-color-active: var(--accent-color);
   --divider-color: var(--menu-background-color);
 }
-
 .wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-left: 245px;
 }
 
 .subcontainer {
@@ -47,4 +47,5 @@
   padding: 1rem 4rem;
   width: 100%;
   max-width: 1100px;
+  min-height: 100vh;
 }

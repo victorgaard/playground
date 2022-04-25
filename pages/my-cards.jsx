@@ -5,11 +5,11 @@ export default function MyWallets() {
   return (
     <div>
       <Head>
-        <title>My wallets</title>
+        <title>My cards</title>
       </Head>
 
       <main className={styles.container}>
-        <h1>Welcome to my wallets</h1>
+        <h1>Welcome to my cards</h1>
       </main>
     </div>
   );

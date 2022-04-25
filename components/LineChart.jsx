@@ -1,21 +1,15 @@
-import Chart from "chart.js/auto";
 import { useEffect, useRef, useState } from "react";
 import { Line } from "react-chartjs-2";
-import styles from "../styles/GraphCard.module.css";
+import styles from "../styles/LineChart.module.css";
 
-function GraphCard({ title, unit, rgbaColor, dataValue, growth }) {
-  const chartRef = useRef();
+function LineChart({ title, unit, rgbaColor, dataValue, growth }) {
+  const lineRef = useRef();
   const [gradientColor, setGradientColor] = useState("");
   const [dataValues, setDataValues] = useState([]);
   const [borderColor, setBorderColor] = useState("");
 
   useEffect(() => {
-    const gradientFill = chartRef.current.ctx.createLinearGradient(
-      0,
-      0,
-      0,
-      150
-    );
+    const gradientFill = lineRef.current.ctx.createLinearGradient(0, 0, 0, 150);
     gradientFill.addColorStop(0, `rgba(${rgbaColor},0.7)`);
     gradientFill.addColorStop(0.2, `rgba(${rgbaColor},0.5)`);
     gradientFill.addColorStop(0.45, `rgba(${rgbaColor},0.1)`);
@@ -77,7 +71,7 @@ function GraphCard({ title, unit, rgbaColor, dataValue, growth }) {
         </div>
       </div>
       <Line
-        ref={chartRef}
+        ref={lineRef}
         className={styles.graph}
         data={data}
         width={350}
@@ -88,4 +82,4 @@ function GraphCard({ title, unit, rgbaColor, dataValue, growth }) {
   );
 }
 
-export default GraphCard;
+export default LineChart;

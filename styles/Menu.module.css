@@ -3,11 +3,12 @@
   color: var(--text-color);
   transition: var(--transition);
   min-width: 245px;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding: 2rem 1rem;
   border-right: 2px solid var(--divider-color);
+  position: fixed;
 }
 
 .logo {
