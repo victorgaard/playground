@@ -1,5 +1,5 @@
 .container {
-  --background-color: #fafbff;
+  --background-color: #f0f2fb;
   --menu-background-color: #fafbff;
   --menuItem-background-color: #e5f1ff;
   --card-background-color: #ffffff;
@@ -11,7 +11,7 @@
   --icon-color-active: var(--accent-color);
   --divider-color: #e8ecf5;
   --success: #1aa72d;
-  --error: #d00101;
+  --error: #dd3f3f;
   --transition: 0.25s;
   --transition-short: 0.2s;
   --title: 1.5rem;
@@ -26,7 +26,7 @@
   --background-color: #1a1a1a;
   --menu-background-color: #212121;
   --menuItem-background-color: var(--background-color);
-  --card-background-color: #0d0d0d;
+  --card-background-color: #212121;
   --accent-color: #0177fd;
   --text-color: #ffffff;
   --icon-color: #a4b4cb;
