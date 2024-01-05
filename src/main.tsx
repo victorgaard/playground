@@ -9,7 +9,6 @@ import {
 } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import "./assets/code.css";
 import {
   Link,
   Outlet,
@@ -20,18 +19,15 @@ import {
   ScrollRestoration,
 } from "@tanstack/react-router";
 import { capitalize } from "./utils/capitalize";
-import Prism from "prismjs";
 import { isObjectEmpty } from "./utils/isObjectEmpty";
 import { generateCodeSnippet } from "./utils/generateCodeSnippet";
-
-export const TanStackRouterDevtools =
-  process.env.NODE_ENV === "production"
-    ? () => null
-    : lazy(() =>
-        import("@tanstack/router-devtools").then((res) => ({
-          default: res.TanStackRouterDevtools,
-        })),
-      );
+import Prism from "prismjs";
+import "prismjs/components/prism-jsx";
+import "prismjs/plugins/line-numbers/prism-line-numbers";
+import "./assets/code.css";
+import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import Button from "./components/Button";
+import { ClipboardIcon } from "@heroicons/react/24/outline";
 
 const rootRoute = new RootRoute({
   component: function Layout() {
@@ -79,11 +75,11 @@ const indexRoute = new Route({
 export function CodeBlock({ children }: PropsWithChildren) {
   useEffect(() => {
     Prism.highlightAll();
-  }, [children]);
+  }, []);
 
   return (
-    <pre className="flex min-h-36 items-center text-sm">
-      <code className="language-html">{children}</code>
+    <pre className="line-numbers ml-6 text-sm">
+      <code className="language-jsx">{children}</code>
     </pre>
   );
 }
@@ -114,9 +110,16 @@ const componentRoute = new Route({
           </div>
         </div>
         <div className="flex w-96 flex-col gap-8 border-l border-gray-800 p-8 text-sm">
-          Code
+          <div className="flex justify-between">
+            Code
+            <Button>
+              <ClipboardIcon className="h-4 w-4" />
+            </Button>
+          </div>
           {!isObjectEmpty(props) && (
-            <CodeBlock>{generateCodeSnippet(props)}</CodeBlock>
+            <CodeBlock>
+              {generateCodeSnippet({ componentName, props })}
+            </CodeBlock>
           )}
         </div>
       </div>

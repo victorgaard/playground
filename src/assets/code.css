@@ -1,14 +1,25 @@
 /**
- * atom-dark theme for `prism.js`
- * Based on Atom's `atom-dark` theme: https://github.com/atom/atom-dark-syntax
- * @author Joe Gibson (@gibsjose)
+ * Darcula theme
+ *
+ * Adapted from a theme based on:
+ * IntelliJ Darcula Theme (https://github.com/bulenkov/Darcula)
+ *
+ * @author Alexandre Paradis <service.paradis@gmail.com>
+ * @version 1.0
  */
 
 code[class*="language-"],
 pre[class*="language-"] {
-  color: #c5c8c6;
-  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-  font-family: Inconsolata, Monaco, Consolas, "Courier New", Courier, monospace;
+  color: #a9b7c6;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    Liberation Mono,
+    Courier New,
+    monospace;
   direction: ltr;
   text-align: left;
   white-space: pre;
@@ -26,17 +37,20 @@ pre[class*="language-"] {
   hyphens: none;
 }
 
-/* Code blocks */
-pre[class*="language-"] {
-  padding: 1em;
-  margin: 0.5em 0;
-  overflow: auto;
-  border-radius: 0.3em;
+pre[class*="language-"]::-moz-selection,
+pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection,
+code[class*="language-"] ::-moz-selection {
+  color: inherit;
+  background: rgba(33, 66, 131, 0.85);
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-  background: #1d1f21;
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection,
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
+  color: inherit;
+  background: rgba(33, 66, 131, 0.85);
 }
 
 /* Inline code */
@@ -47,97 +61,134 @@ pre[class*="language-"] {
 
 .token.comment,
 .token.prolog,
-.token.doctype,
 .token.cdata {
-  color: #7c7c7c;
+  color: #808080;
 }
 
-.token.punctuation {
-  color: #c5c8c6;
+.token.delimiter,
+.token.boolean,
+.token.keyword,
+.token.selector,
+.token.important,
+.token.atrule {
+  color: #cc7832;
 }
 
-.namespace {
-  opacity: 0.7;
+.token.operator,
+.token.punctuation,
+.token.attr-name {
+  color: #a9b7c6;
+}
+
+.token.tag,
+.token.tag .punctuation,
+.token.doctype,
+.token.builtin {
+  color: #e8bf6a;
+}
+
+.token.entity,
+.token.number,
+.token.symbol {
+  color: #6897bb;
 }
 
 .token.property,
-.token.keyword,
-.token.tag {
-  color: #96cbfe;
-}
-
-.token.class-name {
-  color: #ffffb6;
-  text-decoration: underline;
-}
-
-.token.boolean,
-.token.constant {
-  color: #99cc99;
-}
-
-.token.symbol,
-.token.deleted {
-  color: #f92672;
-}
-
-.token.number {
-  color: #ff73fd;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-  color: #a8ff60;
-}
-
+.token.constant,
 .token.variable {
-  color: #c6c5fe;
+  color: #9876aa;
 }
 
-.token.operator {
-  color: #ededed;
+.token.string,
+.token.char {
+  color: #6a8759;
 }
 
-.token.entity {
-  color: #ffffb6;
-  cursor: help;
+.token.attr-value,
+.token.attr-value .punctuation {
+  color: #a5c261;
+}
+
+.token.attr-value .punctuation:first-child {
+  color: #a9b7c6;
 }
 
 .token.url {
-  color: #96cbfe;
-}
-
-.language-css .token.string,
-.style .token.string {
-  color: #87c38a;
-}
-
-.token.atrule,
-.token.attr-value {
-  color: #f9ee98;
+  color: #287bde;
+  text-decoration: underline;
 }
 
 .token.function {
-  color: #dad085;
+  color: #ffc66d;
 }
 
 .token.regex {
-  color: #e9c062;
+  background: #364135;
 }
 
-.token.important {
-  color: #fd971f;
-}
-
-.token.important,
 .token.bold {
   font-weight: bold;
 }
 
 .token.italic {
   font-style: italic;
+}
+
+.token.inserted {
+  background: #294436;
+}
+
+.token.deleted {
+  background: #484a4a;
+}
+
+code.language-css .token.property,
+code.language-css .token.property + .token.punctuation {
+  color: #a9b7c6;
+}
+
+code.language-css .token.id {
+  color: #ffc66d;
+}
+
+code.language-css .token.selector > .token.class,
+code.language-css .token.selector > .token.attribute,
+code.language-css .token.selector > .token.pseudo-class,
+code.language-css .token.selector > .token.pseudo-element {
+  color: #ffc66d;
+}
+
+pre[class*="language-"].line-numbers {
+  position: relative;
+  padding-left: 0;
+  counter-reset: linenumber;
+  border: none;
+}
+
+.line-numbers .line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: -1px;
+  font-size: 100%;
+  left: -3.5em;
+  width: 3em; /* works for line-numbers below 1000 lines */
+  letter-spacing: -1px;
+  border-right: 0;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.line-numbers-rows > span {
+  display: block;
+  counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+  content: counter(linenumber);
+  color: #374151;
+  display: block;
+  padding-right: 0.8em;
+  text-align: right;
 }

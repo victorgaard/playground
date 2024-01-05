@@ -1,12 +1,18 @@
 import { ReactNode } from "react";
 
-export function generateCodeSnippet(props: Record<string, ReactNode>) {
+type GenerateCodeSnippetProps = {
+  componentName: string;
+  props: Record<string, ReactNode>;
+};
+
+export function generateCodeSnippet({
+  componentName,
+  props,
+}: GenerateCodeSnippetProps) {
   if (props.children) {
-    return `
-  <Button className="coe">
-    ${props.children}
-  </Button>
-          `;
+    return `<${componentName} className="coe">
+  ${props.children}
+</${componentName}>`;
   }
-  return `<Button />`;
+  return `<${componentName} />`;
 }
