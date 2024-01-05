@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { StrictMode, Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import {
@@ -10,7 +10,15 @@ import {
   RouterProvider,
   ScrollRestoration,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+
+export const TanStackRouterDevtools =
+  process.env.NODE_ENV === "production"
+    ? () => null
+    : lazy(() =>
+        import("@tanstack/router-devtools").then((res) => ({
+          default: res.TanStackRouterDevtools,
+        }))
+      );
 
 const rootRoute = new RootRoute({
   component: function Layout() {
@@ -43,7 +51,9 @@ const rootRoute = new RootRoute({
         </div>
         <Outlet />
         <ScrollRestoration />
-        <TanStackRouterDevtools />
+        <Suspense>
+          <TanStackRouterDevtools />
+        </Suspense>
       </main>
     );
   },
