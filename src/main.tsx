@@ -1,6 +1,15 @@
-import { StrictMode, Suspense, lazy, useEffect, useState } from "react";
+import {
+  PropsWithChildren,
+  ReactNode,
+  StrictMode,
+  Suspense,
+  lazy,
+  useEffect,
+  useState,
+} from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "./assets/code.css";
 import {
   Link,
   Outlet,
@@ -11,6 +20,9 @@ import {
   ScrollRestoration,
 } from "@tanstack/react-router";
 import { capitalize } from "./utils/capitalize";
+import Prism from "prismjs";
+import { isObjectEmpty } from "./utils/isObjectEmpty";
+import { generateCodeSnippet } from "./utils/generateCodeSnippet";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -64,6 +76,18 @@ const indexRoute = new Route({
   },
 });
 
+export function CodeBlock({ children }: PropsWithChildren) {
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [children]);
+
+  return (
+    <pre className="flex min-h-36 items-center text-sm">
+      <code className="language-html">{children}</code>
+    </pre>
+  );
+}
+
 const componentRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "$componentId",
@@ -71,7 +95,7 @@ const componentRoute = new Route({
     const componentName = capitalize(componentRoute.useParams().componentId);
     const Component = lazy(() => import(`./components/${componentName}.tsx`));
 
-    const [props, setProps] = useState({});
+    const [props, setProps] = useState<Record<string, ReactNode>>({});
 
     useEffect(() => {
       import(`./components/${componentName}.tsx`).then((module) => {
@@ -90,8 +114,10 @@ const componentRoute = new Route({
           </div>
         </div>
         <div className="flex w-96 flex-col gap-8 border-l border-gray-800 p-8 text-sm">
-          Props:
-          <pre>{JSON.stringify(props, null, 2)}</pre>
+          Code
+          {!isObjectEmpty(props) && (
+            <CodeBlock>{generateCodeSnippet(props)}</CodeBlock>
+          )}
         </div>
       </div>
     );
