@@ -18,17 +18,17 @@ export const TanStackRouterDevtools =
     : lazy(() =>
         import("@tanstack/router-devtools").then((res) => ({
           default: res.TanStackRouterDevtools,
-        }))
+        })),
       );
 
 const rootRoute = new RootRoute({
   component: function Layout() {
     return (
       <main className="flex h-screen">
-        <div className="p-8 min-w-64 bg-black flex flex-col gap-1 overflow-auto border-r border-gray-800 ">
+        <div className="flex min-w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 ">
           <Link
             to="/"
-            className="hover:bg-gray-900 py-2 px-4 text-sm rounded"
+            className="rounded px-4 py-2 text-sm hover:bg-gray-900"
             activeProps={{ className: "bg-gray-900" }}
           >
             Home
@@ -36,7 +36,7 @@ const rootRoute = new RootRoute({
           <Link
             to="/$componentId"
             params={{ componentId: "button" }}
-            className="hover:bg-gray-900 py-2 px-4 text-sm rounded"
+            className="rounded px-4 py-2 text-sm hover:bg-gray-900"
             activeProps={{ className: "bg-gray-900" }}
           >
             Component
@@ -57,7 +57,7 @@ const indexRoute = new Route({
   path: "/",
   component: function Index() {
     return (
-      <div className="p-8 flex-1 h-full flex">
+      <div className="flex h-full flex-1 p-8">
         <h1>Welcome Home!</h1>
       </div>
     );
@@ -68,25 +68,30 @@ const componentRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "$componentId",
   component: function Component() {
-    const { componentId } = componentRoute.useParams();
+    const componentName = capitalize(componentRoute.useParams().componentId);
+    const Component = lazy(() => import(`./components/${componentName}`));
+
     const [props, setProps] = useState({});
-    const component = capitalize(componentId);
 
     useEffect(() => {
-      import(`./components/${component}`).then((module) => {
+      import(`./components/${componentName}`).then((module) => {
         setProps(module.props);
       });
-    }, [component]);
-
-    const Component = lazy(() => import(`./components/${component}`));
+    }, [componentName]);
 
     return (
-      <div className="flex-1 flex-col h-full flex">
-        <div className="p-8 border-b border-gray-800">{component}</div>
-        <div className="p-8 flex items-center justify-center h-full">
-          <Suspense>
-            <Component {...props} />
-          </Suspense>
+      <div className="flex h-full flex-1">
+        <div className="flex flex-1 flex-col">
+          <div className="border-b border-gray-800 p-8">{componentName}</div>
+          <div className="flex h-full items-center justify-center p-8">
+            <Suspense>
+              <Component {...props} />
+            </Suspense>
+          </div>
+        </div>
+        <div className="flex w-96 flex-col gap-8 border-l border-gray-800 p-8 text-sm">
+          Props:
+          <pre>{JSON.stringify(props, null, 2)}</pre>
         </div>
       </div>
     );
@@ -109,6 +114,6 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <RouterProvider router={router} />
-    </StrictMode>
+    </StrictMode>,
   );
 }
