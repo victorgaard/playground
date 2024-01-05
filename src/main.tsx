@@ -69,12 +69,12 @@ const componentRoute = new Route({
   path: "$componentId",
   component: function Component() {
     const componentName = capitalize(componentRoute.useParams().componentId);
-    const Component = lazy(() => import(`./components/${componentName}`));
+    const Component = lazy(() => import(`./components/${componentName}.tsx`));
 
     const [props, setProps] = useState({});
 
     useEffect(() => {
-      import(`./components/${componentName}`).then((module) => {
+      import(`./components/${componentName}.tsx`).then((module) => {
         setProps(module.props);
       });
     }, [componentName]);
