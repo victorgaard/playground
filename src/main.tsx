@@ -1,4 +1,4 @@
-import { StrictMode, Suspense, lazy } from "react";
+import { StrictMode, Suspense, lazy, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import {
@@ -10,6 +10,7 @@ import {
   RouterProvider,
   ScrollRestoration,
 } from "@tanstack/react-router";
+import { capitalize } from "./utils/capitalize";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -33,20 +34,12 @@ const rootRoute = new RootRoute({
             Home
           </Link>
           <Link
-            to="/$component"
-            params={{ component: "button" }}
+            to="/$componentId"
+            params={{ componentId: "button" }}
             className="hover:bg-gray-900 py-2 px-4 text-sm rounded"
             activeProps={{ className: "bg-gray-900" }}
           >
             Component
-          </Link>
-          <Link
-            to="/$component"
-            params={{ component: "anchor" }}
-            className="hover:bg-gray-900 py-2 px-4 text-sm rounded"
-            activeProps={{ className: "bg-gray-900" }}
-          >
-            Ale
           </Link>
         </div>
         <Outlet />
@@ -73,13 +66,28 @@ const indexRoute = new Route({
 
 const componentRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: "$component",
+  path: "$componentId",
   component: function Component() {
-    const { component } = componentRoute.useParams();
+    const { componentId } = componentRoute.useParams();
+    const [props, setProps] = useState({});
+    const component = capitalize(componentId);
+
+    useEffect(() => {
+      import(`./components/${component}`).then((module) => {
+        setProps(module.props);
+      });
+    }, [component]);
+
+    const Component = lazy(() => import(`./components/${component}`));
+
     return (
       <div className="flex-1 flex-col h-full flex">
         <div className="p-8 border-b border-gray-800">{component}</div>
-        <div className="p-8 flex items-center justify-center h-full">Heyo</div>
+        <div className="p-8 flex items-center justify-center h-full">
+          <Suspense>
+            <Component {...props} />
+          </Suspense>
+        </div>
       </div>
     );
   },
