@@ -9,10 +9,20 @@ export function generateCodeSnippet({
   componentName,
   props,
 }: GenerateCodeSnippetProps) {
+  let code: string;
+  const propsString = Object.keys(props)
+    .map((key) => {
+      if (key !== "children") return `${key}="${props[key]}"`;
+    })
+    .join(" ");
+
   if (props.children) {
-    return `<${componentName} className="coe">
+    code = `<${componentName}${propsString}>
   ${props.children}
 </${componentName}>`;
+  } else {
+    code = `<${componentName}${propsString} />`;
   }
-  return `<${componentName} />`;
+
+  return code;
 }

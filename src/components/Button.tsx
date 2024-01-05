@@ -15,6 +15,7 @@ const buttonVariants = cva(
         primary: "bg-gray-800 text-white hover:bg-gray-700 active:bg-gray-800",
       },
       size: {
+        sm: "p-1",
         md: "py-3 px-6",
       },
     },
@@ -39,7 +40,7 @@ export default function Button({
 }
 
 export const props: ButtonProps = {
-  children: "Testing this here",
+  children: "👉 click me",
   variant: "primary",
   size: "md",
 };

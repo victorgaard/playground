@@ -47,7 +47,7 @@ const rootRoute = new RootRoute({
             className="rounded px-4 py-2 hover:bg-gray-900"
             activeProps={{ className: "bg-gray-900" }}
           >
-            Component
+            Button
           </Link>
         </div>
         <Outlet />
@@ -78,7 +78,7 @@ export function CodeBlock({ children }: PropsWithChildren) {
   }, []);
 
   return (
-    <pre className="line-numbers ml-6 text-sm">
+    <pre className="line-numbers ml-6 text-[13px]">
       <code className="language-jsx">{children}</code>
     </pre>
   );
