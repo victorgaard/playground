@@ -24,11 +24,11 @@ export const TanStackRouterDevtools =
 const rootRoute = new RootRoute({
   component: function Layout() {
     return (
-      <main className="flex h-screen">
+      <main className="flex h-screen text-sm">
         <div className="flex min-w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 ">
           <Link
             to="/"
-            className="rounded px-4 py-2 text-sm hover:bg-gray-900"
+            className="rounded px-4 py-2 hover:bg-gray-900"
             activeProps={{ className: "bg-gray-900" }}
           >
             Home
@@ -36,7 +36,7 @@ const rootRoute = new RootRoute({
           <Link
             to="/$componentId"
             params={{ componentId: "button" }}
-            className="rounded px-4 py-2 text-sm hover:bg-gray-900"
+            className="rounded px-4 py-2 hover:bg-gray-900"
             activeProps={{ className: "bg-gray-900" }}
           >
             Component

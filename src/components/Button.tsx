@@ -8,11 +8,11 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   };
 
 const buttonVariants = cva(
-  "flex font-medium rounded-lg cursor-pointer items-center justify-center focus:outline-none text-sm disabled:cursor-not-allowed transition-colors",
+  "flex font-medium rounded-lg cursor-pointer items-center justify-center active:scale-90 text-sm focus:ring-2 outline-gray-500 ring-gray-600 disabled:cursor-not-allowed transition-all",
   {
     variants: {
       variant: {
-        primary: "bg-gray-800 hover:bg-gray-700 active:bg-gray-800",
+        primary: "bg-gray-800 text-white hover:bg-gray-700 active:bg-gray-800",
       },
       size: {
         md: "py-3 px-6",
@@ -22,7 +22,7 @@ const buttonVariants = cva(
       variant: "primary",
       size: "md",
     },
-  }
+  },
 );
 
 export default function Button({
