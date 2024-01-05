@@ -110,9 +110,9 @@ const componentRoute = new Route({
           </div>
         </div>
         <div className="flex w-96 flex-col gap-8 border-l border-gray-800 p-8 text-sm">
-          <div className="flex justify-between">
+          <div className="flex items-center justify-between">
             Code
-            <Button>
+            <Button size="sm">
               <ClipboardIcon className="h-4 w-4" />
             </Button>
           </div>

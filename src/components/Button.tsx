@@ -2,7 +2,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "../utils/cn";
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> & {
     children: ReactNode;
   };
@@ -15,7 +15,7 @@ const buttonVariants = cva(
         primary: "bg-gray-800 text-white hover:bg-gray-700 active:bg-gray-800",
       },
       size: {
-        sm: "p-1",
+        sm: "p-2",
         md: "py-3 px-6",
       },
     },
