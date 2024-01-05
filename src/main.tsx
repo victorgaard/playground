@@ -25,9 +25,17 @@ import Prism from "prismjs";
 import "prismjs/components/prism-jsx";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "./assets/code.css";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import Button from "./components/Button";
 import { ClipboardIcon } from "@heroicons/react/24/outline";
+
+export const TanStackRouterDevtools =
+  process.env.NODE_ENV === "production"
+    ? () => null
+    : lazy(() =>
+        import("@tanstack/router-devtools").then((res) => ({
+          default: res.TanStackRouterDevtools,
+        })),
+      );
 
 const rootRoute = new RootRoute({
   component: function Layout() {
