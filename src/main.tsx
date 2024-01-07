@@ -1,5 +1,6 @@
 import {
   PropsWithChildren,
+  ReactNode,
   StrictMode,
   Suspense,
   lazy,
@@ -91,7 +92,7 @@ export function CodeBlock({ children }: PropsWithChildren) {
   );
 }
 
-type InputTypes = string | boolean;
+type InputTypes = string | boolean | ReactNode;
 
 function RenderInput<T>(
   propName: keyof T,
