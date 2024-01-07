@@ -27,7 +27,7 @@ import "prismjs/components/prism-jsx";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "./assets/code.css";
 import Button from "./components/Button";
-import { ClipboardIcon } from "@heroicons/react/24/outline";
+import { ArrowUturnLeftIcon, ClipboardIcon } from "@heroicons/react/24/outline";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -133,15 +133,33 @@ export function PropsForm<T extends Record<string, InputTypes>>({
   propValues,
   onPropChange,
 }: PropsFormProps<T>) {
+  const navigate = useNavigate();
   return (
-    <form className="flex flex-col gap-4">
-      {Object.entries(propValues).map(([propName, propValue]) => (
-        <div key={propName} className="flex flex-col">
-          <label>{propName}</label>
-          {RenderInput(propName, propValue, onPropChange)}
-        </div>
-      ))}
-    </form>
+    <>
+      <div className="flex items-center justify-between">
+        Props
+        <Button
+          size="sm"
+          type="button"
+          onClick={() => {
+            navigate({
+              to: "/$componentId",
+              params: { componentId: "button" },
+            });
+          }}
+        >
+          <ArrowUturnLeftIcon className="h-4 w-4" />
+        </Button>
+      </div>
+      <form className="flex flex-col gap-4">
+        {Object.entries(propValues).map(([propName, propValue]) => (
+          <div key={propName} className="flex flex-col">
+            <label>{propName}</label>
+            {RenderInput(propName, propValue, onPropChange)}
+          </div>
+        ))}
+      </form>
+    </>
   );
 }
 
@@ -151,26 +169,30 @@ const componentRoute = new Route({
   component: function Component() {
     const componentName = capitalize(componentRoute.useParams().componentId);
     const Component = lazy(() => import(`./components/${componentName}.tsx`));
-    const navigate = useNavigate();
     const propsFromParams = componentRoute.useSearch();
+    const navigate = useNavigate();
 
     const [props, setProps] = useState<Record<string, InputTypes>>({});
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
       import(`./components/${componentName}.tsx`).then((module) => {
         setProps(module.props);
+        setMounted(true);
       });
     }, [componentName]);
 
     useEffect(() => {
-      setProps((prevProps) => ({ ...prevProps, ...propsFromParams }));
-    }, [propsFromParams]);
+      if (mounted) {
+        setProps((prevProps) => ({ ...prevProps, ...propsFromParams }));
+      }
+    }, [propsFromParams, mounted]);
 
     function handlePropChange(propName: string, value: InputTypes) {
       navigate({
         to: "/$componentId",
-        search: (prev) => ({ ...prev, [propName]: value }),
         params: true,
+        search: (prev) => ({ ...prev, [propName]: value }),
       });
     }
 

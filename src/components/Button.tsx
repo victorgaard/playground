@@ -36,11 +36,13 @@ export default function Button({
   className,
   loading = false,
   disabled = false,
+  ...rest
 }: ButtonProps) {
   return (
     <button
       className={cn(buttonVariants({ variant, size }), className)}
       disabled={disabled || loading}
+      {...rest}
     >
       {children}
     </button>
