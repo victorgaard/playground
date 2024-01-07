@@ -1,6 +1,5 @@
 import {
   PropsWithChildren,
-  ReactNode,
   StrictMode,
   Suspense,
   lazy,
@@ -92,16 +91,18 @@ export function CodeBlock({ children }: PropsWithChildren) {
   );
 }
 
+type InputTypes = string | boolean;
+
 function RenderInput<T>(
   propName: keyof T,
-  propValue: T[keyof T],
-  onPropChange: (propName: keyof T, value: T[keyof T]) => void,
+  propValue: InputTypes,
+  onPropChange: (propName: keyof T, value: InputTypes) => void,
 ) {
   if (typeof propValue === "boolean") {
     return (
       <input
         type="checkbox"
-        checked={propValue as boolean}
+        checked={propValue}
         onChange={(e) => onPropChange(propName, e.target.checked)}
         className="border bg-black p-4"
       />
@@ -110,7 +111,7 @@ function RenderInput<T>(
     return (
       <input
         type="text"
-        value={propValue as string}
+        value={propValue}
         onChange={(e) => onPropChange(propName, e.target.value)}
         className="border bg-black p-4"
       />
@@ -123,10 +124,10 @@ function RenderInput<T>(
 
 type PropsFormProps<T> = {
   propValues: T;
-  onPropChange: (propName: keyof T, value: T[keyof T]) => void;
+  onPropChange: (propName: keyof T, value: InputTypes) => void;
 };
 
-export function PropsForm<T extends Record<string, ReactNode>>({
+export function PropsForm<T extends Record<string, InputTypes>>({
   propValues,
   onPropChange,
 }: PropsFormProps<T>) {
@@ -149,7 +150,7 @@ const componentRoute = new Route({
     const componentName = capitalize(componentRoute.useParams().componentId);
     const Component = lazy(() => import(`./components/${componentName}.tsx`));
 
-    const [props, setProps] = useState<Record<string, ReactNode>>({});
+    const [props, setProps] = useState<Record<string, InputTypes>>({});
 
     useEffect(() => {
       import(`./components/${componentName}.tsx`).then((module) => {
@@ -157,7 +158,7 @@ const componentRoute = new Route({
       });
     }, [componentName]);
 
-    function handlePropChange(propName: string, value: ReactNode) {
+    function handlePropChange(propName: string, value: InputTypes) {
       setProps((prevProps) => ({ ...prevProps, [propName]: value }));
     }
 
