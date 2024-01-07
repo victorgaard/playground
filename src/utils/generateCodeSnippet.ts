@@ -9,20 +9,29 @@ export function generateCodeSnippet({
   componentName,
   props,
 }: GenerateCodeSnippetProps) {
-  let code: string;
-  const propsString = Object.keys(props)
-    .map((key) => {
-      if (key !== "children") return `${key}="${props[key]}"`;
+  const propsString = Object.entries(props)
+    .map(([key, value]) => {
+      if (key !== "children") {
+        if (typeof value === "string") {
+          return `${key}="${value}"`;
+        } else if (value === true) {
+          return `${key}`;
+        } else if (!value) {
+          return null;
+        } else {
+          return `${key}={${value}}`;
+        }
+      }
+      return null;
     })
+    .filter(Boolean)
     .join(" ");
 
-  if (props.children) {
-    code = `<${componentName}${propsString}>
-  ${props.children}
-</${componentName}>`;
-  } else {
-    code = `<${componentName}${propsString} />`;
-  }
+  const closingTag = props.children
+    ? `>${props.children}</${componentName}>`
+    : " />";
+
+  const code = `<${componentName} ${propsString}${closingTag}`;
 
   return code;
 }

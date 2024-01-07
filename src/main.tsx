@@ -83,12 +83,62 @@ const indexRoute = new Route({
 export function CodeBlock({ children }: PropsWithChildren) {
   useEffect(() => {
     Prism.highlightAll();
-  }, []);
+  }, [children]);
 
   return (
     <pre className="line-numbers ml-6 text-[13px]">
       <code className="language-jsx">{children}</code>
     </pre>
+  );
+}
+
+function RenderInput<T>(
+  propName: keyof T,
+  propValue: T[keyof T],
+  onPropChange: (propName: keyof T, value: T[keyof T]) => void,
+) {
+  if (typeof propValue === "boolean") {
+    return (
+      <input
+        type="checkbox"
+        checked={propValue as boolean}
+        onChange={(e) => onPropChange(propName, e.target.checked)}
+        className="border bg-black p-4"
+      />
+    );
+  } else if (typeof propValue === "string") {
+    return (
+      <input
+        type="text"
+        value={propValue as string}
+        onChange={(e) => onPropChange(propName, e.target.value)}
+        className="border bg-black p-4"
+      />
+    );
+  } else {
+    // Add more cases for other prop types (e.g., number, radio, select, etc.)
+    return null;
+  }
+}
+
+type PropsFormProps<T> = {
+  propValues: T;
+  onPropChange: (propName: keyof T, value: T[keyof T]) => void;
+};
+
+export function PropsForm<T extends Record<string, ReactNode>>({
+  propValues,
+  onPropChange,
+}: PropsFormProps<T>) {
+  return (
+    <form className="flex flex-col gap-4">
+      {Object.entries(propValues).map(([propName, propValue]) => (
+        <div key={propName} className="flex flex-col">
+          <label>{propName}</label>
+          {RenderInput(propName, propValue, onPropChange)}
+        </div>
+      ))}
+    </form>
   );
 }
 
@@ -107,6 +157,10 @@ const componentRoute = new Route({
       });
     }, [componentName]);
 
+    function handlePropChange(propName: string, value: ReactNode) {
+      setProps((prevProps) => ({ ...prevProps, [propName]: value }));
+    }
+
     return (
       <div className="flex h-full flex-1">
         <div className="flex flex-1 flex-col">
@@ -118,6 +172,7 @@ const componentRoute = new Route({
           </div>
         </div>
         <div className="flex w-96 flex-col gap-8 border-l border-gray-800 p-8 text-sm">
+          <PropsForm propValues={props} onPropChange={handlePropChange} />
           <div className="flex items-center justify-between">
             Code
             <Button size="sm">

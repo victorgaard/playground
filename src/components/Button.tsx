@@ -5,14 +5,17 @@ import { cn } from "../utils/cn";
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> & {
     children: ReactNode;
+    loading?: boolean;
+    disabled?: boolean;
   };
 
 const buttonVariants = cva(
-  "flex font-medium rounded-lg cursor-pointer items-center justify-center active:scale-90 text-sm focus:ring-2 outline-gray-500 ring-gray-600 disabled:cursor-not-allowed transition-all",
+  "flex font-medium rounded-lg cursor-pointer items-center justify-center active:scale-90 text-sm focus:ring-2 outline-gray-500 ring-gray-600 disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 transition-all",
   {
     variants: {
       variant: {
-        primary: "bg-gray-800 text-white hover:bg-gray-700 active:bg-gray-800",
+        primary:
+          "bg-gray-800 text-white hover:bg-gray-700 active:bg-gray-800 disabled:hover:bg-gray-800",
       },
       size: {
         sm: "p-2",
@@ -31,9 +34,14 @@ export default function Button({
   variant,
   size,
   className,
+  loading = false,
+  disabled = false,
 }: ButtonProps) {
   return (
-    <button className={cn(buttonVariants({ variant, size }), className)}>
+    <button
+      className={cn(buttonVariants({ variant, size }), className)}
+      disabled={disabled || loading}
+    >
       {children}
     </button>
   );
@@ -43,4 +51,6 @@ export const props: ButtonProps = {
   children: "👉 click me",
   variant: "primary",
   size: "md",
+  loading: false,
+  disabled: false,
 };
