@@ -17,6 +17,7 @@ import {
   Router,
   RouterProvider,
   ScrollRestoration,
+  useNavigate,
 } from "@tanstack/react-router";
 import { capitalize } from "./utils/capitalize";
 import { isObjectEmpty } from "./utils/isObjectEmpty";
@@ -150,6 +151,8 @@ const componentRoute = new Route({
   component: function Component() {
     const componentName = capitalize(componentRoute.useParams().componentId);
     const Component = lazy(() => import(`./components/${componentName}.tsx`));
+    const navigate = useNavigate();
+    const propsFromParams = componentRoute.useSearch();
 
     const [props, setProps] = useState<Record<string, InputTypes>>({});
 
@@ -159,8 +162,16 @@ const componentRoute = new Route({
       });
     }, [componentName]);
 
+    useEffect(() => {
+      setProps((prevProps) => ({ ...prevProps, ...propsFromParams }));
+    }, [propsFromParams]);
+
     function handlePropChange(propName: string, value: InputTypes) {
-      setProps((prevProps) => ({ ...prevProps, [propName]: value }));
+      navigate({
+        to: "/$componentId",
+        search: (prev) => ({ ...prev, [propName]: value }),
+        params: true,
+      });
     }
 
     return (
