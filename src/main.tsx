@@ -166,27 +166,30 @@ export function PropsForm<T extends Record<string, InputTypes>>({
 const componentRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "$componentId",
-  component: function Component() {
-    const componentName = capitalize(componentRoute.useParams().componentId);
+  loader: async ({ params }) => {
+    const componentName = capitalize(params.componentId);
     const Component = lazy(() => import(`./components/${componentName}.tsx`));
+    const baseProps = await import(`./components/${componentName}.tsx`).then(
+      (module) => module.props,
+    );
+    return { componentName, Component, baseProps };
+  },
+  staleTime: Infinity,
+  component: function Component() {
+    const { componentName, Component, baseProps } =
+      componentRoute.useLoaderData();
     const propsFromParams = componentRoute.useSearch();
     const navigate = useNavigate();
 
-    const [props, setProps] = useState<Record<string, InputTypes>>({});
-    const [mounted, setMounted] = useState(false);
+    const [props, setProps] = useState<Record<string, InputTypes>>(baseProps);
 
     useEffect(() => {
-      import(`./components/${componentName}.tsx`).then((module) => {
-        setProps(module.props);
-        setMounted(true);
-      });
-    }, [componentName]);
-
-    useEffect(() => {
-      if (mounted) {
-        setProps((prevProps) => ({ ...prevProps, ...propsFromParams }));
-      }
-    }, [propsFromParams, mounted]);
+      setProps((prevProps) =>
+        Object.entries(propsFromParams).length === 0
+          ? baseProps
+          : { ...prevProps, ...propsFromParams },
+      );
+    }, [baseProps, propsFromParams]);
 
     function handlePropChange(propName: string, value: InputTypes) {
       navigate({
