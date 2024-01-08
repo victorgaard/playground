@@ -17,6 +17,7 @@ import {
   Router,
   RouterProvider,
   ScrollRestoration,
+  redirect,
   useNavigate,
 } from "@tanstack/react-router";
 import { capitalize } from "./utils/capitalize";
@@ -166,6 +167,9 @@ export function PropsForm<T extends Record<string, InputTypes>>({
 const componentRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "$componentId",
+  onError: () => {
+    throw redirect({ to: "/" });
+  },
   loader: async ({ params }) => {
     const componentName = capitalize(params.componentId);
     const Component = lazy(() => import(`./components/${componentName}.tsx`));
