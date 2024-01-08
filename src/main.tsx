@@ -124,15 +124,18 @@ function RenderInput<T>(
   }
 
   if (Array.isArray(propValue)) {
-    return propValue.map((prop) => (
-      <input
-        key={prop}
-        type="text"
-        value={prop}
-        onChange={(e) => onPropChange(prop, e.target.value)}
-        className="border bg-black p-4"
-      />
-    ));
+    return propValue.map((prop) => {
+      return (
+        <Button
+          key={prop}
+          value={prop}
+          onClick={() => onPropChange(propName, prop)}
+          className="mt-2"
+        >
+          {prop}
+        </Button>
+      );
+    });
   }
   // Add more cases for other prop types (e.g., number, radio, select, etc.)
   return null;
@@ -156,7 +159,6 @@ export function PropsForm<
         Props
         <Button
           size="sm"
-          type="button"
           onClick={() => {
             navigate({
               to: "/$componentId",
@@ -167,14 +169,14 @@ export function PropsForm<
           <ArrowUturnLeftIcon className="h-4 w-4" />
         </Button>
       </div>
-      <form className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4">
         {Object.entries(mergedProps).map(([propName, propValue]) => (
           <div key={propName} className="flex flex-col">
             <label>{propName}</label>
             {RenderInput(propName, propValue, onPropChange)}
           </div>
         ))}
-      </form>
+      </div>
     </>
   );
 }
