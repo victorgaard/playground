@@ -10,7 +10,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   };
 
 const buttonVariants = cva(
-  "flex font-medium rounded-lg cursor-pointer items-center justify-center active:scale-90 text-sm focus:ring-2 outline-gray-500 ring-gray-600 disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 transition-all",
+  "flex font-medium gap-2 rounded-lg cursor-pointer items-center justify-center active:scale-90 text-sm focus:ring-2 outline-gray-500 ring-gray-600 disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 transition-all",
   {
     variants: {
       variant: {

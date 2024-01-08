@@ -28,7 +28,11 @@ import "prismjs/components/prism-jsx";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "./assets/code.css";
 import Button from "./components/Button";
-import { ArrowUturnLeftIcon, ClipboardIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowUturnLeftIcon,
+  CheckIcon,
+  ClipboardIcon,
+} from "@heroicons/react/24/outline";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -99,6 +103,7 @@ type InputTypes = string | boolean | ReactNode;
 function RenderInput<T>(
   propName: keyof T,
   propValue: InputTypes,
+  propValues: T,
   onPropChange: (propName: keyof T, value: InputTypes) => void,
 ) {
   if (typeof propValue === "boolean") {
@@ -125,6 +130,7 @@ function RenderInput<T>(
 
   if (Array.isArray(propValue)) {
     return propValue.map((prop) => {
+      const isActive = propValues[propName] === prop;
       return (
         <Button
           key={prop}
@@ -132,7 +138,7 @@ function RenderInput<T>(
           onClick={() => onPropChange(propName, prop)}
           className="mt-2"
         >
-          {prop}
+          {prop} {isActive && <CheckIcon className="h-5 w-5" />}
         </Button>
       );
     });
@@ -173,7 +179,7 @@ export function PropsForm<
         {Object.entries(mergedProps).map(([propName, propValue]) => (
           <div key={propName} className="flex flex-col">
             <label>{propName}</label>
-            {RenderInput(propName, propValue, onPropChange)}
+            {RenderInput(propName, propValue, propValues, onPropChange)}
           </div>
         ))}
       </div>
