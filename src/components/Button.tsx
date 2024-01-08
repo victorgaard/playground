@@ -50,10 +50,21 @@ export default function Button({
   );
 }
 
-export const props: ButtonProps = {
+const defaultProps: ButtonProps = {
   children: "👉 click me",
   variant: "primary",
   size: "md",
   loading: false,
   disabled: false,
+};
+
+const variant: ButtonProps["variant"][] = ["primary", "secondary"];
+const size: ButtonProps["size"][] = ["md", "sm"];
+
+export const props = {
+  defaultProps,
+  multipleProps: {
+    variant,
+    size,
+  },
 };

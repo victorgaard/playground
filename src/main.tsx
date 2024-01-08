@@ -110,7 +110,9 @@ function RenderInput<T>(
         className="border bg-black p-4"
       />
     );
-  } else if (typeof propValue === "string") {
+  }
+
+  if (typeof propValue === "string") {
     return (
       <input
         type="text"
@@ -119,22 +121,35 @@ function RenderInput<T>(
         className="border bg-black p-4"
       />
     );
-  } else {
-    // Add more cases for other prop types (e.g., number, radio, select, etc.)
-    return null;
   }
+
+  if (Array.isArray(propValue)) {
+    return propValue.map((prop) => (
+      <input
+        key={prop}
+        type="text"
+        value={prop}
+        onChange={(e) => onPropChange(prop, e.target.value)}
+        className="border bg-black p-4"
+      />
+    ));
+  }
+  // Add more cases for other prop types (e.g., number, radio, select, etc.)
+  return null;
 }
 
-type PropsFormProps<T> = {
+type PropsFormProps<T, U> = {
   propValues: T;
+  multipleProps: U;
   onPropChange: (propName: keyof T, value: InputTypes) => void;
 };
 
-export function PropsForm<T extends Record<string, InputTypes>>({
-  propValues,
-  onPropChange,
-}: PropsFormProps<T>) {
+export function PropsForm<
+  T extends Record<string, InputTypes>,
+  U extends Record<string, string[]>,
+>({ propValues, multipleProps, onPropChange }: PropsFormProps<T, U>) {
   const navigate = useNavigate();
+  const mergedProps = { ...propValues, ...multipleProps };
   return (
     <>
       <div className="flex items-center justify-between">
@@ -153,7 +168,7 @@ export function PropsForm<T extends Record<string, InputTypes>>({
         </Button>
       </div>
       <form className="flex flex-col gap-4">
-        {Object.entries(propValues).map(([propName, propValue]) => (
+        {Object.entries(mergedProps).map(([propName, propValue]) => (
           <div key={propName} className="flex flex-col">
             <label>{propName}</label>
             {RenderInput(propName, propValue, onPropChange)}
@@ -185,12 +200,14 @@ const componentRoute = new Route({
     const propsFromParams = componentRoute.useSearch();
     const navigate = useNavigate();
 
-    const [props, setProps] = useState<Record<string, InputTypes>>(baseProps);
+    const [props, setProps] = useState<Record<string, InputTypes>>(
+      baseProps.defaultProps,
+    );
 
     useEffect(() => {
       setProps((prevProps) =>
         Object.entries(propsFromParams).length === 0
-          ? baseProps
+          ? baseProps.defaultProps
           : { ...prevProps, ...propsFromParams },
       );
     }, [baseProps, propsFromParams]);
@@ -214,7 +231,11 @@ const componentRoute = new Route({
           </div>
         </div>
         <div className="flex w-96 flex-col gap-8 border-l border-gray-800 p-8 text-sm">
-          <PropsForm propValues={props} onPropChange={handlePropChange} />
+          <PropsForm
+            propValues={props}
+            multipleProps={baseProps.multipleProps}
+            onPropChange={handlePropChange}
+          />
           <div className="flex items-center justify-between">
             Code
             <Button size="sm">
