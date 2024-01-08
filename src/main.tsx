@@ -129,19 +129,22 @@ function RenderInput<T>(
   }
 
   if (Array.isArray(propValue)) {
-    return propValue.map((prop) => {
-      const isActive = propValues[propName] === prop;
-      return (
-        <Button
-          key={prop}
-          value={prop}
-          onClick={() => onPropChange(propName, prop)}
-          className="mt-2"
-        >
-          {prop} {isActive && <CheckIcon className="h-5 w-5" />}
-        </Button>
-      );
-    });
+    return (
+      <div className="grid grid-cols-2 gap-2">
+        {propValue.map((prop) => {
+          const isActive = propValues[propName] === prop;
+          return (
+            <Button
+              key={prop}
+              value={prop}
+              onClick={() => onPropChange(propName, prop)}
+            >
+              {prop} {isActive && <CheckIcon className="h-5 w-5" />}
+            </Button>
+          );
+        })}
+      </div>
+    );
   }
   // Add more cases for other prop types (e.g., number, radio, select, etc.)
   return null;
@@ -175,9 +178,9 @@ export function PropsForm<
           <ArrowUturnLeftIcon className="h-4 w-4" />
         </Button>
       </div>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-8">
         {Object.entries(mergedProps).map(([propName, propValue]) => (
-          <div key={propName} className="flex flex-col">
+          <div key={propName} className="flex flex-col gap-2">
             <label>{propName}</label>
             {RenderInput(propName, propValue, propValues, onPropChange)}
           </div>
