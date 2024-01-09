@@ -6,7 +6,6 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> & {
     children: ReactNode;
     loading?: boolean;
-    disabled?: boolean;
   };
 
 const buttonVariants = cva(

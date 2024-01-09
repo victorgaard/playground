@@ -34,6 +34,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Switch from "./components/Switch";
 import { cn } from "./utils/cn";
+import Input from "./components/Input";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -69,14 +70,14 @@ const rootRoute = new RootRoute({
           </Link>
           <Link
             to="/$component"
-            params={{ component: "Switch" }}
+            params={{ component: "Input" }}
             className="rounded px-4 py-2 hover:bg-gray-900"
             activeProps={{ className: "bg-gray-900" }}
             activeOptions={{
               includeSearch: false,
             }}
           >
-            Switch
+            Input
           </Link>
         </div>
         <Outlet />
@@ -132,11 +133,11 @@ function RenderInput<T>(
 
   if (typeof propValue === "string") {
     return (
-      <input
+      <Input
         type="text"
         value={propValue}
+        placeholder={`${String(propName)}...`}
         onChange={(e) => onPropChange(propName, e.target.value)}
-        className="border bg-black p-4"
       />
     );
   }
@@ -229,6 +230,7 @@ const componentRoute = new Route({
     );
     return { component, Component, config };
   },
+  staleTime: Infinity,
   component: function Component() {
     const { component, Component, config } = componentRoute.useLoaderData();
     const propsFromParams = componentRoute.useSearch();
@@ -239,11 +241,13 @@ const componentRoute = new Route({
     );
 
     useEffect(() => {
-      setProps((prevProps) =>
-        Object.entries(propsFromParams).length === 0
+      function parseProps(prevProps: Record<string, InputTypes>) {
+        return Object.entries(propsFromParams).length === 0
           ? config.defaultProps
-          : { ...prevProps, ...propsFromParams },
-      );
+          : { ...prevProps, ...propsFromParams };
+      }
+
+      setProps((prevProps) => parseProps(prevProps));
     }, [config, propsFromParams]);
 
     function handlePropChange(propName: string, value: InputTypes) {
@@ -264,7 +268,7 @@ const componentRoute = new Route({
             </Suspense>
           </div>
         </div>
-        <div className="flex w-96 flex-col gap-8 border-l border-gray-800 p-8 text-sm">
+        <div className="flex w-96 flex-col gap-8 overflow-auto border-l border-gray-800 p-8 text-sm">
           <PropsForm
             component={component}
             propValues={props}
