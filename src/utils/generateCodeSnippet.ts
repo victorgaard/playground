@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 
 type GenerateCodeSnippetProps = {
-  componentName: string;
+  component: string;
   props: Record<string, ReactNode>;
 };
 
 export function generateCodeSnippet({
-  componentName,
+  component,
   props,
 }: GenerateCodeSnippetProps) {
   const propsString = Object.entries(props)
@@ -28,10 +28,10 @@ export function generateCodeSnippet({
     .join(" ");
 
   const closingTag = props.children
-    ? `>${props.children}</${componentName}>`
+    ? `>${props.children}</${component}>`
     : " />";
 
-  const code = `<${componentName} ${propsString}${closingTag}`;
+  const code = `<${component} ${propsString}${closingTag}`;
 
   return code;
 }

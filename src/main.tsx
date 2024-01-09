@@ -33,6 +33,7 @@ import {
   ClipboardIcon,
 } from "@heroicons/react/24/outline";
 import Switch from "./components/Switch";
+import { cn } from "./utils/cn";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -56,8 +57,8 @@ const rootRoute = new RootRoute({
             Home
           </Link>
           <Link
-            to="/$componentId"
-            params={{ componentId: "Button" }}
+            to="/$component"
+            params={{ component: "Button" }}
             className="rounded px-4 py-2 hover:bg-gray-900"
             activeProps={{ className: "bg-gray-900" }}
             activeOptions={{
@@ -67,8 +68,8 @@ const rootRoute = new RootRoute({
             Button
           </Link>
           <Link
-            to="/$componentId"
-            params={{ componentId: "Switch" }}
+            to="/$component"
+            params={{ component: "Switch" }}
             className="rounded px-4 py-2 hover:bg-gray-900"
             activeProps={{ className: "bg-gray-900" }}
             activeOptions={{
@@ -163,7 +164,7 @@ function RenderInput<T>(
 }
 
 type PropsFormProps<T, U> = {
-  componentName: string;
+  component: string;
   propValues: T;
   multipleProps: U;
   onPropChange: (propName: keyof T, value: InputTypes) => void;
@@ -173,7 +174,7 @@ export function PropsForm<
   T extends Record<string, InputTypes>,
   U extends Record<string, string[]>,
 >({
-  componentName,
+  component,
   propValues,
   multipleProps,
   onPropChange,
@@ -188,8 +189,8 @@ export function PropsForm<
           size="sm"
           onClick={() => {
             navigate({
-              to: "/$componentId",
-              params: { componentId: componentName },
+              to: "/$component",
+              params: { component: component },
             });
           }}
         >
@@ -198,7 +199,13 @@ export function PropsForm<
       </div>
       <div className="flex flex-col gap-8">
         {Object.entries(mergedProps).map(([propName, propValue]) => (
-          <div key={propName} className="flex flex-col gap-2">
+          <div
+            key={propName}
+            className={cn("flex flex-col gap-2", {
+              "flex-row items-center justify-between":
+                typeof propValue === "boolean",
+            })}
+          >
             <label>{propName}</label>
             {RenderInput(propName, propValue, propValues, onPropChange)}
           </div>
@@ -210,41 +217,39 @@ export function PropsForm<
 
 const componentRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: "$componentId",
+  path: "$component",
   onError: () => {
     throw redirect({ to: "/" });
   },
   loader: async ({ params }) => {
-    const componentName = params.componentId;
-    const Component = lazy(() => import(`./components/${componentName}.tsx`));
-    const baseProps = await import(`./components/${componentName}.tsx`).then(
+    const component = params.component;
+    const Component = lazy(() => import(`./components/${component}.tsx`));
+    const config = await import(`./components/${component}.tsx`).then(
       (module) => module.props,
     );
-    return { componentName, Component, baseProps };
+    return { component, Component, config };
   },
-  staleTime: Infinity,
   component: function Component() {
-    const { componentName, Component, baseProps } =
-      componentRoute.useLoaderData();
+    const { component, Component, config } = componentRoute.useLoaderData();
     const propsFromParams = componentRoute.useSearch();
     const navigate = useNavigate();
 
     const [props, setProps] = useState<Record<string, InputTypes>>(
-      baseProps.defaultProps,
+      config.defaultProps,
     );
 
     useEffect(() => {
       setProps((prevProps) =>
         Object.entries(propsFromParams).length === 0
-          ? baseProps.defaultProps
+          ? config.defaultProps
           : { ...prevProps, ...propsFromParams },
       );
-    }, [baseProps, propsFromParams]);
+    }, [config, propsFromParams]);
 
     function handlePropChange(propName: string, value: InputTypes) {
       navigate({
-        to: "/$componentId",
-        params: { componentId: componentName },
+        to: "/$component",
+        params: { component },
         search: (prev) => ({ ...prev, [propName]: value }),
       });
     }
@@ -252,7 +257,7 @@ const componentRoute = new Route({
     return (
       <div className="flex h-full flex-1">
         <div className="flex flex-1 flex-col">
-          <div className="border-b border-gray-800 p-8">{componentName}</div>
+          <div className="border-b border-gray-800 p-8">{component}</div>
           <div className="flex h-full items-center justify-center p-8">
             <Suspense>
               <Component {...props} />
@@ -261,9 +266,9 @@ const componentRoute = new Route({
         </div>
         <div className="flex w-96 flex-col gap-8 border-l border-gray-800 p-8 text-sm">
           <PropsForm
-            componentName={componentName}
+            component={component}
             propValues={props}
-            multipleProps={baseProps.multipleProps}
+            multipleProps={config.multipleProps}
             onPropChange={handlePropChange}
           />
           <div className="flex items-center justify-between">
@@ -273,9 +278,7 @@ const componentRoute = new Route({
             </Button>
           </div>
           {!isObjectEmpty(props) && (
-            <CodeBlock>
-              {generateCodeSnippet({ componentName, props })}
-            </CodeBlock>
+            <CodeBlock>{generateCodeSnippet({ component, props })}</CodeBlock>
           )}
         </div>
       </div>
