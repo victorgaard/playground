@@ -20,7 +20,6 @@ import {
   redirect,
   useNavigate,
 } from "@tanstack/react-router";
-import { capitalize } from "./utils/capitalize";
 import { isObjectEmpty } from "./utils/isObjectEmpty";
 import { generateCodeSnippet } from "./utils/generateCodeSnippet";
 import Prism from "prismjs";
@@ -33,6 +32,7 @@ import {
   CheckIcon,
   ClipboardIcon,
 } from "@heroicons/react/24/outline";
+import Switch from "./components/Switch";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -57,11 +57,25 @@ const rootRoute = new RootRoute({
           </Link>
           <Link
             to="/$componentId"
-            params={{ componentId: "button" }}
+            params={{ componentId: "Button" }}
             className="rounded px-4 py-2 hover:bg-gray-900"
             activeProps={{ className: "bg-gray-900" }}
+            activeOptions={{
+              includeSearch: false,
+            }}
           >
             Button
+          </Link>
+          <Link
+            to="/$componentId"
+            params={{ componentId: "Switch" }}
+            className="rounded px-4 py-2 hover:bg-gray-900"
+            activeProps={{ className: "bg-gray-900" }}
+            activeOptions={{
+              includeSearch: false,
+            }}
+          >
+            Switch
           </Link>
         </div>
         <Outlet />
@@ -108,11 +122,9 @@ function RenderInput<T>(
 ) {
   if (typeof propValue === "boolean") {
     return (
-      <input
-        type="checkbox"
+      <Switch
         checked={propValue}
-        onChange={(e) => onPropChange(propName, e.target.checked)}
-        className="border bg-black p-4"
+        onChecked={(e) => onPropChange(propName, e.target.checked)}
       />
     );
   }
@@ -151,6 +163,7 @@ function RenderInput<T>(
 }
 
 type PropsFormProps<T, U> = {
+  componentName: string;
   propValues: T;
   multipleProps: U;
   onPropChange: (propName: keyof T, value: InputTypes) => void;
@@ -159,7 +172,12 @@ type PropsFormProps<T, U> = {
 export function PropsForm<
   T extends Record<string, InputTypes>,
   U extends Record<string, string[]>,
->({ propValues, multipleProps, onPropChange }: PropsFormProps<T, U>) {
+>({
+  componentName,
+  propValues,
+  multipleProps,
+  onPropChange,
+}: PropsFormProps<T, U>) {
   const navigate = useNavigate();
   const mergedProps = { ...propValues, ...multipleProps };
   return (
@@ -171,7 +189,7 @@ export function PropsForm<
           onClick={() => {
             navigate({
               to: "/$componentId",
-              params: { componentId: "button" },
+              params: { componentId: componentName },
             });
           }}
         >
@@ -197,7 +215,7 @@ const componentRoute = new Route({
     throw redirect({ to: "/" });
   },
   loader: async ({ params }) => {
-    const componentName = capitalize(params.componentId);
+    const componentName = params.componentId;
     const Component = lazy(() => import(`./components/${componentName}.tsx`));
     const baseProps = await import(`./components/${componentName}.tsx`).then(
       (module) => module.props,
@@ -226,7 +244,7 @@ const componentRoute = new Route({
     function handlePropChange(propName: string, value: InputTypes) {
       navigate({
         to: "/$componentId",
-        params: true,
+        params: { componentId: componentName },
         search: (prev) => ({ ...prev, [propName]: value }),
       });
     }
@@ -243,6 +261,7 @@ const componentRoute = new Route({
         </div>
         <div className="flex w-96 flex-col gap-8 border-l border-gray-800 p-8 text-sm">
           <PropsForm
+            componentName={componentName}
             propValues={props}
             multipleProps={baseProps.multipleProps}
             onPropChange={handlePropChange}
