@@ -79,6 +79,17 @@ const rootRoute = new RootRoute({
           >
             Input
           </Link>
+          <Link
+            to="/$component"
+            params={{ component: "Switch" }}
+            className="rounded px-4 py-2 hover:bg-gray-900"
+            activeProps={{ className: "bg-gray-900" }}
+            activeOptions={{
+              includeSearch: false,
+            }}
+          >
+            Switch
+          </Link>
         </div>
         <Outlet />
         <ScrollRestoration />
@@ -230,7 +241,7 @@ const componentRoute = new Route({
     );
     return { component, Component, config };
   },
-  staleTime: Infinity,
+  shouldReload: true,
   component: function Component() {
     const { component, Component, config } = componentRoute.useLoaderData();
     const propsFromParams = componentRoute.useSearch();

@@ -5,6 +5,7 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> &
   VariantProps<typeof inputVariants> & {
+    label?: string;
     error?: string;
   };
 
@@ -27,11 +28,30 @@ const inputVariants = cva(
 );
 
 export default function Input({
+  label,
   error,
   className,
   variant,
   ...rest
 }: InputProps) {
+  if (label)
+    return (
+      <div className="flex flex-col gap-2">
+        <label htmlFor={label}>{label}</label>
+        <input
+          id={label}
+          className={cn(inputVariants({ variant }), className)}
+          {...rest}
+        />
+        {error && (
+          <p className="flex items-center gap-1.5 pt-2 text-xs text-red-700">
+            <ExclamationCircleIcon className="h-4 w-4" />
+            {error}
+          </p>
+        )}
+      </div>
+    );
+
   return (
     <div>
       <input className={cn(inputVariants({ variant }), className)} {...rest} />
@@ -46,8 +66,8 @@ export default function Input({
 }
 
 const defaultProps: InputProps = {
-  placeholder: "I'm a placeholder",
-  defaultValue: "Hello world",
+  label: "Input label",
+  placeholder: "I'm a placeholder...",
   error: "",
   variant: "rest",
   autoFocus: true,
