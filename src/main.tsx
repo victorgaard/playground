@@ -103,7 +103,7 @@ export function CodeBlock({ children }: PropsWithChildren) {
   }, [children]);
 
   return (
-    <pre className="line-numbers ml-6 text-[13px]">
+    <pre className="line-numbers ml-6 text-xs">
       <code className="language-jsx">{children}</code>
     </pre>
   );
@@ -254,15 +254,15 @@ const componentRoute = new Route({
       <div className="flex h-full flex-1">
         <div className="flex flex-1 flex-col">
           <div className="flex h-full flex-col justify-between">
-            <div className="border-b border-gray-800 p-8">{component}</div>
-            <div className="flex items-center gap-6 p-8 text-xs text-gray-400">
+            <div className="flex items-center border-b border-gray-800 pl-5 text-xs text-gray-400">
               <Link
                 to="/$component"
                 preload={false}
                 params={{ component }}
+                className="px-3 pb-5 pt-8 transition-transform active:scale-90"
                 activeProps={{
                   className:
-                    "underline text-white underline-offset-8 decoration-2 decoration-gray-700",
+                    "underline text-white underline-offset-[23px] decoration-2 decoration-gray-600",
                 }}
                 activeOptions={{
                   exact: true,
@@ -277,9 +277,10 @@ const componentRoute = new Route({
                   to="/$component"
                   params={{ component }}
                   search={() => config.examples[example]}
+                  className="px-3 pb-5 pt-8 transition-transform active:scale-90"
                   activeProps={{
                     className:
-                      "underline text-white underline-offset-8 decoration-2 decoration-gray-700",
+                      "underline text-white underline-offset-[23px] decoration-2 decoration-gray-600",
                   }}
                   activeOptions={{
                     exact: true,
@@ -289,12 +290,12 @@ const componentRoute = new Route({
                 </Link>
               ))}
             </div>
-            <div className="flex h-full items-center justify-center p-8">
+            <div className="flex h-full items-center justify-center">
               <Suspense>
                 <Component {...props} />
               </Suspense>
             </div>
-            <div className="p-8">
+            <div className="p-8 pb-6">
               <div className="flex items-center justify-between gap-8">
                 {!isObjectEmpty(props) && (
                   <CodeBlock>
