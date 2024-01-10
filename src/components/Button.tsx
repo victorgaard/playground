@@ -2,6 +2,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "../utils/cn";
 import LoadingSpinner from "./LoadingSpinner";
+import { Props } from "../utils/types";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> & {
@@ -84,7 +85,7 @@ const destructive: ButtonProps = {
   loading: false,
 };
 
-export const props = {
+export const props: Props<ButtonProps> = {
   defaultProps,
   multipleProps: {
     variant,

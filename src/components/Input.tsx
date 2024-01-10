@@ -2,6 +2,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import { InputHTMLAttributes } from "react";
 import { cn } from "../utils/cn";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import { Props } from "../utils/types";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> &
   VariantProps<typeof inputVariants> & {
@@ -76,7 +77,7 @@ const defaultProps: InputProps = {
 
 const variant: InputProps["variant"][] = ["rest", "success", "error"];
 
-export const props = {
+export const props: Props<InputProps> = {
   defaultProps,
   multipleProps: {
     variant,

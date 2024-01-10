@@ -1,6 +1,5 @@
 import {
   PropsWithChildren,
-  ReactNode,
   StrictMode,
   Suspense,
   lazy,
@@ -35,6 +34,7 @@ import Switch from "./components/Switch";
 import { cn } from "./utils/cn";
 import Input from "./components/Input";
 import { capitalize } from "./utils/capitalize";
+import { InputTypes } from "./utils/types";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -108,8 +108,6 @@ export function CodeBlock({ children }: PropsWithChildren) {
     </pre>
   );
 }
-
-type InputTypes = string | boolean | ReactNode;
 
 function RenderInput<T>(
   propName: keyof T,
