@@ -34,7 +34,6 @@ import {
 import Switch from "./components/Switch";
 import { cn } from "./utils/cn";
 import Input from "./components/Input";
-import { routes } from "./utils/readFiles";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -46,9 +45,11 @@ export const TanStackRouterDevtools =
       );
 
 const rootRoute = new RootRoute({
-  loader: async () => routes.map((route) => ({ label: route, href: route })),
   component: function Layout() {
-    const routes = rootRoute.useLoaderData();
+    const routes = [
+      { label: "Button", href: "Button" },
+      { label: "Input", href: "Input" },
+    ];
     return (
       <main className="flex h-screen text-sm">
         <div className="flex min-w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 ">
