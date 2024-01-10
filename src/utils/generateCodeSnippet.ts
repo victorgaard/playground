@@ -11,18 +11,10 @@ export function generateCodeSnippet({
 }: GenerateCodeSnippetProps) {
   const propsString = Object.entries(props)
     .map(([key, value]) => {
-      if (key !== "children") {
-        if (typeof value === "string") {
-          return `${key}="${value}"`;
-        } else if (value === true) {
-          return `${key}`;
-        } else if (!value) {
-          return null;
-        } else {
-          return `${key}={${value}}`;
-        }
-      }
-      return null;
+      if (key === "children" || !value) return null;
+      if (value === true) return `${key}`;
+      if (typeof value === "string") return `${key}="${value}"`;
+      return `${key}={${value}}`;
     })
     .filter(Boolean)
     .join(" ");
