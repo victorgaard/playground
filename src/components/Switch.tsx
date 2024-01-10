@@ -37,4 +37,5 @@ const defaultProps: SwitchProps = {
 
 export const props = {
   defaultProps,
+  examples: {},
 };

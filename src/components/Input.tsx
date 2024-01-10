@@ -81,4 +81,5 @@ export const props = {
   multipleProps: {
     variant,
   },
+  examples: {},
 };

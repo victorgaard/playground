@@ -55,13 +55,6 @@ export default function Button({
   );
 }
 
-const defaultProps: ButtonProps = {
-  children: "👉 click me",
-  variant: "primary",
-  size: "md",
-  loading: false,
-};
-
 const variant: ButtonProps["variant"][] = [
   "primary",
   "secondary",
@@ -70,10 +63,35 @@ const variant: ButtonProps["variant"][] = [
 
 const size: ButtonProps["size"][] = ["sm", "md", "lg"];
 
+const defaultProps: ButtonProps = {
+  children: "👉 click me",
+  variant: "primary",
+  size: "md",
+  loading: false,
+};
+
+const secondary: ButtonProps = {
+  children: "🥈 secondary button",
+  variant: "secondary",
+  size: "md",
+  loading: false,
+};
+
+const destructive: ButtonProps = {
+  children: "👀 uh-oh danger zone",
+  variant: "destructive",
+  size: "md",
+  loading: false,
+};
+
 export const props = {
   defaultProps,
   multipleProps: {
     variant,
     size,
+  },
+  examples: {
+    secondary,
+    destructive,
   },
 };

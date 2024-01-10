@@ -34,6 +34,7 @@ import {
 import Switch from "./components/Switch";
 import { cn } from "./utils/cn";
 import Input from "./components/Input";
+import { capitalize } from "./utils/capitalize";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -129,6 +130,7 @@ function RenderInput<T>(
   if (typeof propValue === "string") {
     return (
       <Input
+        id={String(propName)}
         type="text"
         value={propValue}
         placeholder={`${String(propName)}...`}
@@ -226,6 +228,7 @@ const componentRoute = new Route({
     );
     return { component, Component, config };
   },
+  staleTime: Infinity,
   shouldReload: true,
   component: function Component() {
     const { component, Component, config } = componentRoute.useLoaderData();
@@ -259,6 +262,40 @@ const componentRoute = new Route({
         <div className="flex flex-1 flex-col">
           <div className="flex h-full flex-col justify-between">
             <div className="border-b border-gray-800 p-8">{component}</div>
+            <div className="flex items-center gap-6 p-8 text-xs text-gray-400">
+              <Link
+                to="/$component"
+                preload={false}
+                params={{ component }}
+                activeProps={{
+                  className:
+                    "underline text-white underline-offset-8 decoration-2 decoration-gray-700",
+                }}
+                activeOptions={{
+                  exact: true,
+                }}
+              >
+                Default
+              </Link>
+              {Object.keys(config.examples).map((example) => (
+                <Link
+                  key={example}
+                  preload={false}
+                  to="/$component"
+                  params={{ component }}
+                  search={() => config.examples[example]}
+                  activeProps={{
+                    className:
+                      "underline text-white underline-offset-8 decoration-2 decoration-gray-700",
+                  }}
+                  activeOptions={{
+                    exact: true,
+                  }}
+                >
+                  {capitalize(example)}
+                </Link>
+              ))}
+            </div>
             <div className="flex h-full items-center justify-center p-8">
               <Suspense>
                 <Component {...props} />
