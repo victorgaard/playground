@@ -16,7 +16,6 @@ import {
   Route,
   Router,
   RouterProvider,
-  ScrollRestoration,
   redirect,
   useNavigate,
 } from "@tanstack/react-router";
@@ -92,7 +91,6 @@ const rootRoute = new RootRoute({
           </Link>
         </div>
         <Outlet />
-        <ScrollRestoration />
         <Suspense>
           <TanStackRouterDevtools />
         </Suspense>
@@ -234,7 +232,7 @@ const componentRoute = new Route({
     throw redirect({ to: "/" });
   },
   loader: async ({ params }) => {
-    const component = params.component;
+    const { component } = params;
     const Component = lazy(() => import(`./components/${component}.tsx`));
     const config = await import(`./components/${component}.tsx`).then(
       (module) => module.props,
@@ -272,11 +270,25 @@ const componentRoute = new Route({
     return (
       <div className="flex h-full flex-1">
         <div className="flex flex-1 flex-col">
-          <div className="border-b border-gray-800 p-8">{component}</div>
-          <div className="flex h-full items-center justify-center p-8">
-            <Suspense>
-              <Component {...props} />
-            </Suspense>
+          <div className="flex h-full flex-col justify-between">
+            <div className="border-b border-gray-800 p-8">{component}</div>
+            <div className="flex h-full items-center justify-center p-8">
+              <Suspense>
+                <Component {...props} />
+              </Suspense>
+            </div>
+            <div className="p-8">
+              <div className="flex items-center justify-between gap-8">
+                {!isObjectEmpty(props) && (
+                  <CodeBlock>
+                    {generateCodeSnippet({ component, props })}
+                  </CodeBlock>
+                )}
+                <Button size="sm">
+                  <ClipboardIcon className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
         <div className="flex w-96 flex-col gap-8 overflow-auto border-l border-gray-800 p-8 text-sm">
@@ -286,15 +298,6 @@ const componentRoute = new Route({
             multipleProps={config.multipleProps}
             onPropChange={handlePropChange}
           />
-          <div className="flex items-center justify-between">
-            Code
-            <Button size="sm">
-              <ClipboardIcon className="h-4 w-4" />
-            </Button>
-          </div>
-          {!isObjectEmpty(props) && (
-            <CodeBlock>{generateCodeSnippet({ component, props })}</CodeBlock>
-          )}
         </div>
       </div>
     );

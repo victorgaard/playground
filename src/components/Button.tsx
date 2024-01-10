@@ -58,7 +58,6 @@ const defaultProps: ButtonProps = {
   variant: "primary",
   size: "md",
   loading: false,
-  disabled: false,
 };
 
 const variant: ButtonProps["variant"][] = [
