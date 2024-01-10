@@ -1,6 +1,7 @@
 import { VariantProps, cva } from "class-variance-authority";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "../utils/cn";
+import LoadingSpinner from "./LoadingSpinner";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> & {
@@ -48,6 +49,7 @@ export default function Button({
       disabled={disabled || loading}
       {...rest}
     >
+      {loading && <LoadingSpinner />}
       {children}
     </button>
   );
@@ -65,6 +67,7 @@ const variant: ButtonProps["variant"][] = [
   "secondary",
   "destructive",
 ];
+
 const size: ButtonProps["size"][] = ["sm", "md", "lg"];
 
 export const props = {

@@ -78,17 +78,6 @@ const rootRoute = new RootRoute({
           >
             Input
           </Link>
-          <Link
-            to="/$component"
-            params={{ component: "Switch" }}
-            className="rounded px-4 py-2 hover:bg-gray-900"
-            activeProps={{ className: "bg-gray-900" }}
-            activeOptions={{
-              includeSearch: false,
-            }}
-          >
-            Switch
-          </Link>
         </div>
         <Outlet />
         <Suspense>
@@ -134,6 +123,7 @@ function RenderInput<T>(
   if (typeof propValue === "boolean") {
     return (
       <Switch
+        id={String(propName)}
         checked={propValue}
         onChecked={(e) => onPropChange(propName, e.target.checked)}
       />
@@ -209,16 +199,17 @@ export function PropsForm<
       </div>
       <div className="flex flex-col gap-8">
         {Object.entries(mergedProps).map(([propName, propValue]) => (
-          <div
+          <label
+            htmlFor={propName}
             key={propName}
             className={cn("flex flex-col gap-2", {
-              "flex-row items-center justify-between":
+              "cursor-pointer select-none flex-row items-center justify-between":
                 typeof propValue === "boolean",
             })}
           >
-            <label>{propName}</label>
+            <span>{propName}</span>
             {RenderInput(propName, propValue, propValues, onPropChange)}
-          </div>
+          </label>
         ))}
       </div>
     </>
