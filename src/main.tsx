@@ -34,6 +34,7 @@ import {
 import Switch from "./components/Switch";
 import { cn } from "./utils/cn";
 import Input from "./components/Input";
+import { routes } from "./utils/readFiles";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -45,7 +46,9 @@ export const TanStackRouterDevtools =
       );
 
 const rootRoute = new RootRoute({
+  loader: async () => routes.map((route) => ({ label: route, href: route })),
   component: function Layout() {
+    const routes = rootRoute.useLoaderData();
     return (
       <main className="flex h-screen text-sm">
         <div className="flex min-w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 ">
@@ -56,28 +59,20 @@ const rootRoute = new RootRoute({
           >
             Home
           </Link>
-          <Link
-            to="/$component"
-            params={{ component: "Button" }}
-            className="rounded px-4 py-2 hover:bg-gray-900"
-            activeProps={{ className: "bg-gray-900" }}
-            activeOptions={{
-              includeSearch: false,
-            }}
-          >
-            Button
-          </Link>
-          <Link
-            to="/$component"
-            params={{ component: "Input" }}
-            className="rounded px-4 py-2 hover:bg-gray-900"
-            activeProps={{ className: "bg-gray-900" }}
-            activeOptions={{
-              includeSearch: false,
-            }}
-          >
-            Input
-          </Link>
+          {routes.map((route) => (
+            <Link
+              key={route.href}
+              to="/$component"
+              params={{ component: route.href }}
+              className="rounded px-4 py-2 hover:bg-gray-900"
+              activeProps={{ className: "bg-gray-900" }}
+              activeOptions={{
+                includeSearch: false,
+              }}
+            >
+              {route.label}
+            </Link>
+          ))}
         </div>
         <Outlet />
         <Suspense>
