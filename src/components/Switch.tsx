@@ -1,4 +1,5 @@
 import { ChangeEvent, InputHTMLAttributes } from "react";
+import { Props } from "../utils/types";
 
 type SwitchProps = InputHTMLAttributes<HTMLInputElement> & {
   onChecked: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -35,7 +36,8 @@ const defaultProps: SwitchProps = {
   },
 };
 
-export const props = {
+export const props: Props<SwitchProps> = {
   defaultProps,
+  multipleProps: {},
   examples: {},
 };

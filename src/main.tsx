@@ -34,7 +34,7 @@ import Switch from "./components/Switch";
 import { cn } from "./utils/cn";
 import Input from "./components/Input";
 import { capitalize } from "./utils/capitalize";
-import { InputTypes } from "./utils/types";
+import { InputType, Props, PropsObj } from "./utils/types";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -111,9 +111,9 @@ export function CodeBlock({ children }: PropsWithChildren) {
 
 function RenderInput<T>(
   propName: keyof T,
-  propValue: InputTypes,
+  propValue: InputType,
   propValues: T,
-  onPropChange: (propName: keyof T, value: InputTypes) => void,
+  onPropChange: (propName: keyof T, value: InputType) => void,
 ) {
   if (typeof propValue === "boolean") {
     return (
@@ -163,13 +163,10 @@ type PropsFormProps<T, U> = {
   component: string;
   propValues: T;
   multipleProps: U;
-  onPropChange: (propName: keyof T, value: InputTypes) => void;
+  onPropChange: (propName: keyof T, value: InputType) => void;
 };
 
-export function PropsForm<
-  T extends Record<string, InputTypes>,
-  U extends Record<string, string[]>,
->({
+export function PropsForm<T extends PropsObj, U extends PropsObj>({
   component,
   propValues,
   multipleProps,
@@ -186,7 +183,7 @@ export function PropsForm<
           onClick={() => {
             navigate({
               to: "/$component",
-              params: { component: component },
+              params: { component },
             });
           }}
         >
@@ -221,9 +218,9 @@ const componentRoute = new Route({
   loader: async ({ params }) => {
     const { component } = params;
     const Component = lazy(() => import(`./components/${component}.tsx`));
-    const config = await import(`./components/${component}.tsx`).then(
-      (module) => module.props,
-    );
+    const config: Props<PropsObj> = await import(
+      `./components/${component}.tsx`
+    ).then((module) => module.props);
     return { component, Component, config };
   },
   staleTime: Infinity,
@@ -233,12 +230,10 @@ const componentRoute = new Route({
     const propsFromParams = componentRoute.useSearch();
     const navigate = useNavigate();
 
-    const [props, setProps] = useState<Record<string, InputTypes>>(
-      config.defaultProps,
-    );
+    const [props, setProps] = useState<PropsObj>(config.defaultProps);
 
     useEffect(() => {
-      function parseProps(prevProps: Record<string, InputTypes>) {
+      function parseProps(prevProps: PropsObj) {
         return Object.entries(propsFromParams).length === 0
           ? config.defaultProps
           : { ...prevProps, ...propsFromParams };
@@ -247,7 +242,7 @@ const componentRoute = new Route({
       setProps((prevProps) => parseProps(prevProps));
     }, [config, propsFromParams]);
 
-    function handlePropChange(propName: string, value: InputTypes) {
+    function handlePropChange(propName: string, value: InputType) {
       navigate({
         to: "/$component",
         params: { component },
@@ -303,7 +298,10 @@ const componentRoute = new Route({
               <div className="flex items-center justify-between gap-8">
                 {!isObjectEmpty(props) && (
                   <CodeBlock>
-                    {generateCodeSnippet({ component, props })}
+                    {generateCodeSnippet({
+                      component,
+                      props,
+                    })}
                   </CodeBlock>
                 )}
                 <Button size="sm">

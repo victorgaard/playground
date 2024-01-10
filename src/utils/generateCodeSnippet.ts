@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import { PropsObj } from "./types";
 
 type GenerateCodeSnippetProps = {
   component: string;
-  props: Record<string, ReactNode>;
+  props: PropsObj;
 };
 
 export function generateCodeSnippet({
