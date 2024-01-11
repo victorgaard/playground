@@ -215,7 +215,7 @@ const componentRoute = new Route({
     const { component } = params;
     const Component = lazy(() => import(`./components/${component}.tsx`));
     const config: Props<PropsObj> = await import(
-      `./components/${component}.tsx`
+      `./components/${component}.playground.ts`
     ).then((module) => module.props);
     return { component, Component, config };
   },

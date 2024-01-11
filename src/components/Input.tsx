@@ -2,9 +2,8 @@ import { VariantProps, cva } from "class-variance-authority";
 import { InputHTMLAttributes } from "react";
 import { cn } from "../utils/cn";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { Props } from "../static/types";
 
-type InputProps = InputHTMLAttributes<HTMLInputElement> &
+export type InputProps = InputHTMLAttributes<HTMLInputElement> &
   VariantProps<typeof inputVariants> & {
     label?: string;
     error?: string;
@@ -65,43 +64,3 @@ export default function Input({
     </div>
   );
 }
-
-const variant: InputProps["variant"][] = ["rest", "success", "error"];
-
-const defaultProps: InputProps = {
-  label: "Input label",
-  placeholder: "I'm a placeholder...",
-  defaultValue: "",
-  error: "",
-  variant: "rest",
-  autoFocus: true,
-  disabled: false,
-};
-
-const success: InputProps = {
-  label: "Best doggo",
-  placeholder: "I'm a placeholder...",
-  defaultValue: "All doggos are the best ones",
-  error: "",
-  variant: "success",
-  autoFocus: true,
-  disabled: false,
-};
-
-const error: InputProps = {
-  label: "Dog food",
-  placeholder: "I'm a placeholder...",
-  defaultValue: "ded birbo",
-  error: "Yikes, but why?",
-  variant: "error",
-  autoFocus: true,
-  disabled: false,
-};
-
-export const props: Props<InputProps> = {
-  defaultProps,
-  multipleProps: {
-    variant,
-  },
-  examples: { success, error },
-};
