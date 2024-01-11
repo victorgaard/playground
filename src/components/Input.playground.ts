@@ -26,7 +26,7 @@ const error: InputProps = {
   label: "Dog food",
   placeholder: "I'm a placeholder...",
   defaultValue: "ded birbo",
-  error: "Yikes, but why?",
+  error: "Yikes, are you sure?",
   variant: "error",
   autoFocus: true,
   disabled: false,
