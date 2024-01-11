@@ -215,7 +215,7 @@ const componentRoute = new Route({
   onError: () => {
     throw redirect({ to: "/" });
   },
-  loader: async ({ params }) => {
+  beforeLoad: async ({ params }) => {
     const { component } = params;
     const Component = lazy(() => import(`./components/${component}.tsx`));
     const config: Props<PropsObj> = await import(
@@ -223,8 +223,11 @@ const componentRoute = new Route({
     ).then((module) => module.props);
     return { component, Component, config };
   },
-  staleTime: Infinity,
-  shouldReload: true,
+  loader: ({ context }) => ({
+    component: context.component,
+    Component: context.Component,
+    config: context.config,
+  }),
   component: function Component() {
     const { component, Component, config } = componentRoute.useLoaderData();
     const propsFromParams = componentRoute.useSearch();
@@ -234,7 +237,7 @@ const componentRoute = new Route({
 
     useEffect(() => {
       function parseProps(prevProps: PropsObj) {
-        return Object.entries(propsFromParams).length === 0
+        return isObjectEmpty(propsFromParams)
           ? config.defaultProps
           : { ...prevProps, ...propsFromParams };
       }
@@ -257,7 +260,6 @@ const componentRoute = new Route({
             <div className="flex items-center border-b border-gray-800 pl-5 text-xs text-gray-400">
               <Link
                 to="/$component"
-                preload={false}
                 params={{ component }}
                 className="px-3 pb-5 pt-8 transition-transform active:scale-90"
                 activeProps={{
@@ -273,7 +275,6 @@ const componentRoute = new Route({
               {Object.keys(config.examples).map((example) => (
                 <Link
                   key={example}
-                  preload={false}
                   to="/$component"
                   params={{ component }}
                   search={() => config.examples[example]}
