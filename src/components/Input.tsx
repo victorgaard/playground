@@ -2,7 +2,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import { InputHTMLAttributes } from "react";
 import { cn } from "../utils/cn";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { Props } from "../utils/types";
+import { Props } from "../types/types";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> &
   VariantProps<typeof inputVariants> & {

@@ -1,5 +1,5 @@
 import { ChangeEvent, InputHTMLAttributes } from "react";
-import { Props } from "../utils/types";
+import { Props } from "../types/types";
 
 type SwitchProps = InputHTMLAttributes<HTMLInputElement> & {
   onChecked: (e: ChangeEvent<HTMLInputElement>) => void;

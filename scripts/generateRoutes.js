@@ -5,7 +5,7 @@ import glob from "glob";
 import path from "path";
 
 const folderPath = path.join(process.cwd(), "src", "components");
-const files = glob.sync(path.join(folderPath, "*"));
+const files = glob.sync(path.join(folderPath, "**", "*.{ts,tsx}"));
 const fileNames = files.map((file) => {
   const component = path.basename(file).split(".")[0];
   return {

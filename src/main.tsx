@@ -4,7 +4,6 @@ import {
   Suspense,
   lazy,
   useEffect,
-  useState,
 } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
@@ -34,7 +33,7 @@ import Switch from "./components/Switch";
 import { cn } from "./utils/cn";
 import Input from "./components/Input";
 import { capitalize } from "./utils/capitalize";
-import { InputType, Props, PropsObj } from "./utils/types";
+import { InputType, Props, PropsObj } from "./types/types";
 import { routes } from "./utils/routes";
 
 export const TanStackRouterDevtools =
@@ -226,21 +225,10 @@ const componentRoute = new Route({
     config: context.config,
   }),
   component: function Component() {
-    const { component, Component, config } = componentRoute.useLoaderData();
-    const propsFromParams = componentRoute.useSearch();
     const navigate = useNavigate();
-
-    const [props, setProps] = useState<PropsObj>(config.defaultProps);
-
-    useEffect(() => {
-      function parseProps(prevProps: PropsObj) {
-        return isObjectEmpty(propsFromParams)
-          ? config.defaultProps
-          : { ...prevProps, ...propsFromParams };
-      }
-
-      setProps((prevProps) => parseProps(prevProps));
-    }, [config, propsFromParams]);
+    const propsFromParams = componentRoute.useSearch();
+    const { component, Component, config } = componentRoute.useLoaderData();
+    const props = { ...config.defaultProps, ...propsFromParams };
 
     function handlePropChange(propName: string, value: InputType) {
       navigate({
@@ -274,7 +262,7 @@ const componentRoute = new Route({
                   key={example}
                   to="/$component"
                   params={{ component }}
-                  search={() => config.examples[example]}
+                  search={config.examples[example]}
                   className="px-3 pb-5 pt-8 transition-transform active:scale-90"
                   activeProps={{
                     className:
