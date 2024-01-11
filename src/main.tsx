@@ -35,6 +35,7 @@ import { cn } from "./utils/cn";
 import Input from "./components/Input";
 import { capitalize } from "./utils/capitalize";
 import { InputType, Props, PropsObj } from "./utils/types";
+import { routes } from "./utils/routes";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -47,10 +48,6 @@ export const TanStackRouterDevtools =
 
 const rootRoute = new RootRoute({
   component: function Layout() {
-    const routes = [
-      { label: "Button", href: "Button" },
-      { label: "Input", href: "Input" },
-    ];
     return (
       <main className="flex h-screen text-sm">
         <div className="flex min-w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 ">

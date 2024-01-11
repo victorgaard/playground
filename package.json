@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "npm run routes && vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "routes": "node scripts/generateRoutes.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
