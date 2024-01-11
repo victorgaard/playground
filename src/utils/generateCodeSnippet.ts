@@ -1,4 +1,4 @@
-import { PropsObj } from "../types/types";
+import { PropsObj } from "../static/types";
 
 type GenerateCodeSnippetProps = {
   component: string;

@@ -15,7 +15,7 @@ const fileNames = files.map((file) => {
 });
 
 fs.writeFileSync(
-  path.join(process.cwd(), "src", "utils", "routes.ts"),
+  path.join(process.cwd(), "src", "static", "routes.ts"),
   "export const routes = " + JSON.stringify(fileNames) + ";",
   "utf-8",
 );

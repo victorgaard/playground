@@ -33,8 +33,8 @@ import Switch from "./components/Switch";
 import { cn } from "./utils/cn";
 import Input from "./components/Input";
 import { capitalize } from "./utils/capitalize";
-import { InputType, Props, PropsObj } from "./types/types";
-import { routes } from "./utils/routes";
+import { InputType, Props, PropsObj } from "./static/types";
+import { routes } from "./static/routes";
 
 export const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"

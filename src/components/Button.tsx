@@ -2,7 +2,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "../utils/cn";
 import LoadingSpinner from "./LoadingSpinner";
-import { Props } from "../types/types";
+import { Props } from "../static/types";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> & {
