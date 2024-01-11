@@ -35,15 +35,7 @@ import Input from "./components/Input";
 import { capitalize } from "./utils/capitalize";
 import { InputType, Props, PropsObj } from "./static/types";
 import { routes } from "./static/routes";
-
-export const TanStackRouterDevtools =
-  process.env.NODE_ENV === "production"
-    ? () => null
-    : lazy(() =>
-        import("@tanstack/router-devtools").then((res) => ({
-          default: res.TanStackRouterDevtools,
-        })),
-      );
+import * as ScrollArea from "@radix-ui/react-scroll-area";
 
 const rootRoute = new RootRoute({
   component: function Layout() {
@@ -73,9 +65,6 @@ const rootRoute = new RootRoute({
           ))}
         </div>
         <Outlet />
-        <Suspense>
-          <TanStackRouterDevtools />
-        </Suspense>
       </main>
     );
   },
@@ -87,7 +76,7 @@ const indexRoute = new Route({
   component: function Index() {
     return (
       <div className="flex h-full flex-1 p-8">
-        <h1>Welcome Home!</h1>
+        <h1>Welcome Homes!</h1>
       </div>
     );
   },
@@ -171,7 +160,7 @@ export function PropsForm<T extends PropsObj, U extends PropsObj>({
   const navigate = useNavigate();
   const mergedProps = { ...propValues, ...multipleProps };
   return (
-    <>
+    <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between">
         Props
         <Button
@@ -201,7 +190,7 @@ export function PropsForm<T extends PropsObj, U extends PropsObj>({
           </label>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
@@ -298,14 +287,22 @@ const componentRoute = new Route({
             </div>
           </div>
         </div>
-        <div className="flex w-96 flex-col gap-8 overflow-auto border-l border-gray-800 p-8 text-sm">
-          <PropsForm
-            component={component}
-            propValues={props}
-            multipleProps={config.multipleProps}
-            onPropChange={handlePropChange}
-          />
-        </div>
+        <ScrollArea.Root className="w-96 overflow-hidden border-l border-gray-800 text-sm">
+          <ScrollArea.Viewport className="h-full w-full p-8">
+            <PropsForm
+              component={component}
+              propValues={props}
+              multipleProps={config.multipleProps}
+              onPropChange={handlePropChange}
+            />
+          </ScrollArea.Viewport>
+          <ScrollArea.Scrollbar
+            className="flex touch-none select-none bg-transparent p-0.5 transition-colors duration-[160ms] ease-out hover:bg-gray-800 data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col"
+            orientation="vertical"
+          >
+            <ScrollArea.Thumb className="relative flex-1 rounded-[10px] bg-gray-600 before:absolute before:left-1/2 before:top-1/2 before:h-full before:min-h-[44px] before:w-full before:min-w-[44px] before:-translate-x-1/2 before:-translate-y-1/2 before:content-[''] hover:bg-gray-500" />
+          </ScrollArea.Scrollbar>
+        </ScrollArea.Root>
       </div>
     );
   },

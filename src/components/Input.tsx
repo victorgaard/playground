@@ -10,7 +10,7 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> &
   };
 
 const inputVariants = cva(
-  "min-w-64 rounded-lg bg-gray-900 border w-full border-gray-700 text-white disabled:opacity-70 disabled:cursor-not-allowed focus-visible:ring-4 focus-visible:outline-0 disabled:hover:bg-gray-900 focus-visible:bg-gray-950 hover:bg-gray-950 focus-visible:ring-gray-800/90 transition-colors py-3 px-4",
+  "min-w-64 rounded-lg bg-gray-900 border w-full border-gray-700 text-white disabled:opacity-70 disabled:cursor-not-allowed focus-visible:ring-4 focus-visible:outline-0 disabled:hover:bg-gray-900 focus-visible:bg-gray-950 placeholder:text-gray-500 hover:bg-gray-950 focus-visible:ring-gray-800/90 transition-colors py-3 px-4",
   {
     variants: {
       variant: {
