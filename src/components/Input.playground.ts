@@ -35,7 +35,7 @@ const error: InputProps = {
 /** Set multiple variants, if there are any */
 const variant: InputProps["variant"][] = ["rest", "success", "error"];
 
-/** Generate props */
+/** Finally, generate props */
 export const props = generateProps<InputProps>({
   defaultProps,
   multipleProps: {

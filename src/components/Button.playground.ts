@@ -31,7 +31,7 @@ const variant: ButtonProps["variant"][] = [
 ];
 const size: ButtonProps["size"][] = ["sm", "md", "lg"];
 
-/** Generate props */
+/** Finally, generate props */
 export const props = generateProps<ButtonProps>({
   defaultProps,
   multipleProps: {
