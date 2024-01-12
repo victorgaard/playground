@@ -38,6 +38,6 @@ const defaultProps: SwitchProps = {
 
 export const props: Props<SwitchProps> = {
   defaultProps,
-  multipleProps: {},
+  variantProps: {},
   examples: {},
 };

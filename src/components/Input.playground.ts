@@ -11,7 +11,7 @@ export const props = generateProps<InputProps>({
     autoFocus: true,
     disabled: false,
   },
-  multipleProps: {
+  variantProps: {
     variant: ["rest", "success", "error"],
   },
   examples: {

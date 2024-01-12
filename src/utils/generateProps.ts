@@ -2,18 +2,18 @@ import { Props, PropsObj } from "../static/types";
 
 type GenerateProps<T> = {
   defaultProps: T;
-  multipleProps?: PropsObj;
+  variantProps?: PropsObj;
   examples?: Record<string, T>;
 };
 
 export function generateProps<T>({
   defaultProps,
-  multipleProps,
+  variantProps,
   examples,
 }: GenerateProps<T>): Props<T> {
   return {
     defaultProps,
-    multipleProps: multipleProps || {},
+    variantProps: variantProps || {},
     examples: examples || {},
   };
 }

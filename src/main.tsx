@@ -1,21 +1,21 @@
 import {
-  PropsWithChildren,
-  StrictMode,
-  Suspense,
-  lazy,
-  useEffect,
+    PropsWithChildren,
+    StrictMode,
+    Suspense,
+    lazy,
+    useEffect,
 } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import {
-  Link,
-  Outlet,
-  RootRoute,
-  Route,
-  Router,
-  RouterProvider,
-  redirect,
-  useNavigate,
+    Link,
+    Outlet,
+    RootRoute,
+    Route,
+    Router,
+    RouterProvider,
+    redirect,
+    useNavigate,
 } from "@tanstack/react-router";
 import { isObjectEmpty } from "./utils/isObjectEmpty";
 import { generateCodeSnippet } from "./utils/generateCodeSnippet";
@@ -25,9 +25,9 @@ import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "./assets/code.css";
 import Button from "./components/Button";
 import {
-  ArrowUturnLeftIcon,
-  CheckIcon,
-  ClipboardIcon,
+    ArrowUturnLeftIcon,
+    CheckIcon,
+    ClipboardIcon,
 } from "@heroicons/react/24/outline";
 import Switch from "./components/Switch";
 import { cn } from "./utils/cn";
@@ -147,18 +147,18 @@ function RenderInput<T>(
 type PropsFormProps<T, U> = {
   component: string;
   propValues: T;
-  multipleProps: U;
+  variantProps: U;
   onPropChange: (propName: keyof T, value: InputType) => void;
 };
 
 export function PropsForm<T extends PropsObj, U extends PropsObj>({
   component,
   propValues,
-  multipleProps,
+  variantProps,
   onPropChange,
 }: PropsFormProps<T, U>) {
   const navigate = useNavigate();
-  const mergedProps = { ...propValues, ...multipleProps };
+  const mergedProps = { ...propValues, ...variantProps };
   return (
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between">
@@ -292,7 +292,7 @@ const componentRoute = new Route({
             <PropsForm
               component={component}
               propValues={props}
-              multipleProps={config.multipleProps}
+              variantProps={config.variantProps}
               onPropChange={handlePropChange}
             />
           </ScrollArea.Viewport>
