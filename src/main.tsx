@@ -280,7 +280,7 @@ const componentRoute = new Route({
                     })}
                   </CodeBlock>
                 )}
-                <Button size="sm">
+                <Button size="sm" className="shrink-0">
                   <ClipboardIcon className="h-4 w-4" />
                 </Button>
               </div>
