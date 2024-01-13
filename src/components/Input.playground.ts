@@ -1,7 +1,8 @@
 import { generateProps } from "../utils/generateProps";
-import { InputProps } from "./Input";
+import Input, { InputProps } from "./Input";
 
 export const props = generateProps<InputProps>({
+  Component: Input,
   defaultProps: {
     label: "Input label",
     placeholder: "I'm a placeholder...",

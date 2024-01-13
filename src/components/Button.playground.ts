@@ -1,7 +1,8 @@
 import { generateProps } from "../utils/generateProps";
-import { ButtonProps } from "./Button";
+import Button, { ButtonProps } from "./Button";
 
 export const props = generateProps<ButtonProps>({
+  Component: Button,
   defaultProps: {
     children: "👉 click me",
     variant: "primary",

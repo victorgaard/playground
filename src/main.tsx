@@ -1,21 +1,15 @@
-import {
-    PropsWithChildren,
-    StrictMode,
-    Suspense,
-    lazy,
-    useEffect,
-} from "react";
+import { PropsWithChildren, StrictMode, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import {
-    Link,
-    Outlet,
-    RootRoute,
-    Route,
-    Router,
-    RouterProvider,
-    redirect,
-    useNavigate,
+  Link,
+  Outlet,
+  RootRoute,
+  Route,
+  Router,
+  RouterProvider,
+  redirect,
+  useNavigate,
 } from "@tanstack/react-router";
 import { isObjectEmpty } from "./utils/isObjectEmpty";
 import { generateCodeSnippet } from "./utils/generateCodeSnippet";
@@ -23,19 +17,19 @@ import Prism from "prismjs";
 import "prismjs/components/prism-jsx";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "./assets/code.css";
-import Button from "./components/Button";
 import {
-    ArrowUturnLeftIcon,
-    CheckIcon,
-    ClipboardIcon,
+  ArrowUturnLeftIcon,
+  CheckIcon,
+  ClipboardIcon,
 } from "@heroicons/react/24/outline";
 import Switch from "./components/Switch";
 import { cn } from "./utils/cn";
 import Input from "./components/Input";
 import { capitalize } from "./utils/capitalize";
-import { InputType, Props, PropsObj } from "./static/types";
+import { ImportedProps, InputType, PropsObj } from "./static/types";
 import { routes } from "./static/routes";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
+import Button from "./components/Button";
 
 const rootRoute = new RootRoute({
   component: function Layout() {
@@ -200,26 +194,26 @@ const componentRoute = new Route({
   onError: () => {
     throw redirect({ to: "/" });
   },
-  beforeLoad: async ({ params }) => {
-    const { component } = params;
-    const Component = lazy(() => import(`./components/${component}.tsx`));
-    const config: Props<PropsObj> = await import(
-      `./components/${component}.playground.ts`
-    ).then((module) => module.props);
-    return { component, Component, config };
+  loader: async ({ params }) => {
+    const { props }: ImportedProps<PropsObj> = await import(
+      `./components/${params.component}.playground.ts`
+    );
+    return {
+      component: params.component,
+      ...props,
+    };
   },
-  loader: ({ context }) => ({
-    component: context.component,
-    Component: context.Component,
-    config: context.config,
-  }),
+  staleTime: Infinity,
   component: function Component() {
     const navigate = useNavigate();
     const propsFromParams = componentRoute.useSearch();
     const { component, Component, config } = componentRoute.useLoaderData();
     const props = { ...config.defaultProps, ...propsFromParams };
 
-    function handlePropChange(propName: string, value: InputType) {
+    function handlePropChange(
+      propName: string | number | symbol,
+      value: InputType,
+    ) {
       navigate({
         to: "/$component",
         params: { component },
@@ -266,9 +260,7 @@ const componentRoute = new Route({
               ))}
             </div>
             <div className="flex h-full items-center justify-center">
-              <Suspense>
-                <Component {...props} />
-              </Suspense>
+              <Component {...props} />
             </div>
             <div className="p-8 pb-6">
               <div className="flex items-center justify-between gap-8">
