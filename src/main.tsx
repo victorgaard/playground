@@ -31,6 +31,7 @@ import { routes } from "./static/routes";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { generateProps } from "./utils/generateProps";
 import Button from "./components/Button";
+import { errors } from "./static/errors";
 
 const rootRoute = new RootRoute({
   component: function Layout() {
@@ -208,8 +209,7 @@ const componentRoute = new Route({
     throw redirect({
       to: "/",
       search: {
-        error:
-          "Component file was renamed, deleted, or does not exist. Please restart the server to update your routes.",
+        error: errors.componentFileNotFound,
       },
     });
   },
@@ -222,8 +222,7 @@ const componentRoute = new Route({
       throw redirect({
         to: "/",
         search: {
-          error:
-            "Component file was renamed, deleted, or does not exist. Please restart the server to update your routes.",
+          error: errors.componentRouteNotFound,
         },
       });
     }
