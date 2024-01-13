@@ -1,5 +1,4 @@
 import { ChangeEvent, InputHTMLAttributes } from "react";
-import { Props } from "../static/types";
 
 type SwitchProps = InputHTMLAttributes<HTMLInputElement> & {
   onChecked: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -28,16 +27,3 @@ export default function Switch({
     </label>
   );
 }
-
-const defaultProps: SwitchProps = {
-  defaultChecked: false,
-  onChecked: (e) => {
-    e.target.checked;
-  },
-};
-
-export const props: Props<SwitchProps> = {
-  defaultProps,
-  variantProps: {},
-  examples: {},
-};
