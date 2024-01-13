@@ -88,12 +88,19 @@ export function CodeBlock({ children }: PropsWithChildren) {
   );
 }
 
-function RenderInput<T>(
-  propName: keyof T,
-  propValue: InputType,
-  propValues: T,
-  onPropChange: (propName: keyof T, value: InputType) => void,
-) {
+type RenderInputProps<T> = {
+  propName: keyof T;
+  propValue: InputType;
+  propValues: T;
+  onPropChange: (propName: keyof T, value: string | boolean) => void;
+};
+
+function RenderInput<T>({
+  propName,
+  propValue,
+  propValues,
+  onPropChange,
+}: RenderInputProps<T>) {
   if (typeof propValue === "boolean") {
     return (
       <Switch
@@ -142,7 +149,7 @@ type PropsFormProps<T, U> = {
   component: string;
   propValues: T;
   variantProps: U;
-  onPropChange: (propName: keyof T, value: InputType) => void;
+  onPropChange: (propName: keyof T, value: string | boolean) => void;
 };
 
 export function PropsForm<T extends PropsObj, U extends PropsObj>({
@@ -180,7 +187,12 @@ export function PropsForm<T extends PropsObj, U extends PropsObj>({
             })}
           >
             <span>{propName}</span>
-            {RenderInput(propName, propValue, propValues, onPropChange)}
+            <RenderInput
+              propName={propName}
+              propValue={propValue}
+              propValues={propValues}
+              onPropChange={onPropChange}
+            />
           </label>
         ))}
       </div>
@@ -210,10 +222,7 @@ const componentRoute = new Route({
     const { component, Component, config } = componentRoute.useLoaderData();
     const props = { ...config.defaultProps, ...propsFromParams };
 
-    function handlePropChange(
-      propName: string | number | symbol,
-      value: InputType,
-    ) {
+    function handlePropChange(propName: string, value: string | boolean) {
       navigate({
         to: "/$component",
         params: { component },
