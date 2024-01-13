@@ -21,6 +21,7 @@ import {
   ArrowUturnLeftIcon,
   CheckIcon,
   ClipboardIcon,
+  ExclamationCircleIcon,
 } from "@heroicons/react/24/outline";
 import Switch from "./components/Switch";
 import { cn } from "./utils/cn";
@@ -32,6 +33,7 @@ import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { generateProps } from "./utils/generateProps";
 import Button from "./components/Button";
 import { errors } from "./static/errors";
+import { z } from "zod";
 
 const rootRoute = new RootRoute({
   component: function Layout() {
@@ -69,9 +71,21 @@ const rootRoute = new RootRoute({
 const indexRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/",
+  validateSearch: (search) => {
+    const searchParamsSchema = z.object({
+      error: z.string().optional().catch(""),
+    });
+    return searchParamsSchema.parse(search);
+  },
   component: function Index() {
+    const { error } = indexRoute.useSearch();
     return (
-      <div className="flex h-full flex-1 p-8">
+      <div className="flex h-full flex-1 flex-col gap-4 p-8">
+        {error && (
+          <div className="flex items-center gap-2 rounded-lg border border-red-900 bg-red-950 p-3 text-red-200">
+            <ExclamationCircleIcon className="h-5 w-5" /> Error: {error}
+          </div>
+        )}
         <h1>Welcome Homes!</h1>
       </div>
     );
