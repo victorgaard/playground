@@ -29,6 +29,7 @@ import { capitalize } from "./utils/capitalize";
 import { ImportedProps, InputType, PropsObj } from "./static/types";
 import { routes } from "./static/routes";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
+import { generateProps } from "./utils/generateProps";
 import Button from "./components/Button";
 
 const rootRoute = new RootRoute({
@@ -204,12 +205,44 @@ const componentRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "$component",
   onError: () => {
-    throw redirect({ to: "/" });
+    throw redirect({
+      to: "/",
+      search: {
+        error:
+          "Component file was renamed, deleted, or does not exist. Please restart the server to update your routes.",
+      },
+    });
   },
   loader: async ({ params }) => {
-    const { props }: ImportedProps<PropsObj> = await import(
-      `./components/${params.component}.playground.ts`
+    const componentFound = routes.find(
+      (route) => route.label === params.component,
     );
+
+    if (!componentFound) {
+      throw redirect({
+        to: "/",
+        search: {
+          error:
+            "Component file was renamed, deleted, or does not exist. Please restart the server to update your routes.",
+        },
+      });
+    }
+
+    const { props }: ImportedProps<PropsObj> = await import(
+      componentFound.path
+    );
+
+    if (!props)
+      return {
+        component: params.component,
+        ...generateProps<PropsObj>({
+          Component: () => (
+            <>This component is missing the correct playground configuration</>
+          ),
+          defaultProps: {},
+        }),
+      };
+
     return {
       component: params.component,
       ...props,
@@ -271,21 +304,22 @@ const componentRoute = new Route({
             <div className="flex h-full items-center justify-center">
               <Component {...props} />
             </div>
-            <div className="p-8 pb-6">
-              <div className="flex items-center justify-between gap-8">
-                {!isObjectEmpty(props) && (
+            {!isObjectEmpty(props) && (
+              <div className="p-8 pb-6">
+                <div className="flex items-center justify-between gap-8">
                   <CodeBlock>
                     {generateCodeSnippet({
                       component,
                       props,
                     })}
                   </CodeBlock>
-                )}
-                <Button size="sm" className="shrink-0">
-                  <ClipboardIcon className="h-4 w-4" />
-                </Button>
+
+                  <Button size="sm" className="shrink-0">
+                    <ClipboardIcon className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
         <ScrollArea.Root className="w-96 overflow-hidden border-l border-gray-800 text-sm">
