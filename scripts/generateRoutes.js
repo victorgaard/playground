@@ -10,11 +10,14 @@ const files = glob
   .filter((file) => file.includes(".playground."));
 const fileNames = files.map((file) => {
   const component = path.basename(file).split(".")[0];
-  const relativePath = path.relative(process.cwd(), file);
+  const relativePath = path
+    .relative(process.cwd(), file)
+    .replace("src/components/", "")
+    .replace(".playground.tsx", "");
   return {
     label: component,
     href: component,
-    path: `.${relativePath.slice(3)}`,
+    path: relativePath,
   };
 });
 

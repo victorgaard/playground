@@ -242,7 +242,7 @@ const componentRoute = new Route({
     }
 
     const { props }: ImportedProps<PropsObj> = await import(
-      componentFound.path
+      `./components/${componentFound.path}.playground.tsx`
     );
 
     if (!props)
