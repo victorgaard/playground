@@ -9,7 +9,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     loading?: boolean;
   };
 
-const buttonVariants = cva(
+export const buttonVariants = cva(
   "flex font-medium gap-2 rounded-lg cursor-pointer items-center justify-center active:scale-90 text-sm focus:ring-2  disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 transition-all",
   {
     variants: {
@@ -18,6 +18,8 @@ const buttonVariants = cva(
           "bg-gray-800 text-white hover:bg-gray-700 active:bg-gray-800 outline-gray-500 ring-gray-600 disabled:hover:bg-gray-800",
         secondary:
           "bg-transparent hover:bg-gray-800 active:bg-gray-700 border outline-gray-500 ring-gray-600 border-gray-800 text-white",
+        ghost:
+          "bg-transparent hover:bg-gray-800 active:bg-gray-700 outline-gray-500 ring-gray-600 text-white",
         destructive:
           "bg-red-900 ring-red-600 outline-red-500 hover:bg-red-800 active:bg-red-900 text-white",
       },

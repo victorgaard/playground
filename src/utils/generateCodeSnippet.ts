@@ -14,6 +14,11 @@ export function generateCodeSnippet({
       if (key === "children" || !value) return null;
       if (value === true) return `${key}`;
       if (typeof value === "string") return `${key}="${value}"`;
+      if (typeof value === "object" && Object.entries(value).length > 0) {
+        return Object.entries(value).map(([key, value]) => {
+          return `${key}={${value}}`;
+        }).join(" ");
+      }
       return `${key}={${value}}`;
     })
     .filter(Boolean)

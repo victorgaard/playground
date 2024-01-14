@@ -10,7 +10,7 @@ export const props = generateProps<ButtonProps>({
     loading: false,
   },
   variantProps: {
-    variant: ["primary", "secondary", "destructive"],
+    variant: ["primary", "secondary", "ghost", "destructive"],
     size: ["sm", "md", "lg"],
   },
   examples: {

@@ -158,7 +158,7 @@ function RenderInput<T>({
     );
   }
   // Add more cases for other prop types (e.g., number, radio, select, etc.)
-  return null;
+  return <CodeBlock>{JSON.stringify(propValue, null, 2)}</CodeBlock>;
 }
 
 type PropsFormProps<T, U> = {
@@ -308,6 +308,8 @@ const componentRoute = new Route({
                   }}
                   activeOptions={{
                     exact: true,
+                    includeSearch: true,
+                    includeHash: true
                   }}
                 >
                   {capitalize(example)}

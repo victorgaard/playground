@@ -17,8 +17,10 @@
     "@tanstack/react-router": "^1.1.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "date-fns": "^3.2.0",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
+    "react-day-picker": "^8.10.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^2.2.0",
     "zod": "^3.22.4"
