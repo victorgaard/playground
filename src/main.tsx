@@ -98,7 +98,7 @@ export function CodeBlock({ children }: PropsWithChildren) {
   }, [children]);
 
   return (
-    <pre className="line-numbers ml-6 text-xs">
+    <pre className="text-xs">
       <code className="language-jsx">{children}</code>
     </pre>
   );
@@ -309,7 +309,7 @@ const componentRoute = new Route({
                   activeOptions={{
                     exact: true,
                     includeSearch: true,
-                    includeHash: true
+                    includeHash: true,
                   }}
                 >
                   {capitalize(example)}
@@ -320,20 +320,38 @@ const componentRoute = new Route({
               <Component {...props} />
             </div>
             {!isObjectEmpty(props) && (
-              <div className="p-8 pb-6">
-                <div className="flex items-center justify-between gap-8">
+              <ScrollArea.Root className="group relative overflow-hidden border-t border-gray-800">
+                <Button
+                  size="sm"
+                  className="absolute bottom-[18px] right-3 z-10 hidden animate-fade-in group-hover:block"
+                  onClick={() =>
+                    navigator.clipboard.writeText(
+                      generateCodeSnippet({
+                        component,
+                        props,
+                      }),
+                    )
+                  }
+                >
+                  <ClipboardIcon className="h-4 w-4" />
+                </Button>
+                <div className="absolute bottom-0 right-0 top-0 z-0 w-12 bg-gradient-to-l from-gray-950" />
+                <div className="absolute bottom-0 left-0 top-0 z-0 w-8 bg-gradient-to-r from-gray-950" />
+                <ScrollArea.Viewport className="flex h-20 items-center p-4 px-6 pt-0">
                   <CodeBlock>
                     {generateCodeSnippet({
                       component,
                       props,
                     })}
                   </CodeBlock>
-
-                  <Button size="sm" className="shrink-0">
-                    <ClipboardIcon className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
+                </ScrollArea.Viewport>
+                <ScrollArea.Scrollbar
+                  className="flex touch-none select-none bg-transparent p-0.5 transition-colors duration-[160ms] ease-out hover:bg-gray-800 data-[orientation=horizontal]:h-2 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col"
+                  orientation="horizontal"
+                >
+                  <ScrollArea.Thumb className="relative flex-1 rounded-[10px] bg-gray-600 before:absolute before:left-1/2 before:top-1/2 before:h-full before:min-h-[44px] before:w-full before:min-w-[44px] before:-translate-x-1/2 before:-translate-y-1/2 before:content-[''] hover:bg-gray-500" />
+                </ScrollArea.Scrollbar>
+              </ScrollArea.Root>
             )}
           </div>
         </div>
