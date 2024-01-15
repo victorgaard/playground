@@ -11,28 +11,28 @@ import {
   redirect,
   useNavigate,
 } from "@tanstack/react-router";
-import { isObjectEmpty } from "./utils/isObjectEmpty";
-import { generateCodeSnippet } from "./utils/generateCodeSnippet";
+import { isObjectEmpty } from "@/utils/isObjectEmpty";
+import { generateCodeSnippet } from "@/utils/generateCodeSnippet";
 import Prism from "prismjs";
 import "prismjs/components/prism-jsx";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
-import "./assets/code.css";
+import "@/assets/code.css";
 import {
   ArrowUturnLeftIcon,
   CheckIcon,
   ClipboardIcon,
   ExclamationCircleIcon,
 } from "@heroicons/react/24/outline";
-import Switch from "./components/Switch";
-import { cn } from "./utils/cn";
-import Input from "./components/Input";
-import { capitalize } from "./utils/capitalize";
-import { ImportedProps, InputType, PropsObj } from "./static/types";
-import { routes } from "./static/routes";
+import Switch from "@/components/Switch";
+import { cn } from "@/utils/cn";
+import Input from "@/components/Input";
+import { capitalize } from "@/utils/capitalize";
+import { ImportedProps, InputType, PropsObj } from "@/static/types";
+import { routes } from "@/static/routes";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
-import { generateProps } from "./utils/generateProps";
-import Button from "./components/Button";
-import { errors } from "./static/errors";
+import { generateProps } from "@/utils/generateProps";
+import Button from "@/components/Button";
+import { errors } from "@/static/errors";
 import { z } from "zod";
 
 const rootRoute = new RootRoute({

@@ -1,4 +1,4 @@
-import { generateProps } from "../utils/generateProps";
+import { generateProps } from "@/utils/generateProps";
 import Button, { ButtonProps } from "./Button";
 
 export const props = generateProps<ButtonProps>({

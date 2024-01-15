@@ -1,4 +1,4 @@
-import { generateProps } from "../utils/generateProps";
+import { generateProps } from "@/utils/generateProps";
 import { Calendar, CalendarProps } from "./Calendar";
 
 export const props = generateProps<CalendarProps>({
@@ -6,8 +6,8 @@ export const props = generateProps<CalendarProps>({
   defaultProps: {
     mode: "single",
     numberOfMonths: 1,
-    selected: new Date(),
     showOutsideDays: true,
+    selected: new Date(),
   },
   variantProps: {
     mode: ["single", "range"],

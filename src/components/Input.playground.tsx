@@ -1,4 +1,4 @@
-import { generateProps } from "../utils/generateProps";
+import { generateProps } from "@/utils/generateProps";
 import Input, { InputProps } from "./Input";
 
 export const props = generateProps<InputProps>({

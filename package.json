@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
+    "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@tanstack/react-router": "^1.1.5",
     "class-variance-authority": "^0.7.0",

@@ -1,5 +1,5 @@
 import { SVGProps } from "react";
-import { cn } from "../utils/cn";
+import { cn } from "@/utils/cn";
 
 function LoadingSpinner(props: SVGProps<SVGSVGElement>) {
   return (
