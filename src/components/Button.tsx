@@ -1,5 +1,5 @@
 import { VariantProps, cva } from "class-variance-authority";
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode, forwardRef } from "react";
 import { cn } from "@/utils/cn";
 import LoadingSpinner from "./LoadingSpinner";
 
@@ -36,23 +36,31 @@ export const buttonVariants = cva(
   },
 );
 
-export default function Button({
-  children,
-  variant,
-  size,
-  className,
-  loading = false,
-  disabled = false,
-  ...rest
-}: ButtonProps) {
-  return (
-    <button
-      className={cn(buttonVariants({ variant, size }), className)}
-      disabled={disabled || loading}
-      {...rest}
-    >
-      {loading && <LoadingSpinner />}
-      {children}
-    </button>
-  );
-}
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      children,
+      variant,
+      size,
+      className,
+      loading = false,
+      disabled = false,
+      ...rest
+    },
+    ref,
+  ) => {
+    return (
+      <button
+        ref={ref}
+        className={cn(buttonVariants({ variant, size }), className)}
+        disabled={disabled || loading}
+        {...rest}
+      >
+        {loading && <LoadingSpinner />}
+        {children}
+      </button>
+    );
+  },
+);
+
+export default Button;
