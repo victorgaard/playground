@@ -89,7 +89,7 @@ const indexRoute = new Route({
             <ExclamationCircleIcon className="h-5 w-5" /> Error: {error}
           </div>
         )}
-        <h1>Welcome Homes!</h1>
+        <h1>Welcome Home!</h1>
       </div>
     );
   },
@@ -162,7 +162,7 @@ function RenderInput<T>({
       </div>
     );
   }
-  // Add more cases for other prop types (e.g., number, radio, select, etc.)
+
   return <CodeBlock>{JSON.stringify(propValue, null, 2)}</CodeBlock>;
 }
 

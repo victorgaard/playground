@@ -13,19 +13,19 @@ const avatarVariants = cva("relative flex items-center justify-center", {
       primary: "bg-gray-800 text-gray-200",
     },
     size: {
-      sm: "h-8 w-8",
-      md: "h-10 w-10",
-      lg: "h-12 w-12",
-      xl: "h-16 w-16",
+      sm: "h-8 w-8 group sm",
+      md: "h-10 w-10 group md",
+      lg: "h-12 w-12 group lg",
+      xl: "h-16 w-16 group xl",
     },
     shape: {
       rounded: "rounded-full",
-      squared: "rounded-2xl",
+      squared: "rounded-xl",
     },
     status: {
-      online: "bg-green-500 border-[3px] h-3 w-3 border-gray-950",
-      offline: "bg-gray-500 border-[3px] h-3 w-3 border-gray-950",
-      idle: "bg-yellow-500 border-[3px] h-3 w-3 border-gray-950",
+      online: "bg-green-500",
+      offline: "bg-gray-500",
+      idle: "bg-yellow-500",
     },
   },
   defaultVariants: {
@@ -44,36 +44,27 @@ function Avatar({
   shape,
   className,
 }: AvatarProps) {
-  if (!name && !picture) return null;
-
-  if (name && !picture)
-    return (
-      <div className={cn(avatarVariants({ variant, size, shape }), className)}>
-        {name[0]}
+  return (
+    <div className={cn(avatarVariants({ variant, size, shape }), className)}>
+      {!picture && !name && "N/A"}
+      {!picture && name && <span className="uppercase">{name[0]}</span>}
+      {picture && (
+        <img
+          src={picture}
+          className={cn(
+            avatarVariants({ shape }),
+            "aspect-square h-full w-full shrink-0 object-cover",
+          )}
+        />
+      )}
+      {status && (
         <div
           className={cn(
             avatarVariants({ status }),
-            "absolute bottom-0 right-0 rounded-full",
+            "absolute bottom-0 right-0 rounded-full outline outline-[3px] outline-gray-950 group-[.lg]:h-2.5 group-[.md]:h-2 group-[.sm]:h-1.5 group-[.xl]:h-3 group-[.lg]:w-2.5 group-[.md]:w-2 group-[.sm]:w-1.5 group-[.xl]:w-3 group-[.md]:outline-2 group-[.sm]:outline-2",
           )}
         />
-      </div>
-    );
-
-  return (
-    <div className={cn(avatarVariants({ variant, size, shape }), className)}>
-      <img
-        src={picture}
-        className={cn(
-          avatarVariants({ shape }),
-          "aspect-square h-full w-full shrink-0",
-        )}
-      />
-      <div
-        className={cn(
-          avatarVariants({ status }),
-          "absolute bottom-0 right-0 rounded-full",
-        )}
-      />
+      )}
     </div>
   );
 }

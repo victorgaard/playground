@@ -4,13 +4,28 @@ import Avatar, { AvatarProps } from "./Avatar";
 export const props = generateProps<AvatarProps>({
   Component: Avatar,
   defaultProps: {
-    picture:
-      "https://media.licdn.com/dms/image/D4E03AQFJmfu1Lv_FuA/profile-displayphoto-shrink_800_800/0/1701346250579?e=1710979200&v=beta&t=bIE2SN073dL2F4Bi9GrmG9GsnPPdeuB_7tsSbKpf7nw",
-    name: "Victor",
+    picture: "./assets/avatar.jpeg",
+    name: "",
+    size: "md",
     status: "online",
+    shape: "rounded",
   },
   variantProps: {
-    status: ["online", "offline", "idle"],
     size: ["sm", "md", "lg", "xl"],
+    shape: ["rounded", "squared"],
+    status: ["online", "offline", "idle"],
+  },
+  examples: {
+    squared: {
+      picture: "./assets/avatar.gif",
+      shape: "squared",
+      size: "lg",
+      status: "online",
+    },
+    fallback: {
+      picture: "",
+      name: "knight",
+      status: "offline",
+    },
   },
 });
