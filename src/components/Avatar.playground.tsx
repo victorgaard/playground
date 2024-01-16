@@ -20,7 +20,7 @@ export const props = generateProps<AvatarProps>({
       picture: "./assets/avatar.gif",
       shape: "squared",
       size: "lg",
-      status: "online",
+      status: "idle",
     },
     fallback: {
       picture: "",

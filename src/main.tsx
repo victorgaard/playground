@@ -328,7 +328,7 @@ const componentRoute = new Route({
               <ScrollArea.Root className="group relative shrink-0 overflow-hidden border-t border-gray-800">
                 <Button
                   size="sm"
-                  className="absolute bottom-[18px] right-3 z-10 hidden animate-fade-in group-hover:block"
+                  className="animate-fade-in absolute bottom-[18px] right-3 z-10 hidden group-hover:block"
                   onClick={() =>
                     navigator.clipboard.writeText(
                       generateCodeSnippet({
