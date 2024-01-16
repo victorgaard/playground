@@ -20,7 +20,7 @@ const avatarVariants = cva("relative flex items-center justify-center", {
     },
     shape: {
       rounded: "rounded-full",
-      squared: "rounded-xl",
+      squared: "rounded-lg group-[.lg]:rounded-xl group-[.xl]:rounded-xl",
     },
     status: {
       online: "bg-green-500",
@@ -46,7 +46,7 @@ function Avatar({
 }: AvatarProps) {
   return (
     <div className={cn(avatarVariants({ variant, size, shape }), className)}>
-      {!picture && !name && "N/A"}
+      {!picture && !name && <small>N/A</small>}
       {!picture && name && <span className="uppercase">{name[0]}</span>}
       {picture && (
         <img
