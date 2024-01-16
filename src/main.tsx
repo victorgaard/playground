@@ -1,4 +1,4 @@
-import { PropsWithChildren, StrictMode, useEffect } from "react";
+import { StrictMode, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import {
@@ -92,7 +92,9 @@ const indexRoute = new Route({
   },
 });
 
-export function CodeBlock({ children }: PropsWithChildren) {
+export function CodeBlock({
+  children,
+}: React.PropsWithChildren & React.HTMLAttributes<HTMLPreElement>) {
   useEffect(() => {
     Prism.highlightAll();
   }, [children]);
@@ -320,7 +322,7 @@ const componentRoute = new Route({
               <Component {...props} />
             </div>
             {!isObjectEmpty(props) && (
-              <ScrollArea.Root className="group relative overflow-hidden border-t border-gray-800">
+              <ScrollArea.Root className="group relative shrink-0 overflow-hidden border-t border-gray-800">
                 <Button
                   size="sm"
                   className="absolute bottom-[18px] right-3 z-10 hidden animate-fade-in group-hover:block"
@@ -337,7 +339,7 @@ const componentRoute = new Route({
                 </Button>
                 <div className="absolute bottom-0 right-0 top-0 z-0 w-12 bg-gradient-to-l from-gray-950" />
                 <div className="absolute bottom-0 left-0 top-0 z-0 w-8 bg-gradient-to-r from-gray-950" />
-                <ScrollArea.Viewport className="flex h-20 items-center p-4 px-6 pt-0">
+                <ScrollArea.Viewport className="flex items-center p-6">
                   <CodeBlock>
                     {generateCodeSnippet({
                       component,
@@ -346,7 +348,7 @@ const componentRoute = new Route({
                   </CodeBlock>
                 </ScrollArea.Viewport>
                 <ScrollArea.Scrollbar
-                  className="flex touch-none select-none bg-transparent p-0.5 transition-colors duration-[160ms] ease-out hover:bg-gray-800 data-[orientation=horizontal]:h-2 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col"
+                  className="duration-[160ms] flex touch-none select-none bg-transparent p-0.5 transition-colors ease-out hover:bg-gray-800 data-[orientation=horizontal]:h-2 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col"
                   orientation="horizontal"
                 >
                   <ScrollArea.Thumb className="relative flex-1 rounded-[10px] bg-gray-600 before:absolute before:left-1/2 before:top-1/2 before:h-full before:min-h-[44px] before:w-full before:min-w-[44px] before:-translate-x-1/2 before:-translate-y-1/2 before:content-[''] hover:bg-gray-500" />
@@ -365,7 +367,7 @@ const componentRoute = new Route({
             />
           </ScrollArea.Viewport>
           <ScrollArea.Scrollbar
-            className="flex touch-none select-none bg-transparent p-0.5 transition-colors duration-[160ms] ease-out hover:bg-gray-800 data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col"
+            className="duration-[160ms] flex touch-none select-none bg-transparent p-0.5 transition-colors ease-out hover:bg-gray-800 data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col"
             orientation="vertical"
           >
             <ScrollArea.Thumb className="relative flex-1 rounded-[10px] bg-gray-600 before:absolute before:left-1/2 before:top-1/2 before:h-full before:min-h-[44px] before:w-full before:min-w-[44px] before:-translate-x-1/2 before:-translate-y-1/2 before:content-[''] hover:bg-gray-500" />

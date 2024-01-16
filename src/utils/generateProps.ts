@@ -1,8 +1,7 @@
-import { FunctionComponent } from "react";
 import { Props, PropsObj } from "../static/types";
 
 type GenerateProps<T> = {
-  Component: FunctionComponent<T>;
+  Component: React.FC<T>;
   defaultProps: T;
   variantProps?: PropsObj;
   examples?: Record<string, T>;
