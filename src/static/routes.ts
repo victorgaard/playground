@@ -1,1 +1,1 @@
-export const routes = [{"label":"Button","href":"Button","path":"Button"},{"label":"Calendar","href":"Calendar","path":"Calendar"},{"label":"DatePicker","href":"DatePicker","path":"DatePicker"},{"label":"Input","href":"Input","path":"Input"}];
+export const routes = [{"label":"Avatar","href":"Avatar","path":"Avatar"},{"label":"Button","href":"Button","path":"Button"},{"label":"Input","href":"Input","path":"Input"}];
