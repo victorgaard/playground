@@ -13,10 +13,10 @@ const avatarVariants = cva("relative flex items-center justify-center", {
       primary: "bg-gray-800 text-gray-200",
     },
     size: {
-      sm: "h-8 w-8 group sm",
-      md: "h-10 w-10 group md",
-      lg: "h-12 w-12 group lg",
-      xl: "h-16 w-16 group xl",
+      sm: "h-8 w-8 text-base group sm",
+      md: "h-10 w-10 text-xl group md",
+      lg: "h-12 w-12 text-2xl group lg",
+      xl: "h-16 w-16 text-3xl group xl",
     },
     shape: {
       rounded: "rounded-full",

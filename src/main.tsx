@@ -313,8 +313,6 @@ const componentRoute = new Route({
                   }}
                   activeOptions={{
                     exact: true,
-                    includeSearch: true,
-                    includeHash: true,
                   }}
                 >
                   {capitalize(example)}
