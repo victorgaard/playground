@@ -9,7 +9,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     loading?: boolean;
   };
 
-export const buttonVariants = cva(
+const buttonVariants = cva(
   "flex font-medium gap-2 rounded-lg cursor-pointer items-center justify-center active:scale-90 text-sm focus:ring-2  disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 transition-all",
   {
     variants: {

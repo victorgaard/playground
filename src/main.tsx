@@ -40,13 +40,13 @@ const rootRoute = new RootRoute({
     return (
       <main className="flex h-screen text-sm">
         <div className="flex min-w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 ">
-          <Link
+          {/* <Link
             to="/"
             className="rounded px-4 py-2 hover:bg-gray-900"
             activeProps={{ className: "bg-gray-900" }}
           >
             Home
-          </Link>
+          </Link> */}
           {routes.map((route) => (
             <Link
               key={route.href}
@@ -71,6 +71,9 @@ const rootRoute = new RootRoute({
 const indexRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/",
+  loader: async () => {
+    throw redirect({ to: "/$component", params: { component: "Avatar" } });
+  },
   validateSearch: (search) => {
     const searchParamsSchema = z.object({
       error: z.string().optional().catch(""),
