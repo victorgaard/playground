@@ -97,6 +97,7 @@ const indexRoute = new Route({
 
 export function CodeBlock({
   children,
+  className,
 }: React.PropsWithChildren & React.HTMLAttributes<HTMLPreElement>) {
   useEffect(() => {
     Prism.highlightAll();
@@ -104,7 +105,7 @@ export function CodeBlock({
 
   return (
     <pre className="text-xs">
-      <code className="language-jsx">{children}</code>
+      <code className={cn("language-jsx", className)}>{children}</code>
     </pre>
   );
 }
@@ -163,7 +164,11 @@ function RenderInput<T>({
     );
   }
 
-  return <CodeBlock>{JSON.stringify(propValue, null, 2)}</CodeBlock>;
+  return (
+    <CodeBlock className="whitespace-pre-wrap">
+      {JSON.stringify(propValue, null, 2)}
+    </CodeBlock>
+  );
 }
 
 type PropsFormProps<T, U> = {
