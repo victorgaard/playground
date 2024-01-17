@@ -17,7 +17,7 @@ export const props = generateProps<AvatarProps>({
   },
   examples: {
     squared: {
-      picture: "./assets/avatar.gif",
+      picture: "./assets/avatar.jpeg",
       shape: "squared",
       size: "lg",
       status: "idle",

@@ -7,33 +7,36 @@ export type AvatarProps = React.HTMLAttributes<HTMLDivElement> &
     name?: string;
   };
 
-const avatarVariants = cva("relative flex items-center justify-center", {
-  variants: {
-    variant: {
-      primary: "bg-gray-800 text-gray-200",
+const avatarVariants = cva(
+  "relative flex items-center justify-center transition-all",
+  {
+    variants: {
+      variant: {
+        primary: "bg-gray-800 text-gray-200",
+      },
+      size: {
+        sm: "h-8 w-8 text-base group sm",
+        md: "h-10 w-10 text-xl group md",
+        lg: "h-12 w-12 text-2xl group lg",
+        xl: "h-16 w-16 text-3xl group xl",
+      },
+      shape: {
+        rounded: "rounded-full",
+        squared: "rounded-lg group-[.lg]:rounded-xl group-[.xl]:rounded-xl",
+      },
+      status: {
+        online: "bg-green-500",
+        offline: "bg-gray-500",
+        idle: "bg-yellow-500",
+      },
     },
-    size: {
-      sm: "h-8 w-8 text-base group sm",
-      md: "h-10 w-10 text-xl group md",
-      lg: "h-12 w-12 text-2xl group lg",
-      xl: "h-16 w-16 text-3xl group xl",
-    },
-    shape: {
-      rounded: "rounded-full",
-      squared: "rounded-lg group-[.lg]:rounded-xl group-[.xl]:rounded-xl",
-    },
-    status: {
-      online: "bg-green-500",
-      offline: "bg-gray-500",
-      idle: "bg-yellow-500",
+    defaultVariants: {
+      variant: "primary",
+      size: "md",
+      shape: "rounded",
     },
   },
-  defaultVariants: {
-    variant: "primary",
-    size: "md",
-    shape: "rounded",
-  },
-});
+);
 
 function Avatar({
   picture,
