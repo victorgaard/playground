@@ -1,9 +1,22 @@
+import reactElementToJSXString from "react-element-to-jsx-string";
 import { PropsObj } from "../static/types";
 
 type GenerateCodeSnippetProps = {
   component: string;
   props: PropsObj;
 };
+
+function handleChildren(children: React.ReactNode | string) {
+  if (typeof children === "string") return children;
+
+  return reactElementToJSXString(children, {
+    showDefaultProps: false,
+    useBooleanShorthandSyntax: false,
+  })
+    .replace(/<\/?>/g, "")
+    .replace(/>\s+</g, "><")
+    .trim();
+}
 
 export function generateCodeSnippet({
   component,
@@ -15,9 +28,11 @@ export function generateCodeSnippet({
       if (value === true) return `${key}`;
       if (typeof value === "string") return `${key}="${value}"`;
       if (typeof value === "object" && Object.entries(value).length > 0) {
-        return Object.entries(value).map(([key, value]) => {
-          return `${key}={${value}}`;
-        }).join(" ");
+        return Object.entries(value)
+          .map(([key, value]) => {
+            return `${key}={${value}}`;
+          })
+          .join(" ");
       }
       return `${key}={${value}}`;
     })
@@ -25,7 +40,7 @@ export function generateCodeSnippet({
     .join(" ");
 
   const closingTag = props.children
-    ? `>${props.children}</${component}>`
+    ? `>${handleChildren(props.children)}</${component}>`
     : " />";
 
   const code = `<${component} ${propsString}${closingTag}`;

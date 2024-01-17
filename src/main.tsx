@@ -34,6 +34,7 @@ import { generateProps } from "@/utils/generateProps";
 import Button from "@/components/Button";
 import { errors } from "@/static/errors";
 import { z } from "zod";
+import reactElementToJSXString from "react-element-to-jsx-string";
 
 const rootRoute = new RootRoute({
   component: function Layout() {
@@ -166,7 +167,10 @@ function RenderInput<T>({
 
   return (
     <CodeBlock className="whitespace-pre-wrap">
-      {JSON.stringify(propValue, null, 2)}
+      {reactElementToJSXString(propValue, {
+        showDefaultProps: false,
+        useBooleanShorthandSyntax: false,
+      })}
     </CodeBlock>
   );
 }
@@ -346,7 +350,7 @@ const componentRoute = new Route({
                 <div className="absolute bottom-0 right-0 top-0 z-0 w-12 bg-gradient-to-l from-gray-950" />
                 <div className="absolute bottom-0 left-0 top-0 z-0 w-8 bg-gradient-to-r from-gray-950" />
                 <ScrollArea.Viewport className="flex items-center p-6">
-                  <CodeBlock>
+                  <CodeBlock className="whitespace-nowrap">
                     {generateCodeSnippet({
                       component,
                       props,
