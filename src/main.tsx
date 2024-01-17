@@ -73,7 +73,10 @@ const indexRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/",
   loader: async () => {
-    throw redirect({ to: "/$component", params: { component: "Alert" } });
+    throw redirect({
+      to: "/$component",
+      params: { component: routes[0].label },
+    });
   },
   validateSearch: (search) => {
     const searchParamsSchema = z.object({
