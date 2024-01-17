@@ -33,7 +33,6 @@ import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { generateProps } from "@/utils/generateProps";
 import Button from "@/components/Button";
 import { errors } from "@/static/errors";
-import { z } from "zod";
 import reactElementToJSXString from "react-element-to-jsx-string";
 
 const rootRoute = new RootRoute({
@@ -78,14 +77,8 @@ const indexRoute = new Route({
       params: { component: routes[0].label },
     });
   },
-  validateSearch: (search) => {
-    const searchParamsSchema = z.object({
-      error: z.string().optional().catch(""),
-    });
-    return searchParamsSchema.parse(search);
-  },
   component: function Index() {
-    const { error } = indexRoute.useSearch();
+    const { error } = indexRoute.useSearch<{ error: string }>();
     return (
       <div className="flex h-full flex-1 flex-col gap-4 p-8">
         {error && (
