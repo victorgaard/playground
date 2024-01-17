@@ -5,7 +5,7 @@ export type AlertProps = React.PropsWithChildren &
   React.HTMLAttributes<HTMLDivElement> &
   VariantProps<typeof alertVariants>;
 
-const alertVariants = cva("flex rounded-lg gap-4 p-4", {
+const alertVariants = cva("flex rounded-lg gap-4 p-4 w-full", {
   variants: {
     variant: {
       success: "bg-green-950/70 border border-green-900 group success",

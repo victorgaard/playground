@@ -24,8 +24,22 @@ export const props = generateProps<AlertProps>({
     variant: ["neutral", "success", "error", "warning"],
   },
   examples: {
-    success: {
-      variant: "success",
+    "without title": {
+      children: (
+        <>
+          <Alert.Icon>
+            <BoltIcon className="h-5 w-5" />
+          </Alert.Icon>
+          <Alert.Content>
+            <Alert.Message>
+              Lorem ipsum dolor sit amet, consectetur adipiscing.
+            </Alert.Message>
+          </Alert.Content>
+        </>
+      ),
+    },
+    "with actions": {
+      variant: "warning",
     },
   },
 });

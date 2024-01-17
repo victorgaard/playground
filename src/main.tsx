@@ -1,4 +1,4 @@
-import { StrictMode, useEffect } from "react";
+import { StrictMode, isValidElement, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import {
@@ -102,7 +102,7 @@ export function CodeBlock({
 
   return (
     <pre className="text-xs">
-      <code className={cn(className)}>{children}</code>
+      <code className={className}>{children}</code>
     </pre>
   );
 }
@@ -162,7 +162,7 @@ function RenderInput<T>({
   }
 
   return (
-    <CodeBlock className="language-jsx line-numbers">
+    <CodeBlock className="language-jsx whitespace-pre-wrap">
       {reactElementToJSXString(propValue, {
         showDefaultProps: false,
         useBooleanShorthandSyntax: false,
@@ -271,6 +271,13 @@ const componentRoute = new Route({
       ...props,
     };
   },
+  validateSearch: (search: Record<string, React.ReactNode>) => {
+    /** Transform invalid React into React JSX */
+    if (!isValidElement(search.children)) {
+      delete search.children;
+    }
+    return search;
+  },
   staleTime: Infinity,
   component: function Component() {
     const navigate = useNavigate();
@@ -324,7 +331,7 @@ const componentRoute = new Route({
                 </Link>
               ))}
             </div>
-            <div className="flex h-full items-center justify-center">
+            <div className="flex h-full items-center justify-center px-8">
               <Component {...props} />
             </div>
             {!isObjectEmpty(props) && (
