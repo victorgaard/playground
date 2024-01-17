@@ -32,20 +32,23 @@ function AlertIcon({ children }: React.PropsWithChildren) {
     </div>
   );
 }
+AlertIcon.displayName = "Alert.Icon";
+Alert.Icon = AlertIcon;
 
 function AlertContent({ children }: React.PropsWithChildren) {
   return <div className="flex flex-col gap-1">{children}</div>;
 }
+AlertContent.displayName = "Alert.Content";
+Alert.Content = AlertContent;
 
 function AlertTitle({ children }: React.PropsWithChildren) {
   return <p>{children}</p>;
 }
+AlertTitle.displayName = "Alert.Title";
+Alert.Title = AlertTitle;
 
 function AlertMessage({ children }: React.PropsWithChildren) {
   return <p>{children}</p>;
 }
-
-Alert.Icon = AlertIcon;
-Alert.Content = AlertContent;
-Alert.Title = AlertTitle;
+AlertMessage.displayName = "Alert.Message";
 Alert.Message = AlertMessage;
