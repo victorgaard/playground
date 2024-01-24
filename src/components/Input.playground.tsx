@@ -8,9 +8,11 @@ export const props = generateProps<InputProps>({
     placeholder: "I'm a placeholder...",
     defaultValue: "",
     error: "",
-    variant: "rest",
     autoFocus: true,
     disabled: false,
+    onChange: () => {
+      // do something
+    },
   },
   variantProps: {
     variant: ["rest", "success", "error"],

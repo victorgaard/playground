@@ -1,4 +1,4 @@
-import { StrictMode, useEffect } from "react";
+import { StrictMode, isValidElement, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import {
@@ -152,6 +152,12 @@ function RenderInput<T>({
           );
         })}
       </div>
+    );
+  }
+
+  if (typeof propValue === "function" && !isValidElement(propValue)) {
+    return (
+      <CodeBlock className="language-jsx whitespace-pre-wrap">{String(propValue)}</CodeBlock>
     );
   }
 

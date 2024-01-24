@@ -34,26 +34,13 @@ export default function Input({
   variant,
   ...rest
 }: InputProps) {
-  if (label)
-    return (
-      <div className="flex flex-col gap-2">
-        <label htmlFor={label} className="text-gray-400">{label}</label>
-        <input
-          id={label}
-          className={cn(inputVariants({ variant }), className)}
-          {...rest}
-        />
-        {error && (
-          <p className="flex items-center gap-1.5 text-xs text-red-700">
-            <ExclamationCircleIcon className="h-4 w-4" />
-            {error}
-          </p>
-        )}
-      </div>
-    );
-
   return (
-    <div>
+    <div className="flex flex-col gap-2">
+      {label && (
+        <label htmlFor={label} className="text-gray-400">
+          {label}
+        </label>
+      )}
       <input className={cn(inputVariants({ variant }), className)} {...rest} />
       {error && (
         <p className="flex items-center gap-1.5 pt-2 text-xs text-red-700">
