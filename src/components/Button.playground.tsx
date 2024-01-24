@@ -17,14 +17,14 @@ export const props = generateProps<ButtonProps>({
     secondary: {
       children: "🥈 secondary button",
       variant: "secondary",
-      size: "md",
-      loading: false,
+    },
+    ghost: {
+      children: "👻 spooky time",
+      variant: "ghost",
     },
     destructive: {
       children: "👀 uh-oh danger zone",
       variant: "destructive",
-      size: "md",
-      loading: false,
     },
   },
 });

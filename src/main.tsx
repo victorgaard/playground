@@ -1,4 +1,4 @@
-import { StrictMode, isValidElement, useEffect } from "react";
+import { StrictMode, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import {
@@ -40,13 +40,13 @@ const rootRoute = new RootRoute({
     return (
       <main className="flex h-screen text-sm">
         <div className="flex min-w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 ">
-          {/* <Link
+          <Link
             to="/"
             className="rounded px-4 py-2 hover:bg-gray-900"
             activeProps={{ className: "bg-gray-900" }}
           >
             Home
-          </Link> */}
+          </Link>
           {routes.map((route) => (
             <Link
               key={route.href}
@@ -71,12 +71,6 @@ const rootRoute = new RootRoute({
 const indexRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/",
-  loader: async () => {
-    throw redirect({
-      to: "/$component",
-      params: { component: routes[0].label },
-    });
-  },
   component: function Index() {
     const { error } = indexRoute.useSearch<{ error: string }>();
     return (
@@ -203,24 +197,27 @@ export function PropsForm<T extends PropsObj, U extends PropsObj>({
         </Button>
       </div>
       <div className="flex flex-col gap-8">
-        {Object.entries(mergedProps).map(([propName, propValue]) => (
-          <label
-            htmlFor={propName}
-            key={propName}
-            className={cn("flex flex-col gap-2", {
-              "cursor-pointer select-none flex-row items-center justify-between":
-                typeof propValue === "boolean",
-            })}
-          >
-            <span>{propName}</span>
-            <RenderInput
-              propName={propName}
-              propValue={propValue}
-              propValues={propValues}
-              onPropChange={onPropChange}
-            />
-          </label>
-        ))}
+        {Object.entries(mergedProps).map(([propName, propValue]) => {
+          if (propValue === undefined || propValue === null) return null;
+          return (
+            <label
+              htmlFor={propName}
+              key={propName}
+              className={cn("flex flex-col gap-2", {
+                "cursor-pointer select-none flex-row items-center justify-between":
+                  typeof propValue === "boolean",
+              })}
+            >
+              <span>{propName}</span>
+              <RenderInput
+                propName={propName}
+                propValue={propValue}
+                propValues={propValues}
+                onPropChange={onPropChange}
+              />
+            </label>
+          );
+        })}
       </div>
     </div>
   );
@@ -270,13 +267,6 @@ const componentRoute = new Route({
       component: params.component,
       ...props,
     };
-  },
-  validateSearch: (search: Record<string, React.ReactNode>) => {
-    /** Transform invalid React into React JSX */
-    if (!isValidElement(search.children)) {
-      delete search.children;
-    }
-    return search;
   },
   staleTime: Infinity,
   component: function Component() {

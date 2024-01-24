@@ -1,5 +1,6 @@
 import reactElementToJSXString from "react-element-to-jsx-string";
-import { PropsObj } from "../static/types";
+import { PropsObj } from "@/static/types";
+import { isValidElement } from "react";
 
 type GenerateCodeSnippetProps = {
   component: string;
@@ -27,7 +28,10 @@ export function generateCodeSnippet({
       if (key === "children" || !value) return null;
       if (value === true) return `${key}`;
       if (typeof value === "string") return `${key}="${value}"`;
+      if (typeof value === "object" && isValidElement(value))
+        return `${key}={${handleChildren(value)}}`;
       if (typeof value === "object" && Object.entries(value).length > 0) {
+        console.log(value);
         return Object.entries(value)
           .map(([key, value]) => {
             return `${key}={${value}}`;
