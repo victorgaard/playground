@@ -389,7 +389,7 @@ const componentRoute = new Route({
 
 const routeTree = rootRoute.addChildren([indexRoute, componentRoute]);
 
-const router = new Router({ routeTree, defaultPreload: "intent" });
+const router = new Router({ routeTree });
 
 declare module "@tanstack/react-router" {
   interface Register {
