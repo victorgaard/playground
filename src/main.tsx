@@ -10,8 +10,8 @@ import {
 } from "@tanstack/react-router";
 import { errors } from "@/static/errors";
 import { extractPropsFromComponent } from "./utils/extractPropsFromComponent";
-import Layout from "./components/pages/Layout";
-import Index from "./components/pages/Index";
+import Layout from "./components/ui/Layout";
+import Index from "./components/pages/IndexPage";
 import { Component } from "./components/pages/ComponentViewer/ComponentViewerPage";
 
 const rootRoute = rootRouteWithContext<{
