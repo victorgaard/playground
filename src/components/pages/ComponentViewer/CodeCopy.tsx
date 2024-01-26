@@ -1,10 +1,12 @@
 import Button from "@/components/ui/Button/Button";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { Typography } from "@/components/ui/Typography";
 import { PropsObj } from "@/static/types";
 import { generateCodeSnippet } from "@/utils/generateCodeSnippet";
 import { isObjectEmpty } from "@/utils/isObjectEmpty";
-import { ClipboardIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, ClipboardIcon } from "@heroicons/react/24/outline";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
+import { useEffect, useState } from "react";
 
 type CodeCopyProps = {
   component: string;
@@ -12,23 +14,45 @@ type CodeCopyProps = {
 };
 
 function CodeCopy({ component, props }: CodeCopyProps) {
+  const [isClicked, setIsClicked] = useState(false);
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    if (isClicked) {
+      timeout = setTimeout(() => setIsClicked(false), 2000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [isClicked]);
+
   if (isObjectEmpty(props)) return null;
+
   return (
     <ScrollArea.Root className="group relative shrink-0 overflow-hidden border-t border-gray-800">
-      <Button
-        size="sm"
-        className="animate-fade-in absolute bottom-[18px] right-3 z-10 hidden group-hover:block"
-        onClick={() =>
-          navigator.clipboard.writeText(
-            generateCodeSnippet({
-              component,
-              props,
-            }),
-          )
-        }
-      >
-        <ClipboardIcon className="h-4 w-4" />
-      </Button>
+      <div className="absolute bottom-[18px] right-3 z-10 hidden group-hover:block transition-all">
+        {isClicked ? (
+          <Typography.Paragraph className="flex animate-in fade-in zoom-in-50 items-center gap-1 rounded-lg bg-gray-800 px-3 py-2 text-xs transition-all" extraContrast>
+            <CheckCircleIcon className="h-4 w-4 text-gray-400" /> copied
+          </Typography.Paragraph>
+        ) : (
+          <Button
+            size="sm"
+            className="animate-in zoom-in-50 fade-in"
+            onClick={() => {
+              setIsClicked(true);
+              navigator.clipboard.writeText(
+                generateCodeSnippet({
+                  component,
+                  props,
+                }),
+              );
+            }}
+          >
+            <ClipboardIcon className="h-4 w-4" />
+          </Button>
+        )}
+      </div>
+
       <div className="absolute bottom-0 right-0 top-0 z-0 w-12 bg-gradient-to-l from-gray-950" />
       <div className="absolute bottom-0 left-0 top-0 z-0 w-8 bg-gradient-to-r from-gray-950" />
       <ScrollArea.Viewport className="flex items-center p-6">

@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import "@/index.css";
 import {
   Route,
   Router,
@@ -9,10 +9,10 @@ import {
   rootRouteWithContext,
 } from "@tanstack/react-router";
 import { errors } from "@/static/errors";
-import { extractPropsFromComponent } from "./utils/extractPropsFromComponent";
-import Layout from "./components/ui/Layout";
-import Index from "./components/pages/IndexPage";
-import { Component } from "./components/pages/ComponentViewer/ComponentViewerPage";
+import { extractPropsFromComponent } from "@/utils/extractPropsFromComponent";
+import Layout from "@/components/ui/Layout";
+import Index from "@/components/pages/IndexPage";
+import { Component } from "@/components/pages/ComponentViewer/ComponentViewerPage";
 
 const rootRoute = rootRouteWithContext<{
   playgroundComponents: Record<string, unknown>;

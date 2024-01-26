@@ -23,7 +23,6 @@ pre[class*="language-"] {
   direction: ltr;
   text-align: left;
   word-spacing: normal;
-  whitespace: normal;
   overflow: auto;
   word-break: break-words;
   line-height: 1.5;
