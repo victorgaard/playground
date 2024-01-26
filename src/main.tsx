@@ -2,9 +2,9 @@ import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import "@/index.css";
 import {
-  Route,
-  Router,
   RouterProvider,
+  createRoute,
+  createRouter,
   redirect,
   rootRouteWithContext,
 } from "@tanstack/react-router";
@@ -20,13 +20,13 @@ const rootRoute = rootRouteWithContext<{
   component: Layout,
 });
 
-export const indexRoute = new Route({
+export const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
   component: Index,
 });
 
-export const componentViewerRoute = new Route({
+export const componentViewerRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "$component",
   onError: () => {
@@ -54,7 +54,7 @@ export const componentViewerRoute = new Route({
 
 const routeTree = rootRoute.addChildren([indexRoute, componentViewerRoute]);
 
-const router = new Router({
+const router = createRouter({
   routeTree,
   context: {
     playgroundComponents: import.meta.glob("./**/*.playground.tsx", {
