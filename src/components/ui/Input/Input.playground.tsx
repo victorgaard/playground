@@ -10,9 +10,6 @@ export const props = generateProps<InputProps>({
     error: "",
     autoFocus: true,
     disabled: false,
-    onChange: () => {
-      // do something
-    },
   },
   variantProps: {
     variant: ["rest", "success", "error"],

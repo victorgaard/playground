@@ -3,7 +3,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Typography } from "../Typography";
 import { useState } from "react";
-import Button from "../Button";
+import Button from "../Button/Button";
 
 export type AlertProps = React.HTMLAttributes<HTMLDivElement> &
   VariantProps<typeof alertVariants> & {
