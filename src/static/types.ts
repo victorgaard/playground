@@ -16,3 +16,5 @@ export type Props<T> = {
 export type ImportedProps<T> = {
   props: Props<T>;
 };
+
+export type ComponentFound = [string, ImportedProps<PropsObj>];

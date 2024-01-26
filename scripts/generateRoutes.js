@@ -8,14 +8,11 @@ const folderPath = path.join(process.cwd(), "src", "components");
 const files = glob.sync(path.join(folderPath, "**", "*.playground.{ts,tsx}"));
 const fileNames = files.map((file) => {
   const component = path.basename(file).split(".")[0];
-  const relativePath = path
-    .relative(process.cwd(), file)
-    .replace("src/components/", "")
-    .replace(".playground.tsx", "");
+  const filePath = path.relative(process.cwd(), file);
   return {
     label: component,
     href: component,
-    path: relativePath,
+    path: filePath,
   };
 });
 

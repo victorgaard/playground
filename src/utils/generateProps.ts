@@ -1,4 +1,4 @@
-import { Props, PropsObj } from "../static/types";
+import { Props, PropsObj } from "@/static/types";
 
 type GenerateProps<T> = {
   Component: React.FC<T>;

@@ -27,7 +27,7 @@ import Switch from "@/components/Switch";
 import { cn } from "@/utils/cn";
 import Input from "@/components/Input";
 import { capitalize } from "@/utils/capitalize";
-import { ImportedProps, InputType, PropsObj } from "@/static/types";
+import { ComponentFound, InputType, PropsObj } from "@/static/types";
 import { routes } from "@/static/routes";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { generateProps } from "@/utils/generateProps";
@@ -157,7 +157,9 @@ function RenderInput<T>({
 
   if (typeof propValue === "function" && !isValidElement(propValue)) {
     return (
-      <CodeBlock className="language-jsx whitespace-pre-wrap">{String(propValue)}</CodeBlock>
+      <CodeBlock className="language-jsx whitespace-pre-wrap">
+        {String(propValue)}
+      </CodeBlock>
     );
   }
 
@@ -241,11 +243,20 @@ const componentRoute = new Route({
     });
   },
   loader: async ({ params }) => {
-    const componentFound = routes.find(
-      (route) => route.label === params.component,
+    const modules = import.meta.glob("./**/*.playground.tsx", { eager: true });
+
+    function extractComponentNameFromPath(path: string) {
+      const pathParts = path.split("/");
+      const fileName = pathParts[pathParts.length - 1];
+      return fileName.split(".playground.tsx")[0];
+    }
+
+    const componentFound: ComponentFound[] = Object.entries(modules).filter(
+      (module): module is ComponentFound =>
+        extractComponentNameFromPath(module[0]) == params.component,
     );
 
-    if (!componentFound) {
+    if (!componentFound || componentFound.length === 0) {
       throw redirect({
         to: "/",
         search: {
@@ -254,9 +265,7 @@ const componentRoute = new Route({
       });
     }
 
-    const { props }: ImportedProps<PropsObj> = await import(
-      `./components/${componentFound.path}.playground.tsx`
-    );
+    const { props } = componentFound[0][1];
 
     if (!props)
       return {
