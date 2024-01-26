@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@tanstack/router-devtools": "^1.1.5",
+    "@testing-library/react": "^14.1.2",
     "@types/node": "^20.11.4",
     "@types/prismjs": "^1.26.3",
     "@types/react": "^18.2.43",

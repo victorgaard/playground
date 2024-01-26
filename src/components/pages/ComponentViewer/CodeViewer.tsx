@@ -27,8 +27,6 @@ function CodeViewer({ component, props }: CodeViewerProps) {
 
   if (isObjectEmpty(props)) return null;
 
-  console.log(component, props);
-
   return (
     <ScrollArea.Root className="group relative shrink-0 overflow-hidden border-t border-gray-800">
       <div className="absolute bottom-[18px] right-3 z-10 hidden transition-all group-hover:block">
