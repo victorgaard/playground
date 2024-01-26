@@ -57,7 +57,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || loading}
         {...rest}
       >
-        {loading && <LoadingSpinner />}
+        {loading && <LoadingSpinner data-testid="loading-spinner" />}
         {children}
       </button>
     );
