@@ -27,13 +27,13 @@ import Switch from "@/components/Switch";
 import { cn } from "@/utils/cn";
 import Input from "@/components/Input";
 import { capitalize } from "@/utils/capitalize";
-import { ComponentFound, InputType, PropsObj } from "@/static/types";
+import { InputType, PropsObj } from "@/static/types";
 import { routes } from "@/static/routes";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
-import { generateProps } from "@/utils/generateProps";
 import Button from "@/components/Button";
 import { errors } from "@/static/errors";
 import reactElementToJSXString from "react-element-to-jsx-string";
+import { extractPropsFromComponent } from "./utils/extractPropsFromComponent";
 
 const rootRoute = new RootRoute({
   component: function Layout() {
@@ -244,40 +244,7 @@ const componentRoute = new Route({
   },
   loader: async ({ params }) => {
     const modules = import.meta.glob("./**/*.playground.tsx", { eager: true });
-
-    function extractComponentNameFromPath(path: string) {
-      const pathParts = path.split("/");
-      const fileName = pathParts[pathParts.length - 1];
-      return fileName.split(".playground.tsx")[0];
-    }
-
-    const componentFound: ComponentFound[] = Object.entries(modules).filter(
-      (module): module is ComponentFound =>
-        extractComponentNameFromPath(module[0]) == params.component,
-    );
-
-    if (!componentFound || componentFound.length === 0) {
-      throw redirect({
-        to: "/",
-        search: {
-          error: errors.componentRouteNotFound,
-        },
-      });
-    }
-
-    const { props } = componentFound[0][1];
-
-    if (!props)
-      return {
-        component: params.component,
-        ...generateProps<PropsObj>({
-          Component: () => (
-            <>This component is missing the correct playground configuration</>
-          ),
-          defaultProps: {},
-        }),
-      };
-
+    const props = extractPropsFromComponent(modules, params.component);
     return {
       component: params.component,
       ...props,
