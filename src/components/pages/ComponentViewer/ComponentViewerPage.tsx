@@ -2,8 +2,8 @@ import { useNavigate } from "@tanstack/react-router";
 import { PropsForm } from "./PropsForm";
 import { componentViewerRoute } from "@/main";
 import Navbar from "./Navbar";
-import CodeCopy from "./CodeCopy";
 import PropsWrapper from "./PropsWrapper";
+import CodeViewer from "./CodeViewer";
 
 export function Component() {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export function Component() {
           <div className="flex h-full items-center justify-center px-8">
             <Component {...props} />
           </div>
-          <CodeCopy component={component} props={props} />
+          <CodeViewer component={component} props={props} />
         </div>
       </div>
       <PropsWrapper>

@@ -8,18 +8,18 @@ import { CheckCircleIcon, ClipboardIcon } from "@heroicons/react/24/outline";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { useEffect, useState } from "react";
 
-type CodeCopyProps = {
+type CodeViewerProps = {
   component: string;
   props: PropsObj;
 };
 
-function CodeCopy({ component, props }: CodeCopyProps) {
+function CodeViewer({ component, props }: CodeViewerProps) {
   const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
     if (isClicked) {
-      timeout = setTimeout(() => setIsClicked(false), 2000);
+      timeout = setTimeout(() => setIsClicked(false), 1200);
     }
 
     return () => clearTimeout(timeout);
@@ -73,4 +73,4 @@ function CodeCopy({ component, props }: CodeCopyProps) {
   );
 }
 
-export default CodeCopy;
+export default CodeViewer;
