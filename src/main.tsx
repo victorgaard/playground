@@ -43,7 +43,6 @@ export const componentViewerRoute = new Route({
       context.playgroundComponents,
       component,
     );
-    console.log(props)
     return {
       component,
       ...props,
