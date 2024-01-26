@@ -27,17 +27,22 @@ function CodeViewer({ component, props }: CodeViewerProps) {
 
   if (isObjectEmpty(props)) return null;
 
+  console.log(component, props);
+
   return (
     <ScrollArea.Root className="group relative shrink-0 overflow-hidden border-t border-gray-800">
-      <div className="absolute bottom-[18px] right-3 z-10 hidden group-hover:block transition-all">
+      <div className="absolute bottom-[18px] right-3 z-10 hidden transition-all group-hover:block">
         {isClicked ? (
-          <Typography.Paragraph className="flex animate-in fade-in zoom-in-50 items-center gap-1 rounded-lg bg-gray-800 px-3 py-2 text-xs transition-all" extraContrast>
+          <Typography.Paragraph
+            className="flex items-center gap-1 rounded-lg bg-gray-800 px-3 py-2 text-xs transition-all animate-in fade-in zoom-in-50"
+            extraContrast
+          >
             <CheckCircleIcon className="h-4 w-4 text-gray-400" /> copied
           </Typography.Paragraph>
         ) : (
           <Button
             size="sm"
-            className="animate-in zoom-in-50 fade-in"
+            className="animate-in fade-in zoom-in-50"
             onClick={() => {
               setIsClicked(true);
               navigator.clipboard.writeText(
