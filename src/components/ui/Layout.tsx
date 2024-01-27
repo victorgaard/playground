@@ -7,8 +7,8 @@ function Layout() {
       <div className="flex min-w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 ">
         <Link
           to="/"
-          className="rounded px-4 py-2 hover:bg-gray-900"
-          activeProps={{ className: "bg-gray-900" }}
+          className="rounded-lg p-2 text-gray-400 transition-all hover:bg-gray-900"
+          activeProps={{ className: "bg-gray-900 text-white" }}
         >
           Home
         </Link>
@@ -17,8 +17,8 @@ function Layout() {
             key={route.href}
             to="/$component"
             params={{ component: route.href }}
-            className="rounded px-4 py-2 hover:bg-gray-900"
-            activeProps={{ className: "bg-gray-900" }}
+            className="rounded-lg p-2 text-gray-400 transition-all hover:bg-gray-900"
+            activeProps={{ className: "bg-gray-900 text-white" }}
             activeOptions={{
               includeSearch: false,
             }}

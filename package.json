@@ -14,7 +14,7 @@
   "dependencies": {
     "@heroicons/react": "^2.1.1",
     "@radix-ui/react-scroll-area": "^1.0.5",
-    "@tanstack/react-router": "^1.9.0",
+    "@tanstack/react-router": "^1.13.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "prismjs": "^1.29.0",
@@ -24,7 +24,6 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@tanstack/router-devtools": "^1.1.5",
     "@testing-library/jest-dom": "^6.3.0",
     "@testing-library/react": "^14.1.2",
     "@types/node": "^20.11.4",
