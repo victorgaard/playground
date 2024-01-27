@@ -1,5 +1,5 @@
 import { routes } from "@/static/routes";
-import { Link, Outlet } from "@tanstack/react-router";
+import { Link, Outlet, ScrollRestoration } from "@tanstack/react-router";
 
 function Layout() {
   return (
@@ -27,6 +27,7 @@ function Layout() {
           </Link>
         ))}
       </div>
+      <ScrollRestoration />
       <Outlet />
     </main>
   );

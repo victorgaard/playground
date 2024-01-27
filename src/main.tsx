@@ -49,6 +49,7 @@ export const componentViewerRoute = createRoute({
     };
   },
   staleTime: Infinity,
+  shouldReload: false,
   component: Component,
 });
 

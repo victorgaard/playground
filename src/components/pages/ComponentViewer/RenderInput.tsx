@@ -109,11 +109,12 @@ export function RenderInput<T>({
           const isActive = propValues[propName] === prop;
           return (
             <Button
+              size="sm"
               key={prop}
               value={prop}
               onClick={() => onPropChange(propName, prop)}
             >
-              {prop} {isActive && <CheckIcon className="h-5 w-5" />}
+              {prop} {isActive && <CheckIcon className="h-4 w-4 text-gray-400" />}
             </Button>
           );
         })}
