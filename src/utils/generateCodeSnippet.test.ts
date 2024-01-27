@@ -7,7 +7,7 @@ describe("generateCodeSnippet", () => {
       generateCodeSnippet({
         component: "Avatar",
         props: {
-          picture: "./assets/avatar.jpeg",
+          picture: "./assets/knight.jpeg",
           name: "",
           size: "md",
           status: "online",
@@ -15,7 +15,7 @@ describe("generateCodeSnippet", () => {
         },
       }),
     ).toBe(
-      `<Avatar picture="./assets/avatar.jpeg" size="md" status="online" shape="rounded" />`,
+      `<Avatar picture="./assets/knight.jpeg" size="md" status="online" shape="rounded" />`,
     );
   });
 

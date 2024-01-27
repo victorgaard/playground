@@ -47,7 +47,7 @@ export function RenderInput<T>({
     propValue.some((prop) => typeof prop === "object")
   ) {
     return (
-      <CodeBlock className="language-jsx whitespace-pre-wrap">
+      <CodeBlock className="language-javascript whitespace-pre-wrap">
         {JSON.stringify(propValue, null, 2)}
       </CodeBlock>
     );

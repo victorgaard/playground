@@ -4,8 +4,8 @@ import Avatar, { AvatarProps } from "./Avatar";
 export const props = generateProps<AvatarProps>({
   Component: Avatar,
   defaultProps: {
-    picture: "./assets/avatar.jpeg",
-    name: "",
+    picture: "./assets/knight.jpeg",
+    name: "little knight",
     size: "md",
     status: "online",
     shape: "rounded",
@@ -17,14 +17,14 @@ export const props = generateProps<AvatarProps>({
   },
   examples: {
     squared: {
-      picture: "./assets/avatar.jpeg",
+      picture: "./assets/knight.jpeg",
       shape: "squared",
       size: "lg",
       status: "idle",
     },
     fallback: {
       picture: "",
-      name: "knight",
+      name: "little knight",
       status: "offline",
     },
   },

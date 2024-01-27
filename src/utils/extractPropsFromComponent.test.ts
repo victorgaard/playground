@@ -14,7 +14,7 @@ describe("extractPropsFromComponent", () => {
       Component: Avatar,
       config: {
         defaultProps: {
-          picture: "./assets/avatar.jpeg",
+          picture: "./assets/knight.jpeg",
           name: "",
           size: "md",
           status: "online",
@@ -27,7 +27,7 @@ describe("extractPropsFromComponent", () => {
         },
         examples: {
           squared: {
-            picture: "./assets/avatar.jpeg",
+            picture: "./assets/knight.jpeg",
             shape: "squared",
             size: "lg",
             status: "idle",
