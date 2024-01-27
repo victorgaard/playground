@@ -62,8 +62,8 @@ function CodeViewer({ component, props }: CodeViewerProps) {
         )}
       </div>
 
-      <div className="absolute bottom-0 right-0 top-0 z-0 w-12 bg-gradient-to-l from-gray-950" />
-      <div className="absolute bottom-0 left-0 top-0 z-0 w-8 bg-gradient-to-r from-gray-950" />
+      <div className="absolute bottom-0 right-0 top-0 z-0 w-12 bg-gradient-to-l from-black" />
+      <div className="absolute bottom-0 left-0 top-0 z-0 w-8 bg-gradient-to-r from-black" />
       <ScrollArea.Viewport className="flex items-center p-6">
         <CodeBlock className="language-jsx whitespace-nowrap">
           {generateCodeSnippet({

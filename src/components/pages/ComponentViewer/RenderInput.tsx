@@ -3,8 +3,13 @@ import { CodeBlock } from "@/components/ui/CodeBlock";
 import Input from "@/components/ui/Input/Input";
 import Switch from "@/components/ui/Switch";
 import { InputType } from "@/static/types";
-import { CheckIcon } from "@heroicons/react/24/outline";
-import { isValidElement } from "react";
+import { cn } from "@/utils/cn";
+import {
+  CheckIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+} from "@heroicons/react/24/outline";
+import { isValidElement, useState } from "react";
 import reactElementToJSXString from "react-element-to-jsx-string";
 
 type RenderInputProps<T> = {
@@ -20,6 +25,8 @@ export function RenderInput<T>({
   propValues,
   onPropChange,
 }: RenderInputProps<T>) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   if (typeof propValue === "boolean") {
     return (
       <Switch
@@ -60,9 +67,38 @@ export function RenderInput<T>({
     propValue.some((prop) => typeof prop === "object")
   ) {
     return (
-      <CodeBlock className="language-javascript whitespace-pre-wrap">
-        {JSON.stringify(propValue, null, 2)}
-      </CodeBlock>
+      <div className="relative flex flex-col">
+        <div
+          className={cn("max-h-[245px] overflow-hidden", {
+            "max-h-full": isExpanded,
+          })}
+        >
+          <CodeBlock className="language-jsx whitespace-pre-wrap">
+            {JSON.stringify(propValue, null, 2)}
+          </CodeBlock>
+        </div>
+        {!isExpanded && (
+          <div className="absolute bottom-[20px] z-0 h-[20px] w-full bg-gradient-to-t from-black" />
+        )}
+        <Button
+          size="xs"
+          variant="ghost"
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="z-10"
+        >
+          {isExpanded ? (
+            <>
+              <ChevronUpIcon className="h-3 w-3 text-gray-400" />
+              collapse
+            </>
+          ) : (
+            <>
+              <ChevronDownIcon className="h-3 w-3 text-gray-400" />
+              expand
+            </>
+          )}
+        </Button>
+      </div>
     );
   }
 

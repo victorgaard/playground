@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import Prism from "prismjs";
 import "prismjs/components/prism-jsx";
-import "prismjs/plugins/line-numbers/prism-line-numbers";
 import "@/assets/code.css";
 
 export function CodeBlock({

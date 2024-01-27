@@ -94,18 +94,18 @@ code[class*="language-"] ::selection {
 .token.entity,
 .token.number,
 .token.symbol {
-  color: #6897bb;
+  color: white;
 }
 
 .token.property,
 .token.constant,
 .token.variable {
-  color: #9876aa;
+  color: #e8bf6a;
 }
 
 .token.string,
 .token.char {
-  color: #6a8759;
+  color: #a9b7c6;
 }
 
 .token.attr-value,
