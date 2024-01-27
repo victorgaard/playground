@@ -1,7 +1,7 @@
 import { routes } from "@/static/routes";
 import { Link, Outlet, ScrollRestoration } from "@tanstack/react-router";
 
-function Layout() {
+function RootLayout() {
   return (
     <main className="flex h-screen text-sm">
       <div className="flex min-w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 ">
@@ -33,4 +33,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default RootLayout;

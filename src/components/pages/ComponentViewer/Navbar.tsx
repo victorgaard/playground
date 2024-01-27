@@ -13,10 +13,10 @@ function Navbar({ component, config }: NavbarProps) {
       <Link
         to="/$component"
         params={{ component }}
-        className="px-3 pb-5 pt-8 transition-transform active:scale-90"
+        className="px-3 pb-5 hover:text-gray-300 pt-8 transition-transform active:scale-90"
         activeProps={{
           className:
-            "underline text-white underline-offset-[23px] decoration-2 decoration-gray-600",
+            "underline text-white hover:text-white underline-offset-[23px] decoration-2 decoration-gray-600",
         }}
         activeOptions={{
           exact: true,
@@ -30,10 +30,10 @@ function Navbar({ component, config }: NavbarProps) {
           to="/$component"
           params={{ component }}
           search={config.examples[example]}
-          className="px-3 pb-5 pt-8 transition-transform active:scale-90"
+          className="px-3 pb-5 hover:text-gray-300 pt-8 transition-transform active:scale-90"
           activeProps={{
             className:
-              "underline text-white underline-offset-[23px] decoration-2 decoration-gray-600",
+              "underline text-white hover:text-white underline-offset-[23px] decoration-2 decoration-gray-600",
           }}
           activeOptions={{
             exact: true,

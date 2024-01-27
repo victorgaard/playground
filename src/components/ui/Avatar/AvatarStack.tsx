@@ -29,7 +29,7 @@ function AvatarStack<T extends User>({
         <div
           className={cn(
             avatarVariants({ size: avatarSize }),
-            "border-2 font-medium border-gray-950 [&.lg]:-ml-5 [&.md]:-ml-4 [&.md]:text-base [&.sm]:-ml-3.5 [&.sm]:text-sm [&.lg]:text-xl [&.xl]:text-3xl [&.xl]:-ml-7",
+            "border-2 bg-gray-600 font-medium border-gray-950 [&.lg]:-ml-5 [&.md]:-ml-4 [&.md]:text-base [&.sm]:-ml-3.5 [&.sm]:text-sm [&.lg]:text-xl [&.xl]:text-3xl [&.xl]:-ml-7",
           )}
         >
           {new Intl.NumberFormat("en-US", {

@@ -10,14 +10,14 @@ import {
 } from "@tanstack/react-router";
 import { errors } from "@/static/errors";
 import { extractPropsFromComponent } from "@/utils/extractPropsFromComponent";
-import Layout from "@/components/ui/Layout";
 import Index from "@/components/pages/IndexPage";
 import { Component } from "@/components/pages/ComponentViewer/ComponentViewerPage";
+import RootLayout from "@/components/ui/RootLayout";
 
 const rootRoute = rootRouteWithContext<{
-  playgroundComponents: Record<string, unknown>;
+  playgroundFiles: Record<string, unknown>;
 }>()({
-  component: Layout,
+  component: RootLayout,
 });
 
 export const indexRoute = createRoute({
@@ -39,10 +39,7 @@ export const componentViewerRoute = createRoute({
   },
   loader: async ({ params, context }) => {
     const component = params.component;
-    const props = extractPropsFromComponent(
-      context.playgroundComponents,
-      component,
-    );
+    const props = extractPropsFromComponent(context.playgroundFiles, component);
     return {
       component,
       ...props,
@@ -58,7 +55,7 @@ const routeTree = rootRoute.addChildren([indexRoute, componentViewerRoute]);
 const router = createRouter({
   routeTree,
   context: {
-    playgroundComponents: import.meta.glob("./**/*.playground.tsx", {
+    playgroundFiles: import.meta.glob("./**/*.playground.tsx", {
       eager: true,
     }),
   },
