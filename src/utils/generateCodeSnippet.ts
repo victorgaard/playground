@@ -26,18 +26,17 @@ export function generateCodeSnippet({
   const propsString = Object.entries(props)
     .map(([key, value]) => {
       if (key === "children" || !value) return null;
+
       if (value === true) return `${key}`;
+
       if (typeof value === "string") return `${key}="${value}"`;
+
       if (typeof value === "object" && isValidElement(value))
         return `${key}={${handleChildren(value)}}`;
-      if (typeof value === "object" && Object.entries(value).length > 0) {
-        console.log(value);
-        return Object.entries(value)
-          .map(([key, value]) => {
-            return `${key}={${value}}`;
-          })
-          .join(" ");
-      }
+
+      if (typeof value === "object" && Object.entries(value).length > 0)
+        return `${key}={${key}}`;
+
       return `${key}={${value}}`;
     })
     .filter(Boolean)

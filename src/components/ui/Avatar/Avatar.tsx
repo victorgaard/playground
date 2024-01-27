@@ -7,7 +7,7 @@ export type AvatarProps = React.HTMLAttributes<HTMLDivElement> &
     name?: string;
   };
 
-const avatarVariants = cva(
+export const avatarVariants = cva(
   "relative flex items-center justify-center animate-in fade-in transition-all",
   {
     variants: {

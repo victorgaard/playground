@@ -42,6 +42,17 @@ export function RenderInput<T>({
     );
   }
 
+  if (
+    Array.isArray(propValue) &&
+    propValue.some((prop) => typeof prop === "object")
+  ) {
+    return (
+      <CodeBlock className="language-jsx whitespace-pre-wrap">
+        {JSON.stringify(propValue, null, 2)}
+      </CodeBlock>
+    );
+  }
+
   if (Array.isArray(propValue)) {
     return (
       <div className="grid grid-cols-2 gap-2">

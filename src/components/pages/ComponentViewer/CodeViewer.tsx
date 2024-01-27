@@ -2,6 +2,7 @@ import Button from "@/components/ui/Button/Button";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Typography } from "@/components/ui/Typography";
 import { PropsObj } from "@/static/types";
+import { cn } from "@/utils/cn";
 import { generateCodeSnippet } from "@/utils/generateCodeSnippet";
 import { isObjectEmpty } from "@/utils/isObjectEmpty";
 import { CheckCircleIcon, ClipboardIcon } from "@heroicons/react/24/outline";
@@ -19,7 +20,7 @@ function CodeViewer({ component, props }: CodeViewerProps) {
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
     if (isClicked) {
-      timeout = setTimeout(() => setIsClicked(false), 1200);
+      timeout = setTimeout(() => setIsClicked(false), 2000);
     }
 
     return () => clearTimeout(timeout);
@@ -29,7 +30,12 @@ function CodeViewer({ component, props }: CodeViewerProps) {
 
   return (
     <ScrollArea.Root className="group relative shrink-0 overflow-hidden border-t border-gray-800">
-      <div className="absolute bottom-[18px] right-3 z-10 hidden transition-all group-hover:block">
+      <div
+        className={cn(
+          "absolute bottom-[18px] right-3 z-10 hidden transition-all group-hover:block",
+          { block: isClicked },
+        )}
+      >
         {isClicked ? (
           <Typography.Paragraph
             className="flex items-center gap-1 rounded-lg bg-gray-800 px-3 py-2 text-xs transition-all animate-in fade-in zoom-in-50"
