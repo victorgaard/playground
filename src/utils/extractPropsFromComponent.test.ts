@@ -15,7 +15,7 @@ describe("extractPropsFromComponent", () => {
       config: {
         defaultProps: {
           picture: "./assets/knight.jpeg",
-          name: "",
+          name: "little knight",
           size: "md",
           status: "online",
           shape: "rounded",
@@ -34,7 +34,7 @@ describe("extractPropsFromComponent", () => {
           },
           fallback: {
             picture: "",
-            name: "knight",
+            name: "little knight",
             status: "offline",
           },
         },
