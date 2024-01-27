@@ -26,7 +26,7 @@ export const props = generateProps<AvatarStackProps<User>>({
   examples: {
     limitless: {
       limit: 0,
-      avatarSize: "xl",
+      avatarSize: "lg",
       users
     },
   },
