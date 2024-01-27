@@ -9,7 +9,7 @@ type PropsFormProps<T, U> = {
   component: string;
   propValues: T;
   variantProps: U;
-  onPropChange: (propName: keyof T, value: string | boolean) => void;
+  onPropChange: (propName: keyof T, value: string | boolean | number) => void;
 };
 
 export function PropsForm<T extends PropsObj, U extends PropsObj>({

@@ -5,36 +5,38 @@ import { cn } from "@/utils/cn";
 
 export type AvatarStackProps<T extends User> = {
   avatarSize: VariantProps<typeof avatarVariants>["size"];
-  limit: number;
+  limit?: number;
   users: T[];
 };
 
 function AvatarStack<T extends User>({
   avatarSize,
-  limit,
+  limit = 0,
   users,
 }: AvatarStackProps<T>) {
   return (
     <div className="flex items-center">
-      {users.slice(0, limit).map((user) => (
+      {users.slice(0, limit || users.length).map((user) => (
         <Avatar
           key={user.id}
           picture={user.picture}
           name={user.name}
           size={avatarSize}
-          className="-ml-6 border-4 border-gray-950"
+          className="border-2 border-gray-950 [&.lg]:-ml-5 [&.md]:-ml-4 [&.sm]:-ml-3.5 [&.xl]:-ml-7"
         />
       ))}
-      <div
-        className={cn(
-          avatarVariants({ size: avatarSize }),
-          "-ml-6 border-4 border-gray-950",
-        )}
-      >
-        {new Intl.NumberFormat("en-US", {
-          signDisplay: "exceptZero",
-        }).format(users.length - limit)}
-      </div>
+      {!!limit && users.length - limit > 0 && (
+        <div
+          className={cn(
+            avatarVariants({ size: avatarSize }),
+            "border-2 font-medium border-gray-950 [&.lg]:-ml-5 [&.md]:-ml-4 [&.md]:text-base [&.sm]:-ml-3.5 [&.sm]:text-sm [&.lg]:text-xl [&.xl]:text-3xl [&.xl]:-ml-7",
+          )}
+        >
+          {new Intl.NumberFormat("en-US", {
+            signDisplay: "exceptZero",
+          }).format(users.length - limit)}
+        </div>
+      )}
     </div>
   );
 }

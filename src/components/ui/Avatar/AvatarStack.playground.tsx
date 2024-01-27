@@ -16,11 +16,18 @@ export const users = [
 export const props = generateProps<AvatarStackProps<User>>({
   Component: AvatarStack,
   defaultProps: {
-    avatarSize: "sm",
-    limit: 6,
-    users
+    avatarSize: "md",
+    limit: 5,
+    users,
   },
   variantProps: {
     avatarSize: ["sm", "md", "lg", "xl"],
+  },
+  examples: {
+    limitless: {
+      limit: 0,
+      avatarSize: "xl",
+      users
+    },
   },
 });

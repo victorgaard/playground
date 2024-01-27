@@ -22,7 +22,7 @@ export const avatarVariants = cva(
       },
       shape: {
         rounded: "rounded-full",
-        squared: "rounded-lg group-[.lg]:rounded-xl group-[.xl]:rounded-xl",
+        squared: "rounded-lg [&.lg]:rounded-xl [&.xl]:rounded-xl",
       },
       status: {
         online: "bg-green-500",

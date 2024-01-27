@@ -11,7 +11,10 @@ export function Component() {
   const { component, Component, config } = componentViewerRoute.useLoaderData();
   const props = { ...config.defaultProps, ...propsFromParams };
 
-  function handlePropChange(propName: string, value: string | boolean) {
+  function handlePropChange(
+    propName: string,
+    value: string | boolean | number,
+  ) {
     navigate({
       to: "/$component",
       params: { component },

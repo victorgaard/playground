@@ -11,7 +11,7 @@ type RenderInputProps<T> = {
   propName: keyof T;
   propValue: InputType;
   propValues: T;
-  onPropChange: (propName: keyof T, value: string | boolean) => void;
+  onPropChange: (propName: keyof T, value: string | boolean | number) => void;
 };
 
 export function RenderInput<T>({
@@ -38,6 +38,19 @@ export function RenderInput<T>({
         value={propValue}
         placeholder={`${String(propName)}...`}
         onChange={(e) => onPropChange(propName, e.target.value)}
+      />
+    );
+  }
+
+  if (typeof propValue === "number") {
+    return (
+      <Input
+        id={String(propName)}
+        type="number"
+        value={propValue}
+        placeholder={`${String(propName)}...`}
+        onChange={(e) => onPropChange(propName, Number(e.target.value))}
+        min={0}
       />
     );
   }
