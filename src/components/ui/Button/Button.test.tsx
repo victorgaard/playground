@@ -8,8 +8,8 @@ describe("Button", () => {
   });
 
   it("should render the loading spinner when button is loading", () => {
-    render(<Button loading={true}>I'm loading</Button>);
-    const loading = screen.getByTestId("loading-spinner");
-    expect(loading).toBeInTheDocument();
+    render(<Button isLoading={true}>I'm loading</Button>);
+    const isLoading = screen.getByTestId("loading-spinner");
+    expect(isLoading).toBeInTheDocument();
   });
 });

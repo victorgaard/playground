@@ -45,6 +45,7 @@ function CodeViewer({ component, props }: CodeViewerProps) {
           </Typography.Paragraph>
         ) : (
           <Button
+            variant="tertiary"
             size="sm"
             className="animate-in fade-in zoom-in-50"
             onClick={() => {
@@ -56,8 +57,9 @@ function CodeViewer({ component, props }: CodeViewerProps) {
                 }),
               );
             }}
+            isIcon
           >
-            <ClipboardIcon className="h-4 w-4" />
+            <ClipboardIcon className="h-4 w-4 shrink-0 text-gray-400" />
           </Button>
         )}
       </div>

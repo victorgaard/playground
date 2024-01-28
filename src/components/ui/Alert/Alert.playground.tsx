@@ -6,9 +6,8 @@ export const props = generateProps<AlertProps>({
   Component: Alert,
   defaultProps: {
     title: "This is an alert",
-    message:
-      "No need to panic, this is just common procedure",
-    variant: "neutral",
+    message: "No need to panic, this is just common procedure",
+    variant: "success",
     icon: <BoltIcon className="h-5 w-5" />,
   },
   variantProps: {
@@ -27,6 +26,7 @@ export const props = generateProps<AlertProps>({
       message:
         "The minimum an alert requires is a message, so don't forget it and you are good to go 🤙",
       icon: null,
+      variant: "neutral",
     },
   },
 });

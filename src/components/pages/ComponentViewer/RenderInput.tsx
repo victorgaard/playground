@@ -69,7 +69,7 @@ export function RenderInput<T>({
     return (
       <div className="relative flex flex-col">
         <div
-          className={cn("max-h-[245px] overflow-hidden", {
+          className={cn("max-h-[340px] overflow-hidden", {
             "max-h-full": isExpanded,
           })}
         >
@@ -109,12 +109,14 @@ export function RenderInput<T>({
           const isActive = propValues[propName] === prop;
           return (
             <Button
+              variant="tertiary"
               size="sm"
               key={prop}
               value={prop}
               onClick={() => onPropChange(propName, prop)}
             >
-              {prop} {isActive && <CheckIcon className="h-4 w-4 text-gray-400" />}
+              {prop}{" "}
+              {isActive && <CheckIcon className="h-4 w-4 text-gray-400" />}
             </Button>
           );
         })}

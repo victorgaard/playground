@@ -7,7 +7,7 @@ const badgeVariants = cva("transition-all", {
       purple: "bg-purple-950/70 border-purple-900 text-purple-400",
       grey: "bg-gray-900 border-gray-800 text-gray-400",
       green: "bg-green-950/70 border-green-900 text-green-400",
-      orange: "bg-orange-950/70 border-orange-900 text-orange-400",
+      yellow: "bg-yellow-950/70 border-yellow-900 text-yellow-400",
     },
     size: {
       xs: "px-1 py-0.5 rounded-md text-xs",
@@ -20,7 +20,7 @@ const badgeVariants = cva("transition-all", {
     },
   },
   defaultVariants: {
-    variant: "purple",
+    variant: "yellow",
     size: "sm",
     hasBorder: false,
   },

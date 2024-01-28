@@ -41,7 +41,7 @@ export default function Alert({
 
   if (!isVisible)
     return (
-      <Button onClick={() => setIsVisible(true)}>
+      <Button variant="tertiary" onClick={() => setIsVisible(true)}>
         I changed my mind, display the alert again
       </Button>
     );

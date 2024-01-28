@@ -5,12 +5,12 @@ export const props = generateProps<BadgeProps>({
   Component: Badge,
   defaultProps: {
     children: "this is a badge",
-    variant: "purple",
+    variant: "yellow",
     size: "xs",
     hasBorder: true,
   },
   variantProps: {
-    variant: ["purple", "green", "orange", "grey"],
+    variant: ["purple", "green", "yellow", "grey"],
     size: ["xs", "sm", "md"],
   },
 });

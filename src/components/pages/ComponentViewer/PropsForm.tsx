@@ -25,6 +25,7 @@ export function PropsForm<T extends PropsObj, U extends PropsObj>({
       <div className="flex items-center justify-between">
         Props
         <Button
+          variant="tertiary"
           size="sm"
           onClick={() => {
             navigate({
@@ -32,8 +33,9 @@ export function PropsForm<T extends PropsObj, U extends PropsObj>({
               params: { component },
             });
           }}
+          isIcon
         >
-          <ArrowUturnLeftIcon className="h-4 w-4" />
+          <ArrowUturnLeftIcon className="h-4 w-4 text-gray-400 shrink-0" />
         </Button>
       </div>
       <div className="flex flex-col gap-8">

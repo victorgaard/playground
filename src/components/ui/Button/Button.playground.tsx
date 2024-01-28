@@ -11,7 +11,7 @@ export const props = generateProps<ButtonProps>({
     isLoading: false,
   },
   variantProps: {
-    variant: ["primary", "secondary", "ghost", "destructive"],
+    variant: ["primary", "secondary", "tertiary", "destructive", "ghost"],
     size: ["xs", "sm", "md", "lg"],
   },
   examples: {
