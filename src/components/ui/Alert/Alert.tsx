@@ -5,14 +5,6 @@ import { Typography } from "../Typography";
 import { useState } from "react";
 import Button from "../Button/Button";
 
-export type AlertProps = React.HTMLAttributes<HTMLDivElement> &
-  VariantProps<typeof alertVariants> & {
-    icon?: React.ReactNode;
-    title?: string;
-    message: string;
-    isCloseable?: boolean;
-  };
-
 const alertVariants = cva(
   "flex justify-between animate-in fade-in rounded-lg items-start gap-4 p-4 w-full transition-all",
   {
@@ -29,6 +21,14 @@ const alertVariants = cva(
     },
   },
 );
+
+export type AlertProps = React.HTMLAttributes<HTMLDivElement> &
+  VariantProps<typeof alertVariants> & {
+    icon?: React.ReactNode;
+    title?: string;
+    message: string;
+    isCloseable?: boolean;
+  };
 
 export default function Alert({
   icon,

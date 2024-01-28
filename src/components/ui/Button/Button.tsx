@@ -1,16 +1,10 @@
 import { VariantProps, cva } from "class-variance-authority";
-import { ButtonHTMLAttributes, ReactNode, forwardRef } from "react";
+import { ButtonHTMLAttributes, forwardRef } from "react";
 import { cn } from "@/utils/cn";
 import LoadingSpinner from "../LoadingSpinner";
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
-  VariantProps<typeof buttonVariants> & {
-    children: ReactNode;
-    loading?: boolean;
-  };
-
 const buttonVariants = cva(
-  "flex font-medium gap-2 rounded-lg cursor-pointer items-center justify-center active:scale-90 text-sm focus:ring-2  disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 transition-all",
+  "flex overflow-hidden font-medium gap-2 rounded-lg cursor-pointer items-center justify-center active:scale-90 text-sm focus:ring-2  disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 transition-all",
   {
     variants: {
       variant: {
@@ -24,10 +18,14 @@ const buttonVariants = cva(
           "bg-red-900 ring-red-600 outline-red-500 hover:bg-red-800 active:bg-red-900 text-white",
       },
       size: {
-        xs: "p-1 text-xs font-normal",
-        sm: "py-2 px-3",
-        md: "py-3 px-6",
-        lg: "py-4 px-8",
+        xs: "h-6 px-2 text-xs rounded-md font-normal xs",
+        sm: "h-8 px-3 sm",
+        md: "h-10 px-4 md",
+        lg: "h-12 px-5 lg",
+      },
+      isIcon: {
+        true: "[&.xs]:h-6 [&.xs]:w-6 [&.sm]:h-8 [&.sm]:w-8 [&.md]:h-10 [&.md]:w-10 [&.lg]:h-12 [&.lg]:w-12",
+        false: "",
       },
     },
     defaultVariants: {
@@ -37,6 +35,27 @@ const buttonVariants = cva(
   },
 );
 
+function getRandomEmoji() {
+  const emojiStart = 0x1f600;
+  const emojiEnd = 0x1f64f;
+  const emojiRange = emojiEnd - emojiStart + 1;
+  const randomCodePoint = emojiStart + Math.floor(Math.random() * emojiRange);
+  const randomEmoji = String.fromCodePoint(randomCodePoint);
+  return randomEmoji;
+}
+
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
+  VariantProps<typeof buttonVariants> & {
+    children: React.ReactNode;
+    isLoading?: boolean;
+  };
+
+function handleChildren({ children, isLoading, isIcon }: ButtonProps) {
+  if (isIcon && isLoading) return null;
+  if (isIcon && typeof children === "string") return getRandomEmoji();
+  return children;
+}
+
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -44,7 +63,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       variant,
       size,
       className,
-      loading = false,
+      isIcon,
+      isLoading = false,
       disabled = false,
       ...rest
     },
@@ -53,17 +73,21 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
-        className={cn(buttonVariants({ variant, size }), className)}
-        disabled={disabled || loading}
+        className={cn(buttonVariants({ variant, size, isIcon }), className)}
+        disabled={disabled || isLoading}
         {...rest}
       >
-        {loading && <LoadingSpinner data-testid="loading-spinner" />}
-        {children}
+        {isLoading && (
+          <LoadingSpinner
+            data-testid="loading-spinner"
+            className={cn({ "h-3 w-3": size === "xs" })}
+          />
+        )}
+        {handleChildren({ children, isLoading, isIcon })}
       </button>
     );
   },
 );
 
 Button.displayName = "Button";
-
 export default Button;

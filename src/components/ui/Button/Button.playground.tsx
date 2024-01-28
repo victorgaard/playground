@@ -7,11 +7,12 @@ export const props = generateProps<ButtonProps>({
     children: "👉 click me",
     variant: "primary",
     size: "md",
-    loading: false,
+    isIcon: false,
+    isLoading: false,
   },
   variantProps: {
     variant: ["primary", "secondary", "ghost", "destructive"],
-    size: ["sm", "md", "lg"],
+    size: ["xs", "sm", "md", "lg"],
   },
   examples: {
     secondary: {

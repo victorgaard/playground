@@ -7,6 +7,7 @@ export const props = generateProps<BadgeProps>({
     children: "this is a badge",
     variant: "purple",
     size: "xs",
+    hasBorder: true,
   },
   variantProps: {
     variant: ["purple", "green", "orange", "grey"],

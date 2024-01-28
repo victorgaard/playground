@@ -1,10 +1,12 @@
 import { SVGProps } from "react";
 import { cn } from "@/utils/cn";
 
-function LoadingSpinner(props: SVGProps<SVGSVGElement>) {
+type LoadingSpinnerProps = SVGProps<SVGSVGElement>;
+
+function LoadingSpinner({ className, ...props }: LoadingSpinnerProps) {
   return (
     <svg
-      className={cn("h-5 w-5 animate-spin text-inherit", props.className)}
+      className={cn("h-5 w-5 shrink-0 animate-spin text-inherit", className)}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

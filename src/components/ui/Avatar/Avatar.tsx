@@ -1,12 +1,6 @@
 import { cn } from "@/utils/cn";
 import { VariantProps, cva } from "class-variance-authority";
 
-export type AvatarProps = React.HTMLAttributes<HTMLDivElement> &
-  VariantProps<typeof avatarVariants> & {
-    picture?: string;
-    name?: string;
-  };
-
 export const avatarVariants = cva(
   "relative flex items-center justify-center animate-in fade-in transition-all",
   {
@@ -37,6 +31,12 @@ export const avatarVariants = cva(
     },
   },
 );
+
+export type AvatarProps = React.HTMLAttributes<HTMLDivElement> &
+  VariantProps<typeof avatarVariants> & {
+    picture?: string;
+    name?: string;
+  };
 
 function Avatar({
   picture,
