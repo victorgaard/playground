@@ -15,6 +15,7 @@
   "dependencies": {
     "@heroicons/react": "^2.1.1",
     "@radix-ui/react-scroll-area": "^1.0.5",
+    "@radix-ui/react-tooltip": "^1.0.7",
     "@tanstack/react-router": "^1.13.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
