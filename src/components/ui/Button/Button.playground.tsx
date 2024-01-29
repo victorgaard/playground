@@ -11,7 +11,7 @@ export const props = generateProps<ButtonProps>({
     isLoading: false,
   },
   variantProps: {
-    variant: ["primary", "secondary", "tertiary", "destructive", "ghost"],
+    variant: ["primary", "secondary", "tertiary", "ghost", "destructive"],
     size: ["xs", "sm", "md", "lg"],
   },
   examples: {
@@ -22,6 +22,12 @@ export const props = generateProps<ButtonProps>({
     ghost: {
       children: "👻 spooky time",
       variant: "ghost",
+    },
+    icon: {
+      children: 'I am a random emoji',
+      variant: "tertiary",
+      size: "lg",
+      isIcon: true
     },
     destructive: {
       children: "👀 uh-oh danger zone",
