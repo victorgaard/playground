@@ -15,8 +15,8 @@ export const props = generateProps<TooltipProps>({
     children: "No, you are the trigger. I AM the tooltip 😡",
     side: "top",
     align: "center",
-    displayArrow: true,
     delayDuration: 0,
+    displayArrow: true,
   },
   variantProps: {
     side: ["top", "right", "bottom", "left"],

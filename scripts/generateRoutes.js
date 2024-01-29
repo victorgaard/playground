@@ -11,11 +11,9 @@ const fileNames = files.map((file) => {
   const label = href
     .replace(/([a-z])([A-Z])/g, "$1 $2")
     .replace(/([A-Z])([A-Z][a-z])/g, "$1 $2");
-  const filePath = path.relative(process.cwd(), file);
   return {
     label,
     href,
-    path: filePath,
   };
 });
 
