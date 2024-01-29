@@ -11,27 +11,16 @@ export const props = generateProps<InputProps>({
     autoFocus: true,
     disabled: false,
   },
-  variantProps: {
-    variant: ["rest", "success", "error"],
-  },
   examples: {
-    success: {
-      label: "Best doggo",
-      placeholder: "I'm a placeholder...",
-      defaultValue: "All doggos are the best ones",
-      error: "",
-      variant: "success",
-      autoFocus: true,
-      disabled: false,
+    "without label": {
+      label: "",
+      placeholder: "Just leave label empty and bam...",
     },
-    error: {
+    invalid: {
       label: "Dog food",
-      placeholder: "I'm a placeholder...",
       defaultValue: "ded birbo",
       error: "Yikes, are you sure?",
-      variant: "error",
-      autoFocus: true,
-      disabled: false,
+      pattern: "^$",
     },
   },
 });
