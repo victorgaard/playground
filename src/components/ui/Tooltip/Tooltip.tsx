@@ -23,7 +23,6 @@ function Tooltip({
         <TooltipRadix.Portal>
           <TooltipRadix.Content
             className="max-w-[400px] break-words rounded-lg bg-gray-200 px-2 py-1.5 text-sm text-gray-900"
-            data-testid="tooltip-message"
             sideOffset={5}
             side={side}
             align={align}
