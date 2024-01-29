@@ -1,7 +1,7 @@
 import * as TooltipRadix from "@radix-ui/react-tooltip";
 
 export type TooltipProps = React.PropsWithChildren & {
-  trigger: React.ReactNode;
+  content: React.ReactNode;
   delayDuration?: number;
   displayArrow?: boolean;
   side?: "top" | "right" | "bottom" | "left";
@@ -10,7 +10,7 @@ export type TooltipProps = React.PropsWithChildren & {
 
 function Tooltip({
   children,
-  trigger,
+  content,
   delayDuration = 0,
   displayArrow = true,
   side = "top",
@@ -19,15 +19,15 @@ function Tooltip({
   return (
     <TooltipRadix.Provider delayDuration={delayDuration}>
       <TooltipRadix.Root>
-        <TooltipRadix.Trigger asChild>{trigger}</TooltipRadix.Trigger>
+        <TooltipRadix.Trigger asChild>{children}</TooltipRadix.Trigger>
         <TooltipRadix.Portal>
           <TooltipRadix.Content
-            className="max-w-[400px] break-words rounded-lg bg-gray-200 px-2 py-1.5 text-sm text-gray-900"
+            className="max-w-[400px] animate-in fade-in-50 zoom-in-90 break-words rounded-lg bg-gray-200 px-2 py-1.5 text-sm text-gray-900"
             sideOffset={5}
             side={side}
             align={align}
           >
-            {children}
+            {content}
             {displayArrow && <TooltipRadix.Arrow className="fill-gray-200" />}
           </TooltipRadix.Content>
         </TooltipRadix.Portal>

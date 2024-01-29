@@ -4,6 +4,6 @@ import Tooltip from "./Tooltip";
 
 describe("Tooltip", () => {
   it("should render the component without crashing", () => {
-    render(<Tooltip trigger="hover me">Hello world</Tooltip>);
+    render(<Tooltip content="I'm a tooltip">Hover me</Tooltip>);
   });
 });
