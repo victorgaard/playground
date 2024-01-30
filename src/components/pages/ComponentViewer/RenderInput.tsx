@@ -57,7 +57,10 @@ export function RenderInput<T>({
   }
 
   /** For variantProps variants */
-  if (Array.isArray(propValue)) {
+  if (
+    Array.isArray(propValue) &&
+    propValue.some((prop) => typeof prop === "string")
+  ) {
     return (
       <div className="grid grid-cols-2 gap-2">
         {propValue.map((prop) => {
@@ -79,7 +82,7 @@ export function RenderInput<T>({
     );
   }
 
-  /** For handlers, i.e.: onClick */
+  /** For handlers, like: onClick */
   if (typeof propValue === "function" && !isValidElement(propValue)) {
     return (
       <CodeBlock className="whitespace-pre-wrap">{String(propValue)}</CodeBlock>
