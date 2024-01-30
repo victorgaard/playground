@@ -12,7 +12,7 @@ export function CodeBlock({
   }, [children]);
 
   return (
-    <pre className="text-xs">
+    <pre className="text-xs language-jsx">
       <code className={className}>{children}</code>
     </pre>
   );
