@@ -13,4 +13,12 @@ export const props = generateProps<BadgeProps>({
     variant: ["purple", "green", "yellow", "grey"],
     size: ["xs", "sm", "md"],
   },
+  examples: {
+    borderless: {
+      hasBorder: false,
+      children: "where's my border again? 🤔",
+      variant: "purple",
+      size: "md"
+    },
+  },
 });

@@ -1,12 +1,11 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import Button from "../Button/Button";
 import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 import { createContext, useContext } from "react";
 
 const modalVariants = cva(
-  "fixed left-[50%] flex flex-col border border-gray-800 overflow-hidden justify-between min-h-[200px] top-[50%] max-h-[85vh] translate-x-[-50%] translate-y-[-50%] rounded-2xl shadow-2xl bg-gray-900 focus:outline-none",
+  "fixed left-[50%] flex flex-col border border-gray-800 overflow-hidden justify-between min-h-[200px] top-[50%] max-h-[85vh] translate-x-[-50%] translate-y-[-50%] rounded-2xl shadow-2xl bg-gray-900 focus:outline-none duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
   {
     variants: {
       size: {
@@ -41,22 +40,15 @@ export function ModalTrigger({ children }: React.PropsWithChildren) {
   return <Dialog.Trigger asChild>{children}</Dialog.Trigger>;
 }
 
-export function ModalPortal({ children }: React.PropsWithChildren) {
+export function ModalBody({ children }: React.PropsWithChildren) {
   const { size } = useContext(ModalContext);
   return (
     <Dialog.Portal>
       <Dialog.Overlay className="fixed inset-0 bg-black/50" />
       <Dialog.Content className={cn(modalVariants({ size }))}>
         {children}
-        <Dialog.Close aria-label="Close" asChild>
-          <Button
-            variant="secondary"
-            size="sm"
-            isIcon
-            className="absolute right-4 top-4"
-          >
-            <XMarkIcon className="h-4 w-4 shrink-0 text-gray-400" />
-          </Button>
+        <Dialog.Close aria-label="Close">
+          <XMarkIcon className="absolute right-6 top-6 h-4 w-4 shrink-0 text-gray-400" />
         </Dialog.Close>
       </Dialog.Content>
     </Dialog.Portal>
@@ -64,13 +56,26 @@ export function ModalPortal({ children }: React.PropsWithChildren) {
 }
 
 export function ModalContent({ children }: React.PropsWithChildren) {
-  return <div className="p-6 pr-16">{children}</div>;
+  return <div className="p-6 pr-12">{children}</div>;
 }
 
 export function ModalFooter({ children }: React.PropsWithChildren) {
+  const { size } = useContext(ModalContext);
   return (
-    <div className="flex items-center justify-end gap-2 bg-white/[0.04] px-6 py-4">
+    <div
+      className={cn("flex flex-col gap-2 px-6 py-4", {
+        "flex-row items-center justify-end border-t border-gray-800 bg-white/[0.02]": size !== "sm",
+      })}
+    >
       {children}
     </div>
+  );
+}
+
+export function ModalClose({ children }: React.PropsWithChildren) {
+  return (
+    <Dialog.Close aria-label="Close" asChild>
+      {children}
+    </Dialog.Close>
   );
 }

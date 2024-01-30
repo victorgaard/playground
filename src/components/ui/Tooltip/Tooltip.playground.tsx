@@ -22,4 +22,11 @@ export const props = generateProps<TooltipProps>({
     side: ["top", "right", "bottom", "left"],
     align: ["start", "center", "end"],
   },
+  examples: {
+    arrowless: {
+      content: "I'm an arrowless tooltip 🪽",
+      displayArrow: false,
+      side: "left"
+    }
+  }
 });

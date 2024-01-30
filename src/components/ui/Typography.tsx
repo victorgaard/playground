@@ -126,3 +126,5 @@ Typography.H5 = H5;
 Typography.H6 = H6;
 Typography.Paragraph = Paragraph;
 Typography.Small = Small;
+
+Paragraph.displayName = 'Typography.Paragraph'
