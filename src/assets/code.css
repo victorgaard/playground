@@ -71,7 +71,7 @@ code[class*="language-"] ::selection {
 .token.selector,
 .token.important,
 .token.atrule {
-  color: #cc7832;
+  color: white;
 }
 
 .token.operator,
@@ -110,7 +110,7 @@ code[class*="language-"] ::selection {
 
 .token.attr-value,
 .token.attr-value .punctuation {
-  color: #e8bf6a;
+  color: #e5e7eb;
 }
 
 .token.attr-value .punctuation:first-child {

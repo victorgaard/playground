@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { isValidElement, useState } from "react";
 import reactElementToJSXString from "react-element-to-jsx-string";
+import * as ScrollArea from "@radix-ui/react-scroll-area";
 
 type RenderInputProps<T> = {
   propName: keyof T;
@@ -133,11 +134,21 @@ export function RenderInput<T>({
   }
 
   return (
-    <CodeBlock className="language-jsx whitespace-pre-wrap">
-      {reactElementToJSXString(propValue, {
-        showDefaultProps: false,
-        useBooleanShorthandSyntax: false,
-      })}
-    </CodeBlock>
+    <ScrollArea.Root className="max-w-[315px] pb-2 overflow-hidden">
+      <ScrollArea.Viewport>
+        <CodeBlock className="language-jsx">
+          {reactElementToJSXString(propValue, {
+            showDefaultProps: false,
+            useBooleanShorthandSyntax: false,
+          })}
+        </CodeBlock>
+      </ScrollArea.Viewport>
+      <ScrollArea.Scrollbar
+        className="flex touch-none select-none bg-transparent p-0.5 transition-colors ease-out hover:bg-gray-800 data-[orientation=horizontal]:h-2 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col"
+        orientation="horizontal"
+      >
+        <ScrollArea.Thumb className="relative flex-1 rounded-[10px] bg-gray-600 before:absolute before:left-1/2 before:top-1/2 before:h-full before:min-h-[44px] before:w-full before:min-w-[44px] before:-translate-x-1/2 before:-translate-y-1/2 before:content-[''] hover:bg-gray-500" />
+      </ScrollArea.Scrollbar>
+    </ScrollArea.Root>
   );
 }

@@ -11,6 +11,7 @@ import {
 import Button from "../Button/Button";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Typography } from "../Typography";
+import { DestructiveIllustration } from "../Illustrations";
 
 export const props = generateProps<ModalProps>({
   Component: Modal,
@@ -26,9 +27,7 @@ export const props = generateProps<ModalProps>({
         </ModalTrigger>
         <ModalBody>
           <ModalContent>
-            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-b from-red-400 to-red-600">
-              <TrashIcon className="h-8 w-8 text-white" />
-            </div>
+            <DestructiveIllustration />
             <Typography.Paragraph className="pt-6 text-base" extraContrast>
               Delete blog post?
             </Typography.Paragraph>
@@ -53,6 +52,9 @@ export const props = generateProps<ModalProps>({
   examples: {
     small: {
       size: "sm",
+    },
+    large: {
+      size: "lg",
     },
   },
 });
