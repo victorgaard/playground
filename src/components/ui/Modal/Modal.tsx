@@ -44,7 +44,7 @@ export function ModalBody({ children }: React.PropsWithChildren) {
   const { size } = useContext(ModalContext);
   return (
     <Dialog.Portal>
-      <Dialog.Overlay className="fixed inset-0 bg-black/50" />
+      <Dialog.Overlay className="fixed inset-0 bg-blue-300/5 backdrop-blur-2xl" />
       <Dialog.Content className={cn(modalVariants({ size }))}>
         {children}
         <Dialog.Close aria-label="Close">
@@ -63,8 +63,8 @@ export function ModalFooter({ children }: React.PropsWithChildren) {
   const { size } = useContext(ModalContext);
   return (
     <div
-      className={cn("flex flex-col gap-2 px-6 py-4", {
-        "flex-row items-center justify-end border-t border-gray-800 bg-white/[0.02]": size !== "sm",
+      className={cn("flex flex-col gap-2 p-6 pt-2", {
+        "flex-row items-center justify-end border-t border-gray-800 bg-white/[0.02] px-6 py-4": size !== "sm",
       })}
     >
       {children}

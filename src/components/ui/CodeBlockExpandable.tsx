@@ -34,13 +34,12 @@ function CodeBlockExpandable({ children }: { children: string }) {
           <CodeBlock>{children}</CodeBlock>
         </div>
         {!isExpanded && (
-          <div className="absolute bottom-[20px] z-0 h-[20px] w-full bg-gradient-to-t from-black" />
+          <div className="absolute bottom-6 z-0 h-5 w-full bg-gradient-to-t from-black" />
         )}
         <Button
           size="xs"
           variant="tertiary"
           onClick={() => setIsExpanded(!isExpanded)}
-          className="z-10"
         >
           <ChevronDownIcon className="h-3 w-3 text-gray-400" />
           expand code

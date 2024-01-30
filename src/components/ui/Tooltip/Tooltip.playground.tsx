@@ -26,7 +26,7 @@ export const props = generateProps<TooltipProps>({
     arrowless: {
       content: "I'm an arrowless tooltip 🪽",
       displayArrow: false,
-      side: "left"
+      side: "bottom"
     }
   }
 });
