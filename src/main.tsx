@@ -2,7 +2,6 @@ import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import "@/index.css";
 import {
-  Navigate,
   RouterProvider,
   createRoute,
   createRouter,
@@ -14,7 +13,7 @@ import { extractPropsFromComponent } from "@/utils/extractPropsFromComponent";
 import { Component } from "@/components/pages/ComponentViewer/ComponentViewerPage";
 import RootLayout from "@/components/ui/RootLayout";
 import ErrorPage from "./components/pages/ErrorPage";
-import { routes } from "./static/routes";
+import IndexPage from "./components/pages/IndexPage";
 
 const rootRoute = rootRouteWithContext<{
   playgroundFiles: Record<string, unknown>;
@@ -25,9 +24,7 @@ const rootRoute = rootRouteWithContext<{
 export const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: () => (
-    <Navigate to="/$component" params={{ component: routes[0].href }} />
-  ),
+  component: IndexPage,
 });
 
 export const errorRoute = createRoute({
