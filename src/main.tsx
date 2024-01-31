@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import "@/index.css";
 import {
+  Navigate,
   RouterProvider,
   createRoute,
   createRouter,
@@ -10,9 +11,10 @@ import {
 } from "@tanstack/react-router";
 import { errors } from "@/static/errors";
 import { extractPropsFromComponent } from "@/utils/extractPropsFromComponent";
-import Index from "@/components/pages/IndexPage";
 import { Component } from "@/components/pages/ComponentViewer/ComponentViewerPage";
 import RootLayout from "@/components/ui/RootLayout";
+import ErrorPage from "./components/pages/ErrorPage";
+import { routes } from "./static/routes";
 
 const rootRoute = rootRouteWithContext<{
   playgroundFiles: Record<string, unknown>;
@@ -23,7 +25,15 @@ const rootRoute = rootRouteWithContext<{
 export const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: Index,
+  component: () => (
+    <Navigate to="/$component" params={{ component: routes[0].href }} />
+  ),
+});
+
+export const errorRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/error",
+  component: ErrorPage,
 });
 
 export const componentViewerRoute = createRoute({
@@ -31,7 +41,7 @@ export const componentViewerRoute = createRoute({
   path: "$component",
   onError: () => {
     throw redirect({
-      to: "/",
+      to: "/error",
       search: {
         error: errors.componentFileNotFound,
       },
@@ -50,7 +60,11 @@ export const componentViewerRoute = createRoute({
   component: Component,
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, componentViewerRoute]);
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  errorRoute,
+  componentViewerRoute,
+]);
 
 const router = createRouter({
   routeTree,

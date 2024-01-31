@@ -32,7 +32,7 @@ export function extractPropsFromComponent(
 
   if (!componentFound || componentFound.length === 0) {
     throw redirect({
-      to: "/",
+      to: "/error",
       search: {
         error: errors.componentRouteNotFound,
       },

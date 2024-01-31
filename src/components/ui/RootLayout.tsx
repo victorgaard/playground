@@ -5,13 +5,6 @@ function RootLayout() {
   return (
     <main className="flex h-screen text-sm">
       <div className="flex min-w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 ">
-        <Link
-          to="/"
-          className="rounded-lg p-2 text-gray-400 transition-all hover:bg-gray-900"
-          activeProps={{ className: "bg-gray-900 text-white" }}
-        >
-          Home
-        </Link>
         {routes.map((route) => (
           <Link
             key={route.href}
