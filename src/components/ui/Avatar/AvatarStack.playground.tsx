@@ -16,8 +16,8 @@ export const users = [
 export const props = generateProps<AvatarStackProps<User>>({
   Component: AvatarStack,
   defaultProps: {
-    avatarSize: "md",
     limit: 5,
+    avatarSize: "md",
     users,
   },
   variantProps: {

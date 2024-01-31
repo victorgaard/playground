@@ -7,6 +7,7 @@ import { CheckIcon } from "@heroicons/react/24/outline";
 import { isValidElement } from "react";
 import reactElementToJSXString from "react-element-to-jsx-string";
 import CodeBlockExpandable from "@/components/ui/CodeBlockExpandable";
+import { cn } from "@/utils/cn";
 
 type RenderInputProps<T> = {
   propName: keyof T;
@@ -67,14 +68,19 @@ export function RenderInput<T>({
           const isActive = propValues[propName] === prop;
           return (
             <Button
-              variant="tertiary"
+              className={cn("relative text-gray-300", {
+                "border border-gray-700 text-white": isActive,
+              })}
+              variant={isActive ? "tertiary" : "secondary"}
               size="sm"
               key={prop}
               value={prop}
               onClick={() => onPropChange(propName, prop)}
             >
-              {prop}{" "}
-              {isActive && <CheckIcon className="h-4 w-4 text-gray-400" />}
+              <span className="truncate max-w-24">{prop}</span>
+              {isActive && (
+                <CheckIcon className="absolute right-2 top-2 h-4 w-4 text-gray-400" />
+              )}
             </Button>
           );
         })}
