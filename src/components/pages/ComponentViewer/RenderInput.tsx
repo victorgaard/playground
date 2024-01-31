@@ -68,7 +68,7 @@ export function RenderInput<T>({
           const isActive = propValues[propName] === prop;
           return (
             <Button
-              className={cn("relative text-gray-300", {
+              className={cn("relative text-gray-300 border-gray-700/80", {
                 "border border-gray-700 text-white": isActive,
               })}
               variant={isActive ? "tertiary" : "secondary"}
