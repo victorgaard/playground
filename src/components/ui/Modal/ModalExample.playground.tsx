@@ -16,7 +16,7 @@ import Input from "../Input/Input";
 import Avatar from "../Avatar/Avatar";
 import Badge from "../Badge/Badge";
 
-export const users = [
+const users = [
   { id: 6, name: "", email: "john@doe.com", status: "pending" },
   { id: 7, name: "", email: "foo@bar.com", status: "pending" },
   {

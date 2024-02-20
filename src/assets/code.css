@@ -37,22 +37,6 @@ pre[class*="language-"] {
   hyphens: none;
 }
 
-pre[class*="language-"]::-moz-selection,
-pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::-moz-selection,
-code[class*="language-"] ::-moz-selection {
-  color: inherit;
-  background: rgba(33, 66, 131, 0.85);
-}
-
-pre[class*="language-"]::selection,
-pre[class*="language-"] ::selection,
-code[class*="language-"]::selection,
-code[class*="language-"] ::selection {
-  color: inherit;
-  background: rgba(33, 66, 131, 0.85);
-}
-
 /* Inline code */
 :not(pre) > code[class*="language-"] {
   padding: 0.1em;

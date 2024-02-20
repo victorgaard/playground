@@ -3,7 +3,7 @@ import { Link, Outlet, ScrollRestoration } from "@tanstack/react-router";
 
 function RootLayout() {
   return (
-    <main className="flex h-screen text-sm">
+    <main className="flex h-screen text-sm selection:bg-yellow-500 selection:text-black">
       <div className="flex min-w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 ">
         {routes.map((route) => (
           <Link
