@@ -1,5 +1,4 @@
 import Button from "@/components/ui/Button/Button";
-import { CodeBlock } from "@/components/ui/CodeBlock";
 import Input from "@/components/ui/Input/Input";
 import Switch from "@/components/ui/Switch";
 import { InputType } from "@/static/types";
@@ -91,7 +90,7 @@ export function RenderInput<T>({
   /** For handlers, like: onClick */
   if (typeof propValue === "function" && !isValidElement(propValue)) {
     return (
-      <CodeBlock className="whitespace-pre-wrap">{String(propValue)}</CodeBlock>
+      <CodeBlockExpandable>{String(propValue)}</CodeBlockExpandable>
     );
   }
 

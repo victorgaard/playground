@@ -10,7 +10,7 @@ export const props = generateProps<BadgeProps>({
     hasBorder: true,
   },
   variantProps: {
-    variant: ["purple", "green", "yellow", "grey"],
+    variant: ["purple", "green", "yellow", "gray"],
     size: ["xs", "sm", "md"],
   },
   examples: {

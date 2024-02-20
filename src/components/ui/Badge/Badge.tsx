@@ -5,7 +5,7 @@ const badgeVariants = cva("transition-all", {
   variants: {
     variant: {
       purple: "bg-purple-950/70 border-purple-900 text-purple-400",
-      grey: "bg-gray-900 border-gray-800 text-gray-400",
+      gray: "bg-gray-900 border-gray-800 text-gray-400",
       green: "bg-green-950/70 border-green-900 text-green-400",
       yellow: "bg-yellow-950/70 border-yellow-900 text-yellow-400",
     },

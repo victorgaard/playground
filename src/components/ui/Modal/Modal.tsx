@@ -22,16 +22,17 @@ const modalVariants = cva(
 
 export type ModalProps = React.PropsWithChildren &
   React.HTMLAttributes<HTMLDivElement> &
-  VariantProps<typeof modalVariants>;
+  VariantProps<typeof modalVariants> &
+  React.ComponentPropsWithoutRef<typeof Dialog.Root>;
 
 const ModalContext = createContext<{
   size: VariantProps<typeof modalVariants>["size"];
 }>({ size: "md" });
 
-export function Modal({ children, size }: ModalProps) {
+export function Modal({ children, size, ...rest }: ModalProps) {
   return (
     <ModalContext.Provider value={{ size }}>
-      <Dialog.Root>{children}</Dialog.Root>
+      <Dialog.Root {...rest}>{children}</Dialog.Root>
     </ModalContext.Provider>
   );
 }
@@ -63,8 +64,9 @@ export function ModalFooter({ children }: React.PropsWithChildren) {
   const { size } = useContext(ModalContext);
   return (
     <div
-      className={cn("flex flex-col gap-2 p-6 pt-2", {
-        "flex-row items-center justify-end border-t border-gray-800 bg-white/[0.02] px-6 py-4": size !== "sm",
+      className={cn("flex flex-col-reverse gap-2 p-6 pt-2", {
+        "flex-row items-center justify-end border-t border-gray-800 bg-white/[0.02] px-6 py-4":
+          size !== "sm",
       })}
     >
       {children}
