@@ -24,10 +24,10 @@ export const props = generateProps<ButtonProps>({
       variant: "ghost",
     },
     icon: {
-      children: 'I am a random emoji',
+      children: "I am a random emoji",
       variant: "tertiary",
       size: "lg",
-      isIcon: true
+      isIcon: true,
     },
     destructive: {
       children: "👀 uh-oh danger zone",

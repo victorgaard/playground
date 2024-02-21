@@ -9,7 +9,8 @@ import {
 } from "./Modal";
 import { DestructiveIllustration } from "../Illustrations";
 import { Typography } from "../Typography";
-import { useState } from "react";
+import { isValidElement, useState } from "react";
+import { cn } from "@/utils/cn";
 
 export type ModalConfirmationProps = {
   trigger: React.ReactNode;
@@ -29,6 +30,11 @@ function ModalConfirmation({
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const isTriggerAButton =
+    isValidElement(trigger) &&
+    typeof trigger.type === "object" &&
+    trigger.type["displayName"] === "Button";
+
   async function submit() {
     try {
       setIsLoading(true);
@@ -43,7 +49,12 @@ function ModalConfirmation({
 
   return (
     <Modal open={isOpen} onOpenChange={(open) => setIsOpen(open)} size="sm">
-      <ModalTrigger>{trigger}</ModalTrigger>
+      <ModalTrigger
+        asChild={isTriggerAButton}
+        className={cn({ "flex items-center gap-2": !isTriggerAButton })}
+      >
+        {trigger}
+      </ModalTrigger>
       <ModalBody>
         <ModalContent>
           <DestructiveIllustration />

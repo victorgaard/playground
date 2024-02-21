@@ -41,7 +41,7 @@ export function DropdownBody({ children, className }: DropdownBodyProps) {
     <DropdownMenu.Portal>
       <DropdownMenu.Content
         className={cn(
-          "min-w-[8rem] overflow-hidden rounded-lg border border-gray-600 bg-gray-700 py-1 text-white shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2",
+          "min-w-24 overflow-hidden rounded-lg border border-gray-600 bg-gray-700 py-1 text-white shadow-xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
           className,
         )}
         sideOffset={sideOffset}
@@ -65,7 +65,7 @@ export function DropdownItem({
     <DropdownMenu.Item
       onClick={onClick}
       className={cn(
-        "flex min-w-48 select-none items-center gap-2 px-4 py-2.5 text-sm outline-none hover:bg-gray-600  focus:bg-gray-600 active:bg-gray-800/20",
+        "flex select-none items-center gap-2 px-4 py-2.5 text-sm outline-none hover:bg-gray-600  focus:bg-gray-600 active:bg-gray-800/20",
         className,
       )}
     >

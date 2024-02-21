@@ -9,12 +9,21 @@ import {
 import Button from "../Button/Button";
 import {
   EllipsisHorizontalIcon,
+  PaperAirplaneIcon,
+  UserMinusIcon,
   UserPlusIcon,
 } from "@heroicons/react/24/outline";
 import { Typography } from "../Typography";
 import Input from "../Input/Input";
 import Avatar from "../Avatar/Avatar";
 import Badge from "../Badge/Badge";
+import {
+  Dropdown,
+  DropdownBody,
+  DropdownItem,
+  DropdownTrigger,
+} from "../Dropdown/Dropdown";
+import ModalConfirmation from "./ModalConfirmation";
 
 const users = [
   { id: 6, name: "", email: "john@doe.com", status: "pending" },
@@ -92,9 +101,48 @@ export const props = generateProps<ModalProps>({
                       <Badge size="xs">Pending</Badge>
                     )}
                   </div>
-                  <Button variant="ghost" isIcon size="sm">
-                    <EllipsisHorizontalIcon className="h-5 w-5 shrink-0 opacity-50" />
-                  </Button>
+                  <Dropdown align="end">
+                    <DropdownTrigger>
+                      <Button
+                        className="active:scale-100"
+                        variant="ghost"
+                        size="sm"
+                        isIcon
+                      >
+                        <EllipsisHorizontalIcon className="h-5 w-5 shrink-0 opacity-50" />
+                      </Button>
+                    </DropdownTrigger>
+                    <DropdownBody>
+                      {user.status === "pending" && (
+                        <>
+                          <DropdownItem>
+                            <PaperAirplaneIcon className="h-5 w-5 opacity-50" />
+                            Resend invite
+                          </DropdownItem>
+                          <DropdownItem>
+                            <UserMinusIcon className="h-5 w-5 opacity-50" />
+                            Revoke access
+                          </DropdownItem>
+                        </>
+                      )}
+                      {user.status === "member" && (
+                        <DropdownItem onClick={(e) => e.preventDefault()}>
+                          <ModalConfirmation
+                            trigger={
+                              <>
+                                <UserMinusIcon className="h-5 w-5 opacity-50" />
+                                Remove from team
+                              </>
+                            }
+                            title={`Remove ${user.name}?`}
+                            message="Are you sure you want to remove this member? This action is irreversible"
+                            submitButtonLabel={`Remove ${user.name}`}
+                            onSubmit={async () => new Promise((resolve) => setTimeout(resolve, 1000))}
+                          />
+                        </DropdownItem>
+                      )}
+                    </DropdownBody>
+                  </Dropdown>
                 </div>
               ))}
             </div>

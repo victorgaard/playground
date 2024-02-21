@@ -13,7 +13,6 @@ import {
   ArrowRightStartOnRectangleIcon,
   BanknotesIcon,
   BeakerIcon,
-  ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 
 export const props = generateProps<DropdownProps>({
@@ -24,9 +23,8 @@ export const props = generateProps<DropdownProps>({
     children: (
       <>
         <DropdownTrigger>
-          <Button>
-            open me
-            <ChevronDownIcon className="h-5 w-5 opacity-50" />
+          <Button className="active:scale-100">
+            😤 trigger me
           </Button>
         </DropdownTrigger>
         <DropdownBody>

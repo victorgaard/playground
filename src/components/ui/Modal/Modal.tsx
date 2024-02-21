@@ -36,8 +36,19 @@ export function Modal({ children, size, ...rest }: ModalProps) {
   );
 }
 
-export function ModalTrigger({ children }: React.PropsWithChildren) {
-  return <Dialog.Trigger asChild>{children}</Dialog.Trigger>;
+type ModalTriggerProps = React.PropsWithChildren &
+  React.ComponentPropsWithoutRef<typeof Dialog.Trigger>;
+
+export function ModalTrigger({
+  children,
+  asChild = true,
+  className,
+}: ModalTriggerProps) {
+  return (
+    <Dialog.Trigger asChild={asChild} className={className}>
+      {children}
+    </Dialog.Trigger>
+  );
 }
 
 export function ModalBody({ children }: React.PropsWithChildren) {
