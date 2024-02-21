@@ -23,7 +23,7 @@ export const props = generateProps<DropdownProps>({
     children: (
       <>
         <DropdownTrigger>
-          <Button className="active:scale-100">
+          <Button variant="tertiary" className="active:scale-100">
             😤 trigger me
           </Button>
         </DropdownTrigger>

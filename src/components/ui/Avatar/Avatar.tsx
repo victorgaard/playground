@@ -9,6 +9,7 @@ export const avatarVariants = cva(
         primary: "bg-gray-800 text-gray-200",
       },
       size: {
+        xs: 'h-6 w-6 text-base group xs',
         sm: "h-8 w-8 text-base group sm",
         md: "h-10 w-10 text-xl group md",
         lg: "h-12 w-12 text-2xl group lg",
@@ -64,7 +65,7 @@ function Avatar({
         <div
           className={cn(
             avatarVariants({ status }),
-            "absolute bottom-0 right-0 rounded-full outline outline-[3px] outline-gray-950 group-[.lg]:h-2.5 group-[.md]:h-2 group-[.sm]:h-1.5 group-[.xl]:h-3 group-[.lg]:w-2.5 group-[.md]:w-2 group-[.sm]:w-1.5 group-[.xl]:w-3 group-[.md]:outline-2 group-[.sm]:outline-2",
+            "absolute bottom-0 right-0 rounded-full outline outline-[3px] outline-gray-950 group-[.lg]:h-2.5 group-[.md]:h-2 group-[.sm]:h-1.5 group-[.xs]:h-1 group-[.xs]:w-1 group-[.xs]:outline-1 group-[.xl]:h-3 group-[.lg]:w-2.5 group-[.md]:w-2 group-[.sm]:w-1.5 group-[.xl]:w-3 group-[.md]:outline-2 group-[.sm]:outline-2",
           )}
         />
       )}

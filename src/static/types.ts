@@ -20,7 +20,7 @@ export type ImportedProps<T> = {
 export type ComponentFound = [string, ImportedProps<PropsObj>];
 
 export type User = {
-  id: string | number;
+  id: number;
   picture?: string;
   name: string
 }
