@@ -21,7 +21,7 @@ describe("extractPropsFromComponent", () => {
           shape: "rounded",
         },
         variantProps: {
-          size: ["sm", "md", "lg", "xl"],
+          size: ["xs", "sm", "md", "lg", "xl"],
           shape: ["rounded", "squared"],
           status: ["online", "offline", "idle"],
         },
