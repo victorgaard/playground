@@ -21,7 +21,6 @@ const modalVariants = cva(
 );
 
 export type ModalProps = React.PropsWithChildren &
-  React.HTMLAttributes<HTMLDivElement> &
   VariantProps<typeof modalVariants> &
   React.ComponentPropsWithoutRef<typeof Dialog.Root>;
 
