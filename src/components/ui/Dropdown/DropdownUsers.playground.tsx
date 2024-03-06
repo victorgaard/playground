@@ -15,8 +15,8 @@ export const props = generateProps<DropdownUsersProps<User>>({
   defaultProps: {
     align: "start",
     avatarStackLimit: 3,
-    enableSearch: true,
     sideOffset: 6,
+    enableSearch: true,
     users,
   },
   variantProps: {

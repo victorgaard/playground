@@ -17,7 +17,6 @@ export const props = generateProps<AvatarProps>({
   },
   examples: {
     squared: {
-      picture: "./assets/knight.jpeg",
       shape: "squared",
       size: "lg",
       status: "idle",
