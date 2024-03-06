@@ -27,7 +27,6 @@ describe("extractPropsFromComponent", () => {
         },
         examples: {
           squared: {
-            picture: "./assets/knight.jpeg",
             shape: "squared",
             size: "lg",
             status: "idle",
