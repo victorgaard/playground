@@ -1,9 +1,5 @@
 import { routes } from "@/static/routes";
-import {
-  Bars3Icon,
-  Cog6ToothIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import {
   Link,
   Outlet,
@@ -26,9 +22,8 @@ function RootLayoutMobile() {
     : routes.filter((route) => route.href === params.component);
   return (
     <main className="flex h-dvh flex-col text-sm selection:bg-yellow-500 selection:text-black">
-      <div className="flex w-full flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 pb-1">
         {!isExpanded && (
-          <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4 p-8 pb-1">
             <Button
               variant="secondary"
               onClick={() => setIsExpanded(true)}
@@ -39,13 +34,11 @@ function RootLayoutMobile() {
             <Typography.Paragraph extraContrast>
               {activeRoute.label}
             </Typography.Paragraph>
-            <Button variant="tertiary" isIcon>
-              <Cog6ToothIcon className="h-5 w-5 shrink-0" />
-            </Button>
+            <div />
           </div>
         )}
         {isExpanded && (
-          <div className="flex flex-col animate-in fade-in slide-in-from-top-2">
+          <div className="flex flex-col animate-in fade-in slide-in-from-top-2 p-8">
             <div className="flex items-center gap-4 pb-6">
               <Button
                 variant="secondary"
@@ -54,10 +47,7 @@ function RootLayoutMobile() {
               >
                 <XMarkIcon className="h-5 w-5 shrink-0" />
               </Button>
-              <Typography.Paragraph
-                extraContrast
-                className="animate-in fade-in"
-              >
+              <Typography.Paragraph>
                 Pick a component
               </Typography.Paragraph>
             </div>
@@ -78,38 +68,35 @@ function RootLayoutMobile() {
             ))}
           </div>
         )}
-      </div>
       {!isExpanded && <Outlet />}
     </main>
   );
 }
 
 function RootLayout() {
-  const isResponsive = useWidth() <= 1024;
-  if (isResponsive) return <RootLayoutMobile />;
+  const isResponsiveLayout = useWidth() <= 1024;
+  if (isResponsiveLayout) return <RootLayoutMobile />;
   return (
-    <>
-      <main className="flex h-screen text-sm selection:bg-yellow-500 selection:text-black">
-        <div className="flex w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8">
-          {routes.map((route) => (
-            <Link
-              key={route.href}
-              to="/$component"
-              params={{ component: route.href }}
-              className="rounded-lg p-2 text-gray-400 transition-all hover:bg-gray-900"
-              activeProps={{ className: "bg-gray-900 text-white" }}
-              activeOptions={{
-                includeSearch: false,
-              }}
-            >
-              {route.label}
-            </Link>
-          ))}
-        </div>
-        <ScrollRestoration />
-        <Outlet />
-      </main>
-    </>
+    <main className="flex h-screen text-sm selection:bg-yellow-500 selection:text-black">
+      <div className="flex w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8">
+        {routes.map((route) => (
+          <Link
+            key={route.href}
+            to="/$component"
+            params={{ component: route.href }}
+            className="rounded-lg p-2 text-gray-400 transition-all hover:bg-gray-900"
+            activeProps={{ className: "bg-gray-900 text-white" }}
+            activeOptions={{
+              includeSearch: false,
+            }}
+          >
+            {route.label}
+          </Link>
+        ))}
+      </div>
+      <ScrollRestoration />
+      <Outlet />
+    </main>
   );
 }
 

@@ -1,14 +1,17 @@
 import { getRouteApi, useNavigate } from "@tanstack/react-router";
-import { PropsForm } from "./PropsForm";
 import Navbar from "./Navbar";
-import PropsWrapper from "./PropsWrapper";
 import CodeViewer from "./CodeViewer";
+import PropsWrapper from "./PropsWrapper";
+import { PropsForm } from "./PropsForm";
+import { useWidth } from "@/hooks/useWidth";
+import ComponentViewerPageMobile from "./ComponentViewerPageMobile";
 
-const route = getRouteApi('/$component');
+const route = getRouteApi("/$component");
 
 export function Component() {
   const navigate = useNavigate();
   const propsFromParams = route.useSearch();
+  const isResponsiveLayout = useWidth() <= 1024;
   const { component, Component, config } = route.useLoaderData();
   const props = { ...config.defaultProps, ...propsFromParams };
 
@@ -22,6 +25,17 @@ export function Component() {
       search: (prev) => ({ ...prev, [propName]: value }),
     });
   }
+
+  if (isResponsiveLayout)
+    return (
+      <ComponentViewerPageMobile
+        component={component}
+        Component={Component}
+        config={config}
+        props={props}
+        onPropChange={handlePropChange}
+      />
+    );
 
   return (
     <div className="flex h-full flex-1">
