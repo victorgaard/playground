@@ -3,7 +3,8 @@
 Playground is a design system documentation tool for React components. My motivation to build it is purely educational and aimed towards making a lighter alternative to Storybook. It is also a great opportunity to hone my design & engineering skills. 
 
 🛠️ Built with React, Typescript, TanStack Router, and Tailwind. All baked with Vite. <br />
-👉 [Live demo](https://playground.victorsantos.work/) hosted at Netlify.
+👉 [Live demo](https://playground.victorsantos.work/) hosted at Netlify.<br /> <br />
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e2567937-271f-4ca2-bdcd-64f341b01b9e/deploy-status)](https://app.netlify.com/sites/glittery-tarsier-f22d47/deploys)
 
 ----
 
