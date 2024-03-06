@@ -12,8 +12,8 @@ import { errors } from "@/static/errors";
 import { extractPropsFromComponent } from "@/utils/extractPropsFromComponent";
 import { Component } from "@/components/pages/ComponentViewer/ComponentViewerPage";
 import RootLayout from "@/components/ui/RootLayout";
-import ErrorPage from "./components/pages/ErrorPage";
-import IndexPage from "./components/pages/IndexPage";
+import ErrorPage from "@/components/pages/ErrorPage";
+import IndexPage from "@/components/pages/IndexPage";
 
 const rootRoute = rootRouteWithContext<{
   playgroundFiles: Record<string, unknown>;
