@@ -1,5 +1,9 @@
 import { routes } from "@/static/routes";
-import { Bars3Icon, Cog6ToothIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  Cog6ToothIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import {
   Link,
   Outlet,
@@ -9,17 +13,18 @@ import {
 import { useState } from "react";
 import Button from "./Button/Button";
 import { Typography } from "./Typography";
+import { isObjectEmpty } from "@/utils/isObjectEmpty";
 
-const route = getRouteApi("__root__");
+const route = getRouteApi("/$component");
 
 function RootLayoutMobile() {
   const [isExpanded, setIsExpanded] = useState(false);
-  const params = route.useParams<{ component: string }>();
-  const [activeRoute] = routes.filter(
-    (route) => route.href === params.component,
-  );
+  const params = route.useParams();
+  const [activeRoute] = isObjectEmpty(params)
+    ? [routes[0]]
+    : routes.filter((route) => route.href === params.component);
   return (
-    <main className="flex h-screen flex-col text-sm selection:bg-yellow-500 selection:text-black">
+    <main className="flex h-screen flex-col text-sm selection:bg-yellow-500 selection:text-black sm:hidden">
       <div className="flex w-full flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 pb-1">
         {!isExpanded && (
           <div className="flex items-center justify-between lg:hidden">
@@ -48,9 +53,7 @@ function RootLayoutMobile() {
               >
                 <XMarkIcon className="h-5 w-5 shrink-0" />
               </Button>
-              <Typography.Paragraph
-                extraContrast
-              >
+              <Typography.Paragraph extraContrast>
                 Pick a component
               </Typography.Paragraph>
             </div>
