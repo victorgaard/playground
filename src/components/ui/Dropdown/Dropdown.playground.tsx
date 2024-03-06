@@ -37,11 +37,12 @@ export const props = generateProps<DropdownProps>({
             Me too
           </DropdownItem>
           <DropdownItem onClick={(e) => e.preventDefault()}>
-            <BeakerIcon className="h-5 w-5 opacity-50" /> Well, I don't 👀
+            <BeakerIcon className="h-5 w-5 opacity-50" />
+            Well, I don't 👀
           </DropdownItem>
           <DropdownSeparator />
           <DropdownItem>
-            <ArrowRightStartOnRectangleIcon className="h-5 w-5 opacity-50" />{" "}
+            <ArrowRightStartOnRectangleIcon className="h-5 w-5 opacity-50" />
             Sign out
           </DropdownItem>
         </DropdownBody>

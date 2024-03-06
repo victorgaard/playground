@@ -1,9 +1,11 @@
-import { errorRoute } from "@/main";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import Alert from "../ui/Alert/Alert";
+import { getRouteApi } from "@tanstack/react-router";
+
+const route = getRouteApi("/error");
 
 function ErrorPage() {
-  const { error } = errorRoute.useSearch<{ error: string }>();
+  const { error } = route.useSearch<{ error: string }>();
 
   return (
     <div className="flex h-full flex-1 flex-col gap-4 p-8">

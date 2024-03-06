@@ -21,19 +21,19 @@ const rootRoute = rootRouteWithContext<{
   component: RootLayout,
 });
 
-export const indexRoute = createRoute({
+const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
   component: IndexPage,
 });
 
-export const errorRoute = createRoute({
+const errorRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/error",
   component: ErrorPage,
 });
 
-export const componentViewerRoute = createRoute({
+const componentViewerRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "$component",
   onError: () => {

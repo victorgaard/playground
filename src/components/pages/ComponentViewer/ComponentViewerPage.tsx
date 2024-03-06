@@ -1,14 +1,15 @@
-import { useNavigate } from "@tanstack/react-router";
+import { getRouteApi, useNavigate } from "@tanstack/react-router";
 import { PropsForm } from "./PropsForm";
-import { componentViewerRoute } from "@/main";
 import Navbar from "./Navbar";
 import PropsWrapper from "./PropsWrapper";
 import CodeViewer from "./CodeViewer";
 
+const route = getRouteApi('/$component');
+
 export function Component() {
   const navigate = useNavigate();
-  const propsFromParams = componentViewerRoute.useSearch();
-  const { component, Component, config } = componentViewerRoute.useLoaderData();
+  const propsFromParams = route.useSearch();
+  const { component, Component, config } = route.useLoaderData();
   const props = { ...config.defaultProps, ...propsFromParams };
 
   function handlePropChange(
