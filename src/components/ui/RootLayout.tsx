@@ -14,6 +14,7 @@ import { useState } from "react";
 import Button from "./Button/Button";
 import { Typography } from "./Typography";
 import { isObjectEmpty } from "@/utils/isObjectEmpty";
+import { useWidth } from "@/hooks/useWidth";
 
 const route = getRouteApi("/$component");
 
@@ -24,10 +25,10 @@ function RootLayoutMobile() {
     ? [routes[0]]
     : routes.filter((route) => route.href === params.component);
   return (
-    <main className="flex h-screen flex-col text-sm selection:bg-yellow-500 selection:text-black sm:hidden">
+    <main className="flex h-dvh flex-col text-sm selection:bg-yellow-500 selection:text-black">
       <div className="flex w-full flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8 pb-1">
         {!isExpanded && (
-          <div className="flex items-center justify-between lg:hidden">
+          <div className="flex items-center justify-between">
             <Button
               variant="secondary"
               onClick={() => setIsExpanded(true)}
@@ -44,7 +45,7 @@ function RootLayoutMobile() {
           </div>
         )}
         {isExpanded && (
-          <>
+          <div className="flex flex-col animate-in fade-in slide-in-from-top-2">
             <div className="flex items-center gap-4 pb-6">
               <Button
                 variant="secondary"
@@ -53,7 +54,10 @@ function RootLayoutMobile() {
               >
                 <XMarkIcon className="h-5 w-5 shrink-0" />
               </Button>
-              <Typography.Paragraph extraContrast>
+              <Typography.Paragraph
+                extraContrast
+                className="animate-in fade-in"
+              >
                 Pick a component
               </Typography.Paragraph>
             </div>
@@ -72,7 +76,7 @@ function RootLayoutMobile() {
                 {route.label}
               </Link>
             ))}
-          </>
+          </div>
         )}
       </div>
       {!isExpanded && <Outlet />}
@@ -81,9 +85,11 @@ function RootLayoutMobile() {
 }
 
 function RootLayout() {
+  const isResponsive = useWidth() <= 1024;
+  if (isResponsive) return <RootLayoutMobile />;
   return (
     <>
-      <main className="hidden h-screen text-sm selection:bg-yellow-500 selection:text-black lg:flex">
+      <main className="flex h-screen text-sm selection:bg-yellow-500 selection:text-black">
         <div className="flex w-64 flex-col gap-1 overflow-auto border-r border-gray-800 bg-black p-8">
           {routes.map((route) => (
             <Link
@@ -103,7 +109,6 @@ function RootLayout() {
         <ScrollRestoration />
         <Outlet />
       </main>
-      <RootLayoutMobile />
     </>
   );
 }
