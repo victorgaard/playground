@@ -47,7 +47,7 @@ Feel free to refer to the examples inside the folder `./src/components/ui`.
 
 ## Enhancing the playground
 You just added your first component to the playground and you visualize it there. Hoorray! 🎉 <br />
-But let's not stop there. There are more you to enhance your playground. You can define variant props, as well as examples.
+But let's not stop there. There are more you can enhance your component playground. You can define variant props, as well as examples.
 
 - Variant props are a way to provide shortcuts in the playground UI, i.e.: a Button can have two sizes, like 'sm' and 'md'. If you pass an array of `['sm', 'md']` to the variant props, they will be offered in the props sidebar as radio buttons.
 - Examples are a way to provide component presents, i.e.: you can create a small destructive button by defining these props as an example.
