@@ -113,7 +113,9 @@ export const props = generateProps<ButtonProps>({
 
 ## Contribute
 All contributions must be written in English. Feel free to open an issue or submit PRs. 
-For PRS, follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), like:
+For PRS, please do so on the `develop` branch. 
+
+Commit messages should follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), like:
 
 - fix: ...
 - feat: ...
