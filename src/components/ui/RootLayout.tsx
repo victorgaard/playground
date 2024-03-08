@@ -85,7 +85,7 @@ function RootLayout() {
             key={route.href}
             to="/$component"
             params={{ component: route.href }}
-            className="rounded-lg p-2 text-gray-400 transition-all hover:bg-gray-900"
+            className="rounded-lg p-2 text-gray-300 transition-all hover:bg-gray-900"
             activeProps={{ className: "bg-gray-900 text-white" }}
             activeOptions={{
               includeSearch: false,
