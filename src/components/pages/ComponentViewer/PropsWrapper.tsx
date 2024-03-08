@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 
 function PropsWrapper({ children }: PropsWithChildren) {
   return (
-    <ScrollArea.Root className="w-96 overflow-hidden border-l border-gray-800 text-sm">
+    <ScrollArea.Root className="w-96 overflow-hidden border-l border-gray-800 text-white text-sm">
       <ScrollArea.Viewport className="h-full w-full p-8">
         {children}
       </ScrollArea.Viewport>
