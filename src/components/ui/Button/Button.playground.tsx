@@ -4,7 +4,7 @@ import Button, { ButtonProps } from "./Button";
 export const props = generateProps<ButtonProps>({
   Component: Button,
   defaultProps: {
-    children: "👉 click me",
+    children: "👉 click me ",
     variant: "primary",
     size: "md",
     isIcon: false,
